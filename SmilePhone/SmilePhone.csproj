@@ -50,6 +50,8 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Data.Entity.Design" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -68,6 +70,66 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DTO\BaoCaoTonKho.cs">
+      <DependentUpon>CellphoneDatabaseEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DTO\CellphoneDatabaseEntity.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CellphoneDatabaseEntity.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DTO\CellphoneDatabaseEntity.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CellphoneDatabaseEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DTO\CellphoneDatabaseEntity.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CellphoneDatabaseEntity.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="DTO\ChiTietPhieuBanHang.cs">
+      <DependentUpon>CellphoneDatabaseEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DTO\ChiTietPhieuDatHang.cs">
+      <DependentUpon>CellphoneDatabaseEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DTO\ChiTietPhieuNhap.cs">
+      <DependentUpon>CellphoneDatabaseEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DTO\HangHoa.cs">
+      <DependentUpon>CellphoneDatabaseEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DTO\LoaiHangHoa.cs">
+      <DependentUpon>CellphoneDatabaseEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DTO\NhaCungCap.cs">
+      <DependentUpon>CellphoneDatabaseEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DTO\NhanVien.cs">
+      <DependentUpon>CellphoneDatabaseEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DTO\PhanQuyen.cs">
+      <DependentUpon>CellphoneDatabaseEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DTO\PhieuBanHang.cs">
+      <DependentUpon>CellphoneDatabaseEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DTO\PhieuBaoHang.cs">
+      <DependentUpon>CellphoneDatabaseEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DTO\PhieuChi.cs">
+      <DependentUpon>CellphoneDatabaseEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DTO\PhieuDatHang.cs">
+      <DependentUpon>CellphoneDatabaseEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DTO\PhieuNhap.cs">
+      <DependentUpon>CellphoneDatabaseEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DTO\sysdiagram.cs">
+      <DependentUpon>CellphoneDatabaseEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="UI\UI_BanHang.xaml.cs">
       <DependentUpon>UI_BanHang.xaml</DependentUpon>
     </Compile>
@@ -131,6 +193,13 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EntityDeploy Include="DTO\CellphoneDatabaseEntity.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>CellphoneDatabaseEntity.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="DTO\CellphoneDatabaseEntity.edmx.diagram">
+      <DependentUpon>CellphoneDatabaseEntity.edmx</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -144,6 +213,18 @@
     <Resource Include="Assets\banner.jpg" />
     <Resource Include="Assets\bannerv1.jpg" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DTO\CellphoneDatabaseEntity.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>CellphoneDatabaseEntity.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="DTO\CellphoneDatabaseEntity.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>CellphoneDatabaseEntity.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
