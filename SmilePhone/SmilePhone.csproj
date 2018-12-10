@@ -8,12 +8,13 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>SmilePhone</RootNamespace>
     <AssemblyName>SmilePhone</AssemblyName>
-    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -35,23 +36,21 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MaterialDesignColors, Version=1.0.0.14576, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MaterialDesignColors.1.1.1\lib\net45\MaterialDesignColors.dll</HintPath>
-    </Reference>
-    <Reference Include="MaterialDesignThemes.Wpf, Version=2.5.0.1205, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MaterialDesignThemes.2.5.0.1205\lib\net45\MaterialDesignThemes.Wpf.dll</HintPath>
-    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="MaterialDesignColors, Version=1.0.0.14576, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialDesignColors.1.1.1\lib\net45\MaterialDesignColors.dll</HintPath>
+    </Reference>
+    <Reference Include="MaterialDesignThemes.Wpf, Version=2.5.0.1205, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialDesignThemes.2.5.0.1205\lib\net45\MaterialDesignThemes.Wpf.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Data.Entity" />
-    <Reference Include="System.Data.Entity.Design" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -70,66 +69,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="DTO\BaoCaoTonKho.cs">
-      <DependentUpon>CellphoneDatabaseEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DTO\CellphoneDatabaseEntity.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CellphoneDatabaseEntity.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DTO\CellphoneDatabaseEntity.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CellphoneDatabaseEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DTO\CellphoneDatabaseEntity.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CellphoneDatabaseEntity.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="DTO\ChiTietPhieuBanHang.cs">
-      <DependentUpon>CellphoneDatabaseEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DTO\ChiTietPhieuDatHang.cs">
-      <DependentUpon>CellphoneDatabaseEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DTO\ChiTietPhieuNhap.cs">
-      <DependentUpon>CellphoneDatabaseEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DTO\HangHoa.cs">
-      <DependentUpon>CellphoneDatabaseEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DTO\LoaiHangHoa.cs">
-      <DependentUpon>CellphoneDatabaseEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DTO\NhaCungCap.cs">
-      <DependentUpon>CellphoneDatabaseEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DTO\NhanVien.cs">
-      <DependentUpon>CellphoneDatabaseEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DTO\PhanQuyen.cs">
-      <DependentUpon>CellphoneDatabaseEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DTO\PhieuBanHang.cs">
-      <DependentUpon>CellphoneDatabaseEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DTO\PhieuBaoHang.cs">
-      <DependentUpon>CellphoneDatabaseEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DTO\PhieuChi.cs">
-      <DependentUpon>CellphoneDatabaseEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DTO\PhieuDatHang.cs">
-      <DependentUpon>CellphoneDatabaseEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DTO\PhieuNhap.cs">
-      <DependentUpon>CellphoneDatabaseEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DTO\sysdiagram.cs">
-      <DependentUpon>CellphoneDatabaseEntity.tt</DependentUpon>
-    </Compile>
     <Compile Include="UI\UI_BanHang.xaml.cs">
       <DependentUpon>UI_BanHang.xaml</DependentUpon>
     </Compile>
@@ -193,13 +132,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EntityDeploy Include="DTO\CellphoneDatabaseEntity.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>CellphoneDatabaseEntity.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <None Include="DTO\CellphoneDatabaseEntity.edmx.diagram">
-      <DependentUpon>CellphoneDatabaseEntity.edmx</DependentUpon>
-    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -217,14 +149,10 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="DTO\CellphoneDatabaseEntity.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>CellphoneDatabaseEntity.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="DTO\CellphoneDatabaseEntity.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>CellphoneDatabaseEntity.cs</LastGenOutput>
-    </Content>
+    <ProjectReference Include="..\BUS\BUS.csproj">
+      <Project>{3a76a284-b4d9-4502-b244-16d8cb89e9f2}</Project>
+      <Name>BUS</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

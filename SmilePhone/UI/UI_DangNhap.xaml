@@ -24,11 +24,11 @@
 
             <StackPanel Margin="0,15" Orientation="Horizontal">
                 <materialDesign:PackIcon Kind="Account" VerticalAlignment="Center" Foreground="#707070"/>
-                <TextBox materialDesign:HintAssist.Hint="Tên đăng nhập" Width="250" Margin="5" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+                <TextBox x:Name="tbUserName" materialDesign:HintAssist.Hint="Tên đăng nhập" Width="250" Margin="5" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <materialDesign:PackIcon Kind="Key" VerticalAlignment="Center" Foreground="#707070"/>
-                <PasswordBox materialDesign:HintAssist.Hint="Mật khẩu" Width="250" Margin="5" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"/>
+                <PasswordBox x:Name="tbPassword" materialDesign:HintAssist.Hint="Mật khẩu" Width="250" Margin="5" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"/>
             </StackPanel>
             <Button x:Name="btnDangNhap"
             Style="{StaticResource MaterialDesignRaisedButton}"

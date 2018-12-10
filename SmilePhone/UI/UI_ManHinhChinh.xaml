@@ -46,7 +46,7 @@
                             <Button Content="Account"/>
                             <Button Content="Help"/>
                             <Separator/>
-                            <Button Content="Logout"/>
+                            <Button x:Name="btn_Logout" Content="Logout" Click="btn_Logout_Click"/>
                         </StackPanel>
                     </materialDesign:PopupBox>
                 </StackPanel>

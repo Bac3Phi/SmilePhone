@@ -54,5 +54,12 @@ namespace SmilePhone.UI
                     break;
             }
         }
+
+        private void btn_Logout_Click(object sender, RoutedEventArgs e)
+        {
+            UI_DangNhap UI_DangNhap = new UI_DangNhap();
+            UI_DangNhap.Show();
+            this.Close();
+        }
     }
 }

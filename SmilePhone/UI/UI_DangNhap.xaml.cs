@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using BUS;
 
 namespace SmilePhone.UI
 {
@@ -26,9 +27,18 @@ namespace SmilePhone.UI
 
         private void btnDangNhap_Click(object sender, RoutedEventArgs e)
         {
-            UI_ManHinhChinh UI_ManHinhChinh = new UI_ManHinhChinh();
-            UI_ManHinhChinh.Show();
-            this.Close();
+            if (BUS_DangNhap.Instance.DangNhap(tbUserName.Text, tbPassword.Password))
+            {
+                UI_ManHinhChinh UI_ManHinhChinh = new UI_ManHinhChinh();
+                UI_ManHinhChinh.Show();
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Sai tên đăng nhập hoặc mật khẩu",
+                                          "Đăng Nhập Thất Bại",
+                                          MessageBoxButton.OK);
+            }
         }
     }
 }
