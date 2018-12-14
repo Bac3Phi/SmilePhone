@@ -4,9 +4,57 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SmilePhone.UI"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Background="Orange">
-            
+    <Grid Background="WhiteSmoke">
+        <Button x:Name="btnLapPhieu"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Top"
+            Style="{StaticResource MaterialDesignRaisedLightButton}"
+            ToolTip="Resource name: MaterialDesignRaisedLightButton" Margin="0,20,80,0" Click="btnLapPhieu_Click">
+            Lập Phiếu Bán Hàng
+        </Button>
+        <StackPanel Margin="44,69,44,288" Orientation="Vertical" HorizontalAlignment="Center">
+            <StackPanel Orientation="Horizontal">
+                <DatePicker
+                    HorizontalAlignment="Center"
+                    Margin="0,0,50,0"
+                    VerticalAlignment="Center"
+                    materialDesign:HintAssist.Hint="Từ ngày"
+                    Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Width="241"/>
+                <DatePicker
+                    HorizontalAlignment="Center"
+                    Margin="0,0,50,0"
+                    VerticalAlignment="Center"
+                    materialDesign:HintAssist.Hint="Đến ngày"
+                    Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Width="241"/>
+                <Button
+                    HorizontalAlignment="Center"
+                    Style="{StaticResource MaterialDesignRaisedButton}"
+                    Width="128"
+                    ToolTip="Resource name: MaterialDesignRaisedButton">
+                    Search
+                </Button>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
+                <TextBox
+                    Margin="0,0,50,0"
+                    materialDesign:HintAssist.Hint="Tìm kiếm"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="533" />
+                <Button
+                    HorizontalAlignment="Center"
+                    Style="{StaticResource MaterialDesignRaisedButton}"
+                    Width="128"
+                    ToolTip="Resource name: MaterialDesignRaisedButton">
+                    Search
+                </Button>
+            </StackPanel>
+        </StackPanel>
+        <DataGrid
+            Margin="44,197,44,26"
+            ItemsSource="{Binding Items3}"
+            CanUserSortColumns="True"
+            CanUserAddRows="False" />
     </Grid>
 </UserControl>

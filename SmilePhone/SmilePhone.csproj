@@ -75,6 +75,9 @@
     <Compile Include="UI\UI_DangNhap.xaml.cs">
       <DependentUpon>UI_DangNhap.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\UI_LapPhieuBanHang.xaml.cs">
+      <DependentUpon>UI_LapPhieuBanHang.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\UI_ManHinhChinh.xaml.cs">
       <DependentUpon>UI_ManHinhChinh.xaml</DependentUpon>
     </Compile>
@@ -102,6 +105,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\UI_DangNhap.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\UI_LapPhieuBanHang.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -16,21 +16,21 @@ using System.Windows.Shapes;
 namespace SmilePhone.UI
 {
     /// <summary>
-    /// Interaction logic for UI_BanHang.xaml
+    /// Interaction logic for UI_LapPhieuBanHang.xaml
     /// </summary>
-    public partial class UI_BanHang : UserControl
+    public partial class UI_LapPhieuBanHang : UserControl
     {
         private Grid gridMain;
 
-        public UI_BanHang(Grid gridMain)
+        public UI_LapPhieuBanHang(Grid gridMain)
         {
             InitializeComponent();
             this.gridMain = gridMain;
         }
 
-        private void btnLapPhieu_Click(object sender, RoutedEventArgs e)
+        private void btnQuayLai_Click(object sender, RoutedEventArgs e)
         {
-            UserControl usc = new UI_LapPhieuBanHang(gridMain);
+            UserControl usc = new UI_BanHang(gridMain);
             gridMain.Children.Clear();
             gridMain.Children.Add(usc);
         }

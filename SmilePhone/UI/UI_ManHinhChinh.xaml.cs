@@ -47,7 +47,7 @@ namespace SmilePhone.UI
                     GridMain.Children.Add(usc);
                     break;
                 case "ItemCreate":
-                    usc = new UI_BanHang();
+                    usc = new UI_BanHang(GridMain);
                     GridMain.Children.Add(usc);
                     break;
                 default:
