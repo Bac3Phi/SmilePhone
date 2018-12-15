@@ -53,7 +53,11 @@ namespace SmilePhone.UI
                 case "ItemSuppliers":
                     usc = new UI_NhaCungCap(GridMain);
                     GridMain.Children.Add(usc);
-                    break;                    
+                    break;
+                case "ItemEmployees":
+                    usc = new UI_NhanVien(GridMain);
+                    GridMain.Children.Add(usc);
+                    break;
                 default:
                     break;
             }
