@@ -1,0 +1,45 @@
+﻿<UserControl x:Class="SmilePhone.UI.UI_NhaCungCap"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SmilePhone.UI"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid Background="WhiteSmoke">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.58*" />
+                <ColumnDefinition Width="0.3*"/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0" Content="Danh sách Nhà Cung Cấp" FontFamily="Segoe UI Semibold" FontSize="18" Padding="10" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+            <Button Grid.Column="1" Style="{StaticResource MaterialDesignRaisedButton}" Width="100" ToolTip="Resource name: MaterialDesignRaisedButton"
+                    Click="btnThem_Click">
+                Thêm
+            </Button>
+        </Grid>
+        <Grid Grid.Row="1" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBox Grid.Column="0"  materialDesign:HintAssist.Hint="Tìm kiếm" Height="45" Width="500" Margin="100,5,5,5" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+            <RepeatButton Grid.Column="1" Width="100" ToolTip="Resource name: MaterialDesignRaisedButton"
+                          Click="btnTim_Click">
+                Tìm
+            </RepeatButton>
+        </Grid>
+        <DataGrid
+            Grid.Row="2"
+            Margin="10"
+            ItemsSource="{Binding Items3}"
+            CanUserSortColumns="True"
+            CanUserAddRows="False" />
+    </Grid>
+</UserControl>
