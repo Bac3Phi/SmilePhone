@@ -26,14 +26,14 @@ namespace DAL
             }
         }
 
-        public bool CheckDangNhap(string userName, string password)
+        public NhanVien CheckDangNhap(string userName, string password)
         {
             var result = from nv in db.NhanViens
                          where (nv.UserName == userName) && (nv.Password == password)
                          select nv;
             if (result.Count() > 0)
-                return true;
-            return false;
+                return result.First();
+            return null;
         }
     }
 }

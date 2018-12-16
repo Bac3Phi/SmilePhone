@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using BUS;
+using DAL;
 
 namespace SmilePhone.UI
 {
@@ -27,8 +28,13 @@ namespace SmilePhone.UI
 
         private void btnDangNhap_Click(object sender, RoutedEventArgs e)
         {
-            if (BUS_DangNhap.Instance.DangNhap(tbUserName.Text, tbPassword.Password))
+            if (BUS_DangNhap.Instance.DangNhap(tbUserName.Text, tbPassword.Password) != null)
             {
+                NhanVien nhanVien = BUS_DangNhap.Instance.DangNhap(tbUserName.Text, tbPassword.Password);
+                Properties.Settings.Default.MaNV = nhanVien.MaNhanVien;
+                Properties.Settings.Default.TenNhanVien = nhanVien.TenNhanVien;
+                Properties.Settings.Default.Save();
+
                 UI_ManHinhChinh UI_ManHinhChinh = new UI_ManHinhChinh();
                 UI_ManHinhChinh.Show();
                 this.Close();

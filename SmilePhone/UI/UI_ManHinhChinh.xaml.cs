@@ -19,9 +19,12 @@ namespace SmilePhone.UI
     /// </summary>
     public partial class UI_ManHinhChinh : Window
     {
+        public static Grid gridMain;
         public UI_ManHinhChinh()
         {
             InitializeComponent();
+            gridMain = GridMain;
+            txtTenNhanVien.Text = Properties.Settings.Default.TenNhanVien;
         }
         private void ButtonOpenMenu_Click(object sender, RoutedEventArgs e)
         {
@@ -47,7 +50,11 @@ namespace SmilePhone.UI
                     GridMain.Children.Add(usc);
                     break;
                 case "ItemCreate":
-                    usc = new UI_BanHang(GridMain);
+                    usc = new UI_BanHang();
+                    GridMain.Children.Add(usc);
+                    break;
+                case "ItemHangHoa":
+                    usc = new UI_HangHoa();
                     GridMain.Children.Add(usc);
                     break;
                 default:

@@ -20,19 +20,16 @@ namespace SmilePhone.UI
     /// </summary>
     public partial class UI_LapPhieuBanHang : UserControl
     {
-        private Grid gridMain;
-
-        public UI_LapPhieuBanHang(Grid gridMain)
+        public UI_LapPhieuBanHang()
         {
             InitializeComponent();
-            this.gridMain = gridMain;
         }
 
         private void btnQuayLai_Click(object sender, RoutedEventArgs e)
         {
-            UserControl usc = new UI_BanHang(gridMain);
-            gridMain.Children.Clear();
-            gridMain.Children.Add(usc);
+            UserControl usc = new UI_BanHang();
+            UI_ManHinhChinh.gridMain.Children.Clear();
+            UI_ManHinhChinh.gridMain.Children.Add(usc);
         }
     }
 }

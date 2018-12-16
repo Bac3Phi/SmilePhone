@@ -1,0 +1,97 @@
+﻿<UserControl x:Class="SmilePhone.UI.UI_ThemHangHoa"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SmilePhone.UI"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             d:DesignHeight="550" d:DesignWidth="800">
+    <Grid Background="WhiteSmoke">
+        <WrapPanel Margin="0,20,29,0" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" Width="371">
+            <Button
+                Margin="0,0,10,0"
+                Style="{StaticResource MaterialDesignRaisedButton}"
+                Width="100"
+                ToolTip="Resource name: MaterialDesignRaisedButton" Content="Lưu"/>
+            <Button
+                Margin="0,0,10,0"
+                Style="{StaticResource MaterialDesignRaisedButton}"
+                Width="100"
+                ToolTip="Resource name: MaterialDesignRaisedButton" Content="Quay lại"/>
+            <Button
+                Style="{StaticResource MaterialDesignRaisedButton}"
+                Width="150"
+                ToolTip="Resource name: MaterialDesignRaisedButton" Content="DS Nhà cung cấp"/>
+        </WrapPanel>
+        <WrapPanel Margin="84,59,134,16" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <WrapPanel Orientation="Vertical" Height="202" Width="150" VerticalAlignment="Top" Margin="0,0,50,0">
+                <Image
+                    Margin="0,0,0,20"
+                    Width="150"
+                    Height="150"
+                    Source="/Assets/placeholder.png"
+                    HorizontalAlignment="Center"/>
+                <Button x:Name="btnChonHinhAnh"
+                    Style="{StaticResource MaterialDesignRaisedLightButton}"
+                    ToolTip="Resource name: MaterialDesignRaisedLightButton" Content="Chọn hình ảnh" Width="150"/>
+            </WrapPanel>
+            <WrapPanel Orientation="Vertical" Height="475" Width="366">
+                <TextBox
+                    Margin="0,0,0,5"
+                    materialDesign:HintAssist.Hint="Tên hàng hóa"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" Height="39" Width="365" />
+                <TextBox
+                    Margin="0,0,0,5"
+                    materialDesign:HintAssist.Hint="Tên model"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" Height="39" Width="365" />
+                <TextBox
+                    Margin="0,0,0,5"
+                    materialDesign:HintAssist.Hint="Giá bán"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" Height="39" Width="365" />
+                <TextBox
+                    Margin="0,0,0,5"
+                    materialDesign:HintAssist.Hint="Đơn vị tính"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" Height="39" Width="365" />
+                <TextBox
+                    Margin="0,0,0,5"
+                    Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}"
+                    VerticalAlignment="Top"
+                    Height="82"
+                    AcceptsReturn="True"
+                    TextWrapping="Wrap"
+                    VerticalScrollBarVisibility="Auto"
+                    materialDesign:HintAssist.Hint="Mô tả"
+                    IsEnabled="{Binding IsChecked, ElementName=MaterialDesignOutlinedTextFieldTextBoxEnabledComboBox}" Width="365" />
+                <TextBox
+                    Margin="0,0,0,5"
+                    materialDesign:HintAssist.Hint="Xuất xứ"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" Height="39" Width="365" />
+                <TextBox
+                    Margin="0,0,0,5"
+                    materialDesign:HintAssist.Hint="Thời gian bảo hành"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" Height="39" Width="365" />
+                <TextBox
+                    Margin="0,0,0,5"
+                    Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}"
+                    VerticalAlignment="Top"
+                    Height="82"
+                    AcceptsReturn="True"
+                    TextWrapping="Wrap"
+                    VerticalScrollBarVisibility="Auto"
+                    materialDesign:HintAssist.Hint="Thông số kĩ thuật"
+                    IsEnabled="{Binding IsChecked, ElementName=MaterialDesignOutlinedTextFieldTextBoxEnabledComboBox}" Width="365" />
+                <ComboBox
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    x:Name="LocaleCombo" Width="366" Height="28">
+                    <ComboBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <VirtualizingStackPanel />
+                        </ItemsPanelTemplate>
+                    </ComboBox.ItemsPanel>
+                </ComboBox>
+            </WrapPanel>
+        </WrapPanel>
+    </Grid>
+</UserControl>
