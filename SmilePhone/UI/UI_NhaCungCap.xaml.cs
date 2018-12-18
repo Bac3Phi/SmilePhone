@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using BUS;
+using DAL;
 
 namespace SmilePhone.UI
 {
@@ -26,10 +28,11 @@ namespace SmilePhone.UI
         {
             InitializeComponent();
             this.gridMain = gridMain;
+            dgvSuppliers.ItemsSource = BUS_NhaCungCap.showData();
         }
         private void btnThem_Click(object sender, RoutedEventArgs e)
         {
-            UserControl usc = new UI_ThemNhaCungCap(gridMain);
+            UserControl usc = new UI_ThemNhaCungCap(gridMain, dgvSuppliers.SelectedItem as NhaCungCap);
             gridMain.Children.Clear();
             gridMain.Children.Add(usc);
         }
@@ -39,5 +42,22 @@ namespace SmilePhone.UI
             //gridMain.Children.Clear();
             //gridMain.Children.Add(usc);
         }
+
+        private void btnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            if (dgvSuppliers.SelectedItem == null) return;
+            else
+            {
+                BUS_NhaCungCap.DeleteNCC(dgvSuppliers.SelectedItem as NhaCungCap);
+                dgvSuppliers.Items.Remove(dgvSuppliers.SelectedItem);
+            }
+        }
+        private void btnRefresh_Click(object sender, RoutedEventArgs e)
+        {
+            //dgvSuppliers.Rows.Clear();
+            dgvSuppliers.ItemsSource = BUS_NhaCungCap.showData();
+        }
     }
 }
+
+//Command="{StaticResource DeleteOrderCommand}"

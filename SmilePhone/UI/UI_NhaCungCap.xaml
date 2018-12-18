@@ -16,12 +16,17 @@
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0.58*" />
-                <ColumnDefinition Width="0.3*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
             <Label Grid.Column="0" Content="Danh sách Nhà Cung Cấp" FontFamily="Segoe UI Semibold" FontSize="18" Padding="10" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-            <Button Grid.Column="1" Style="{StaticResource MaterialDesignRaisedButton}" Width="100" ToolTip="Resource name: MaterialDesignRaisedButton"
+            <Button Grid.Column="1" Style="{StaticResource MaterialDesignRaisedButton}" Margin="10,5,10,5" Width="100" ToolTip="Resource name: MaterialDesignRaisedButton"
                     Click="btnThem_Click">
                 Thêm
+            </Button>
+            <Button Grid.Column="2" Style="{StaticResource MaterialDesignRaisedButton}" Margin="10,5,10,5" Width="100" ToolTip="Resource name: MaterialDesignRaisedButton"
+                    Click="btnRefresh_Click">
+                Làm mới
             </Button>
         </Grid>
         <Grid Grid.Row="1" >
@@ -35,11 +40,40 @@
                 Tìm
             </RepeatButton>
         </Grid>
-        <DataGrid
-            Grid.Row="2"
-            Margin="10"
-            ItemsSource="{Binding Items3}"
-            CanUserSortColumns="True"
-            CanUserAddRows="False" />
+        <DataGrid 
+            x:Name="dgvSuppliers" 
+            Grid.Row="2" 
+            SelectionUnit="FullRow" 
+            SelectionMode="Extended" 
+            CanUserSortColumns="True" 
+            AutoGenerateColumns="False" 
+            CanUserAddRows="false" 
+            IsEnabled="True" 
+            EnableRowVirtualization="True" 
+            Width="auto"
+            Margin="10,10,10,10" 
+            RowDetailsVisibilityMode="VisibleWhenSelected">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <ToggleButton
+                                Style="{StaticResource MaterialDesignFlatToggleButton}"
+                                ToolTip="MaterialDesignFlatToggleButton" 
+                                Click="btnDelete_Click"
+                                CommandParameter="{Binding}" >
+                                <materialDesign:PackIcon
+                                    Kind="DeleteForever"/>                   
+                            </ToggleButton>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn x:Name="SuppliersIDCol" Binding="{Binding MaNhaCungCap}" Header="Mã NCC" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="SuppliersNameCol" Binding="{Binding TenNhaCungCap}" Header="Tên NCC" Width="Auto"/>
+                <DataGridTextColumn x:Name="SuppliersAddressCol" Binding="{Binding DiaChi}" Header="Địa chỉ" Width="Auto"/>
+                <DataGridTextColumn x:Name="SuppliersPhoneCol" Binding="{Binding SoDienThoai}" Header="Số ĐT" Width="Auto"/>
+                <DataGridTextColumn x:Name="SuppliersEmailCol" Binding="{Binding Email}" Header="Email" Width="Auto"/>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </UserControl>

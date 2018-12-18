@@ -7,7 +7,7 @@ using DAL;
 
 namespace BUS
 {
-    class BUS_NhaCungCap
+    public class BUS_NhaCungCap
     {
         private static BUS_NhaCungCap instance;
 
@@ -23,9 +23,24 @@ namespace BUS
             }
         }
 
-        //public bool DangNhap(string userName, string password)
-        //{
-        //    return NhaCungCap.Instance.CheckDangNhap(userName, password);
-        //}
+        public static List<NhaCungCap> showData()
+        {
+            return NhaCungCap.Instance.showNCC();
+        }
+
+        public static void DeleteNCC(NhaCungCap obj)
+        {
+            NhaCungCap.Instance.DeleteNCC(obj);
+        }
+
+        public NhaCungCap InsertNCC(NhaCungCap obj)
+        {
+            return NhaCungCap.Instance.InsertNCC(obj);
+        }
+
+        public void UpdateNCC(NhaCungCap obj)
+        {
+            NhaCungCap.Instance.UpdateNCC(obj);
+        }
     }
 }

@@ -11,15 +11,27 @@ namespace DAL
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Linq;
+
     public partial class NhaCungCap
     {
+        private static NhaCungCap instance;
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public NhaCungCap()
         {
             this.PhieuNhaps = new HashSet<PhieuNhap>();
         }
-    
+
+        public static NhaCungCap Instance
+        {
+            get
+            {
+                if (instance == null)
+                    instance = new NhaCungCap();
+                return instance;
+            }
+        }
+
         public string MaNhaCungCap { get; set; }
         public string TenNhaCungCap { get; set; }
         public string DiaChi { get; set; }
@@ -28,5 +40,43 @@ namespace DAL
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PhieuNhap> PhieuNhaps { get; set; }
+
+        public void DeleteNCC(NhaCungCap obj)
+        {
+            using (CellphoneComponentEntities db = new CellphoneComponentEntities())
+            {
+                db.NhaCungCaps.Attach(obj);
+                db.NhaCungCaps.Remove(obj);
+                db.SaveChanges();
+            }
+        }
+
+        public NhaCungCap InsertNCC(NhaCungCap obj)
+        {
+            using (CellphoneComponentEntities db = new CellphoneComponentEntities())
+            {
+                db.NhaCungCaps.Add(obj);
+                db.SaveChanges();
+                return obj;
+            }
+        }
+
+        public void UpdateNCC(NhaCungCap obj)
+        {
+            using (CellphoneComponentEntities db = new CellphoneComponentEntities())
+            {
+                db.NhaCungCaps.Attach(obj);
+                db.Entry(obj).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+            }
+        }
+
+        public List<NhaCungCap> showNCC()
+        {
+            using (CellphoneComponentEntities db = new CellphoneComponentEntities())
+            {
+                return db.NhaCungCaps.ToList();
+            }
+        }
     }
 }

@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using DAL;
+using BUS;
 
 namespace SmilePhone.UI
 {
@@ -21,18 +23,75 @@ namespace SmilePhone.UI
     public partial class UI_ThemNhaCungCap : UserControl
     {
         private Grid gridMain;
+        private bool isNew = false;
+        private NhaCungCap item = new NhaCungCap();
 
-        public UI_ThemNhaCungCap(Grid gridMain)
+        public UI_ThemNhaCungCap(Grid gridMain, NhaCungCap obj)
         {
             InitializeComponent();
             this.gridMain = gridMain;
+            if (obj == null)
+            {
+                isNew = true;
+            }
+            else
+            {
+                txtSupplierID.Text = obj.MaNhaCungCap;
+                txtSupplierName.Text = obj.TenNhaCungCap;
+                txtSupplierAddress.Text = obj.DiaChi;
+                txtSupplierPhone.Text = obj.SoDienThoai;
+                txtSupplierEmail.Text = obj.Email;
+            }
         }
 
         private void btnLuu_Click(object sender, RoutedEventArgs e)
         {
-            //UserControl usc = new UI_ThemNhaCungCap(gridMain);
-            //gridMain.Children.Clear();
-            //gridMain.Children.Add(usc);
+            if (isNew == true)
+            {
+                item.MaNhaCungCap = txtSupplierID.Text.Trim();
+                item.TenNhaCungCap = txtSupplierName.Text.Trim();
+                item.DiaChi = txtSupplierAddress.Text.Trim();
+                item.SoDienThoai = txtSupplierPhone.Text.Trim();
+                item.Email = txtSupplierEmail.Text.Trim();
+                if (txtSupplierEmail.Text != "" || txtSupplierID.Text != "" || txtSupplierPhone.Text != ""
+                    || txtSupplierAddress.Text != "" || txtSupplierName.Text != "")
+                {
+                    BUS_NhaCungCap.Instance.InsertNCC(item);
+                    txtSupplierID.Clear();
+                    txtSupplierName.Clear();
+                    txtSupplierPhone.Clear();
+                    txtSupplierAddress.Clear();
+                    txtSupplierEmail.Clear();
+                    MessageBox.Show("Thêm mới thành công!");
+                }
+                else
+                {
+                    MessageBox.Show("Hãy điền tất cả các ô còn trống!!!");
+                }
+            }
+            else
+            {
+                item.MaNhaCungCap = txtSupplierID.Text.Trim();
+                item.TenNhaCungCap = txtSupplierName.Text.Trim();
+                item.DiaChi = txtSupplierAddress.Text.Trim();
+                item.SoDienThoai = txtSupplierPhone.Text.Trim();
+                item.Email = txtSupplierEmail.Text.Trim();
+                if (txtSupplierEmail.Text != "" || txtSupplierID.Text != "" || txtSupplierPhone.Text != ""
+                    || txtSupplierAddress.Text != "" || txtSupplierName.Text != "")
+                {
+                    BUS_NhaCungCap.Instance.UpdateNCC(item);
+                    txtSupplierID.Clear();
+                    txtSupplierName.Clear();
+                    txtSupplierPhone.Clear();
+                    txtSupplierAddress.Clear();
+                    txtSupplierEmail.Clear();
+                    MessageBox.Show("Cập nhật thành công!");
+                }
+                else
+                {
+                    MessageBox.Show("Hãy điền tất cả các ô còn trống!!!");
+                }
+            }
         }
 
         private void btnQuayLai_Click(object sender, RoutedEventArgs e)
@@ -40,6 +99,15 @@ namespace SmilePhone.UI
             UserControl usc = new UI_NhaCungCap(gridMain);
             gridMain.Children.Clear();
             gridMain.Children.Add(usc);
+        }
+
+        private void btnRefresh_Click(object sender, RoutedEventArgs e)
+        {
+            txtSupplierID.Clear();
+            txtSupplierName.Clear();
+            txtSupplierPhone.Clear();
+            txtSupplierAddress.Clear();
+            txtSupplierEmail.Clear();
         }
     }
 }
