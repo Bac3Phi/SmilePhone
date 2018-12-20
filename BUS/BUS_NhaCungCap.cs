@@ -75,5 +75,10 @@ namespace BUS
             }
             return res;
         }
+
+        public List<NhaCungCap> searchData(String str)
+        {
+            return NhaCungCap.Instance.searchNCC(str);
+        }
     }
 }

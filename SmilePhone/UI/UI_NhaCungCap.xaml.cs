@@ -38,9 +38,8 @@ namespace SmilePhone.UI
         }
         private void btnTim_Click(object sender, RoutedEventArgs e)
         {
-            //UserControl usc = new UI_ThemNhaCungCap(gridMain);
-            //gridMain.Children.Clear();
-            //gridMain.Children.Add(usc);
+            string searchStr = txtSearch.Text;
+            dgvSuppliers.ItemsSource = BUS_NhaCungCap.Instance.searchData(searchStr);
         }
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)

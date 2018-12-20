@@ -92,5 +92,20 @@ namespace DAL
                 return maxID.ToString();
             }
         }
+
+        public List<NhaCungCap> searchNCC(string str)
+        {
+            using (CellphoneComponentEntities db = new CellphoneComponentEntities())
+            {
+                var result = (from item in db.NhaCungCaps
+                              where item.MaNhaCungCap.Contains(str.ToUpper())
+                              || item.TenNhaCungCap.Contains(str)
+                              || item.DiaChi.Contains(str)
+                              || item.SoDienThoai.Contains(str)
+                              || item.Email.Contains(str)
+                              select item).ToList();
+                return result;
+            }
+        }
     }
 }

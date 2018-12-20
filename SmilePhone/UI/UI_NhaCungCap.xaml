@@ -34,7 +34,7 @@
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <TextBox Grid.Column="0"  materialDesign:HintAssist.Hint="Tìm kiếm" Height="45" Width="500" Margin="100,5,5,5" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+            <TextBox x:Name="txtSearch" Grid.Column="0"  materialDesign:HintAssist.Hint="Tìm kiếm" Height="45" Width="500" Margin="100,5,5,5" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
             <RepeatButton Grid.Column="1" Width="100" ToolTip="Resource name: MaterialDesignRaisedButton"
                           Click="btnTim_Click">
                 Tìm
