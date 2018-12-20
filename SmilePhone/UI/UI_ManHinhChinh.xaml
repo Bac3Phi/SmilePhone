@@ -113,10 +113,16 @@
                             <TextBlock Text="Hàng Hóa" VerticalAlignment="Center"  FontWeight="Bold"  Margin="20 10"/>
                         </StackPanel>
                     </ListViewItem>
-                    <ListViewItem Height="60">
+                    <ListViewItem x:Name="ItemSuppliers" Height="60">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="AccountNetwork" Height="25" Width="25" Margin="10"/>
                             <TextBlock Text="Nhà Cung Cấp" VerticalAlignment="Center"  FontWeight="Bold"  Margin="20 10"/>
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem x:Name="ItemEmployees" Height="60">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="AccountBox" Height="25" Width="25" Margin="10"/>
+                            <TextBlock Text="Nhân viên" VerticalAlignment="Center"  FontWeight="Bold"  Margin="20 10"/>
                         </StackPanel>
                     </ListViewItem>
                 </ListView>

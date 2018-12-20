@@ -25,11 +25,11 @@ namespace SmilePhone.UI
             InitializeComponent();
         }
 
-        private void btnDangNhap_Click(object sender, RoutedEventArgs e)
-        {
+        private void btnDangNhap_Click(object sender, RoutedEventArgs e)        {
+            
             if (BUS_DangNhap.Instance.DangNhap(tbUserName.Text, tbPassword.Password))
             {
-                UI_ManHinhChinh UI_ManHinhChinh = new UI_ManHinhChinh();
+                UI_ManHinhChinh UI_ManHinhChinh = new UI_ManHinhChinh();                
                 UI_ManHinhChinh.Show();
                 this.Close();
             }

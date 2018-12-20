@@ -50,6 +50,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -78,8 +79,20 @@
     <Compile Include="UI\UI_ManHinhChinh.xaml.cs">
       <DependentUpon>UI_ManHinhChinh.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\UI_NhaCungCap.xaml.cs">
+      <DependentUpon>UI_NhaCungCap.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\UI_NhanVien.xaml.cs">
+      <DependentUpon>UI_NhanVien.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\UI_QuanTri.xaml.cs">
       <DependentUpon>UI_QuanTri.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\UI_ThemNhaCungCap.xaml.cs">
+      <DependentUpon>UI_ThemNhaCungCap.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\UI_ThemNhanVien.xaml.cs">
+      <DependentUpon>UI_ThemNhanVien.xaml</DependentUpon>
     </Compile>
     <Page Include="Assets\assets.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -109,7 +122,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UI\UI_NhaCungCap.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\UI_NhanVien.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UI\UI_QuanTri.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\UI_ThemNhaCungCap.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\UI_ThemNhanVien.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -152,6 +181,10 @@
     <ProjectReference Include="..\BUS\BUS.csproj">
       <Project>{3a76a284-b4d9-4502-b244-16d8cb89e9f2}</Project>
       <Name>BUS</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DAL\DAL.csproj">
+      <Project>{77FF60C0-4736-427B-8712-7BFE1F78C07E}</Project>
+      <Name>DAL</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
