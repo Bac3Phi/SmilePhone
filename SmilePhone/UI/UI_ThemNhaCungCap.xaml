@@ -36,7 +36,7 @@
                 Làm mới
             </Button>
         </Grid>
-        <TextBox x:Name="txtSupplierID" Grid.Row="1" materialDesign:HintAssist.Hint="Mã nhà cung cấp" Margin="10" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+        <TextBox x:Name="txtSupplierID" Grid.Row="1" materialDesign:HintAssist.Hint="Mã nhà cung cấp" Margin="10" Style="{StaticResource MaterialDesignFloatingHintTextBox}" IsReadOnly="True" />
         <TextBox x:Name="txtSupplierName" Grid.Row="2" materialDesign:HintAssist.Hint="Tên nhà cung cấp" Margin="10" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
         <TextBox x:Name="txtSupplierAddress" Grid.Row="3" materialDesign:HintAssist.Hint="Địa chỉ" Margin="10" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
         <TextBox x:Name="txtSupplierPhone" Grid.Row="4" materialDesign:HintAssist.Hint="Số điện thoại" Margin="10" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />

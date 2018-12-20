@@ -32,6 +32,7 @@ namespace SmilePhone.UI
             this.gridMain = gridMain;
             if (obj == null)
             {
+                AutoGenerateID();
                 isNew = true;
             }
             else
@@ -41,7 +42,13 @@ namespace SmilePhone.UI
                 txtSupplierAddress.Text = obj.DiaChi;
                 txtSupplierPhone.Text = obj.SoDienThoai;
                 txtSupplierEmail.Text = obj.Email;
+                isNew = false;
             }
+        }
+
+        private void AutoGenerateID()
+        {
+            txtSupplierID.Text = BUS_NhaCungCap.Instance.generateAutoID();
         }
 
         private void btnLuu_Click(object sender, RoutedEventArgs e)
@@ -53,7 +60,7 @@ namespace SmilePhone.UI
                 item.DiaChi = txtSupplierAddress.Text.Trim();
                 item.SoDienThoai = txtSupplierPhone.Text.Trim();
                 item.Email = txtSupplierEmail.Text.Trim();
-                if (txtSupplierEmail.Text != "" || txtSupplierID.Text != "" || txtSupplierPhone.Text != ""
+                if (txtSupplierEmail.Text != "" || txtSupplierPhone.Text != ""
                     || txtSupplierAddress.Text != "" || txtSupplierName.Text != "")
                 {
                     BUS_NhaCungCap.Instance.InsertNCC(item);
@@ -76,7 +83,7 @@ namespace SmilePhone.UI
                 item.DiaChi = txtSupplierAddress.Text.Trim();
                 item.SoDienThoai = txtSupplierPhone.Text.Trim();
                 item.Email = txtSupplierEmail.Text.Trim();
-                if (txtSupplierEmail.Text != "" || txtSupplierID.Text != "" || txtSupplierPhone.Text != ""
+                if (txtSupplierEmail.Text != "" || txtSupplierPhone.Text != ""
                     || txtSupplierAddress.Text != "" || txtSupplierName.Text != "")
                 {
                     BUS_NhaCungCap.Instance.UpdateNCC(item);
@@ -108,6 +115,7 @@ namespace SmilePhone.UI
             txtSupplierPhone.Clear();
             txtSupplierAddress.Clear();
             txtSupplierEmail.Clear();
+            AutoGenerateID();
         }
     }
 }

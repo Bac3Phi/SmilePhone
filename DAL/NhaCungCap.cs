@@ -78,5 +78,17 @@ namespace DAL
                 return db.NhaCungCaps.ToList();
             }
         }
+
+        public String autoID()
+        {
+            using (CellphoneComponentEntities db = new CellphoneComponentEntities())
+            {
+                var maxID = db.Database
+                    .SqlQuery<String>("select MaNhaCungCap from dbo.NhaCungCap where MaNhaCungCap = (Select Max(MaNhaCungCap) from dbo.NhaCungCap)")
+                    .FirstOrDefault();
+                
+                return maxID.ToString();
+            }
+        }
     }
 }
