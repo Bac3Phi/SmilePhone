@@ -45,11 +45,11 @@ namespace SmilePhone.UI
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
-            if (dgvSuppliers.SelectedItem == null) return;
-            else
+            if (dgvSuppliers.SelectedItem != null)
             {
                 BUS_NhaCungCap.DeleteNCC(dgvSuppliers.SelectedItem as NhaCungCap);
-                dgvSuppliers.Items.Remove(dgvSuppliers.SelectedItem);
+                dgvSuppliers.ItemsSource = BUS_NhaCungCap.showData();
+                //dgvSuppliers.Items.Remove(dgvSuppliers.SelectedItem);
             }
         }
         private void btnRefresh_Click(object sender, RoutedEventArgs e)

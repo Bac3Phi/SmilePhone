@@ -45,8 +45,10 @@ namespace DAL
         {
             using (CellphoneComponentEntities db = new CellphoneComponentEntities())
             {
-                db.NhaCungCaps.Attach(obj);
-                db.NhaCungCaps.Remove(obj);
+                NhaCungCap ncc = (from item in db.NhaCungCaps
+                                  where item.MaNhaCungCap == obj.MaNhaCungCap
+                                  select item).SingleOrDefault();
+                db.NhaCungCaps.Remove(ncc);
                 db.SaveChanges();
             }
         }
