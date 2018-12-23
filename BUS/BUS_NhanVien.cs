@@ -28,9 +28,9 @@ namespace BUS
             return NhanVien.Instance.showNV();
         }
 
-        public static void DeleteNV(NhanVien obj)
+        public static void DeleteNV(String id)
         {
-            NhanVien.Instance.DeleteNV(obj);
+            NhanVien.Instance.DeleteNV(id);
         }
 
         public void InsertNV(NhanVien obj, String str)
@@ -76,7 +76,7 @@ namespace BUS
             return res;
         }
 
-        public List<NhanVien> searchData(String str)
+        public List<dynamic> searchData(String str)
         {
             return NhanVien.Instance.searchNV(str);
         }

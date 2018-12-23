@@ -55,15 +55,15 @@ namespace DAL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PhieuNhap> PhieuNhaps { get; set; }
 
-        public void DeleteNV(NhanVien obj)
+        public void DeleteNV(String id)
         {
             using (CellphoneComponentEntities db = new CellphoneComponentEntities())
             {
-                //NhanVien ncc = (from item in db.NhaCungCaps
-                //                  where item.MaNhaCungCap == obj.MaNhaCungCap
-                //                  select item).SingleOrDefault();
-                //db.NhanVien.Remove(ncc);
-                //db.SaveChanges();
+                NhanVien nv = (from item in db.NhanViens
+                                where item.MaNhanVien == id
+                                select item).SingleOrDefault();
+                db.NhanViens.Remove(nv);
+                db.SaveChanges();
             }
         }
 
@@ -71,14 +71,6 @@ namespace DAL
         {
             using (CellphoneComponentEntities db = new CellphoneComponentEntities())
             {
-                //NhanVien employee = new NhanVien();
-                //Type t = obj.GetType();
-                //employee.MaNhanVien = t.GetProperty("MaNhanVien").GetValue(obj, null);
-                //employee.TenNhanVien = t.GetProperty("TenNhanVien").GetValue(obj, null);
-                //employee.UserName = t.GetProperty("UserName").GetValue(obj, null);
-                //employee.Password = t.GetProperty("Password").GetValue(obj, null);
-
-                //String pqName = t.GetProperty("TenPhanQuyen").GetValue(obj, null);
                 var result = db.Database
                     .SqlQuery<String>("select MaPhanQuyen from dbo.PhanQuyen where TenPhanQuyen = N'" + str + "'")
                     .FirstOrDefault();
@@ -134,17 +126,26 @@ namespace DAL
             }
         }
 
-        public List<NhanVien> searchNV(string str)
+        public List<dynamic> searchNV(string str)
         {
             using (CellphoneComponentEntities db = new CellphoneComponentEntities())
             {
                 var result = (from item in db.NhanViens
+                              join perm in db.PhanQuyens
+                              on item.MaPhanQuyen equals perm.MaPhanQuyen
                               where item.MaNhanVien.Contains(str.ToUpper())
                               || item.TenNhanVien.Contains(str)
                               || item.UserName.Contains(str)
                               || item.Password.Contains(str)
-                              //|| item.TenPhanQuyen.Contains(str)
-                              select item).ToList();
+                              || perm.TenPhanQuyen.Contains(str)
+                              select new
+                              {
+                                  MaNhanVien = item.MaNhanVien,
+                                  TenNhanVien = item.TenNhanVien,
+                                  UserName = item.UserName,
+                                  Password = item.Password,
+                                  TenPhanQuyen = perm.TenPhanQuyen
+                              }).ToList<dynamic>();
                 return result;
             }
         }

@@ -46,9 +46,11 @@ namespace SmilePhone.UI
         {
             if (dgvEmployees.SelectedItem != null)
             {
-                BUS_NhanVien.DeleteNV(dgvEmployees.SelectedItem as NhanVien);
+                //NhanVien nv = new NhanVien();
+                //nv.MaNhanVien = dgvEmployees.;
+                //BUS_NhanVien.DeleteNV(nv.MaNhanVien.ToString());
                 //dgvEmployees.ItemsSource = BUS_NhanVien.showData();
-                //dgvSuppliers.Items.Remove(dgvSuppliers.SelectedItem);
+                //dgvEmployees.Items.Remove(dgvEmployees.SelectedItem);
             }
         }
         private void btnRefresh_Click(object sender, RoutedEventArgs e)
