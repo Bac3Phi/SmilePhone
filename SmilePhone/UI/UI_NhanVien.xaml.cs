@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -46,16 +47,20 @@ namespace SmilePhone.UI
         {
             if (dgvEmployees.SelectedItem != null)
             {
-                //NhanVien nv = new NhanVien();
-                //nv.MaNhanVien = dgvEmployees.;
-                //BUS_NhanVien.DeleteNV(nv.MaNhanVien.ToString());
-                //dgvEmployees.ItemsSource = BUS_NhanVien.showData();
-                //dgvEmployees.Items.Remove(dgvEmployees.SelectedItem);
+                //object obj = dgvEmployees.SelectedItem;
+                dynamic obj = dgvEmployees.SelectedItem;
+                Type t = obj.GetType();
+                String id = t.GetProperty("MaNhanVien").GetValue(obj, null);
+
+                BUS_NhanVien.DeleteNV(id);
+                dgvEmployees.ItemsSource = BUS_NhanVien.showData();
+                
             }
         }
         private void btnRefresh_Click(object sender, RoutedEventArgs e)
         {
             //dgvSuppliers.Rows.Clear();
+            txtSearch.Clear();
             dgvEmployees.ItemsSource = BUS_NhanVien.showData();
         }
     }
