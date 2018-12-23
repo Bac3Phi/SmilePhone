@@ -10,10 +10,13 @@
 namespace DAL
 {
     using System;
+    using System.Linq;
     using System.Collections.Generic;
-    
+    using System.Diagnostics;
+
     public partial class NhanVien
     {
+        private static NhanVien instance;
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public NhanVien()
         {
@@ -23,13 +26,23 @@ namespace DAL
             this.PhieuDatHangs = new HashSet<PhieuDatHang>();
             this.PhieuNhaps = new HashSet<PhieuNhap>();
         }
-    
+
+        public static NhanVien Instance
+        {
+            get
+            {
+                if (instance == null)
+                    instance = new NhanVien();
+                return instance;
+            }
+        }
+
         public string MaNhanVien { get; set; }
         public string TenNhanVien { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }
         public string MaPhanQuyen { get; set; }
-    
+
         public virtual PhanQuyen PhanQuyen { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PhieuBanHang> PhieuBanHangs { get; set; }
@@ -41,5 +54,82 @@ namespace DAL
         public virtual ICollection<PhieuDatHang> PhieuDatHangs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PhieuNhap> PhieuNhaps { get; set; }
+
+        public void DeleteNV(NhanVien obj)
+        {
+            using (CellphoneComponentEntities db = new CellphoneComponentEntities())
+            {
+                //NhanVien ncc = (from item in db.NhaCungCaps
+                //                  where item.MaNhaCungCap == obj.MaNhaCungCap
+                //                  select item).SingleOrDefault();
+                //db.NhanVien.Remove(ncc);
+                //db.SaveChanges();
+            }
+        }
+
+        public NhanVien InsertNV(NhanVien obj)
+        {
+            using (CellphoneComponentEntities db = new CellphoneComponentEntities())
+            {
+                db.NhanViens.Add(obj);
+                db.SaveChanges();
+                return obj;
+            }
+        }
+
+        public void UpdateNV(NhanVien obj)
+        {
+            using (CellphoneComponentEntities db = new CellphoneComponentEntities())
+            {
+                db.NhanViens.Attach(obj);
+                db.Entry(obj).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+            }
+        }
+
+        public List<dynamic> showNV()
+        {
+            using (CellphoneComponentEntities db = new CellphoneComponentEntities())
+            {
+                var result = (from item in db.NhanViens
+                                join perm in db.PhanQuyens on item.MaPhanQuyen equals perm.MaPhanQuyen
+                                select new
+                                {
+                                    MaNhanVien = item.MaNhanVien,
+                                    TenNhanVien = item.TenNhanVien,
+                                    UserName = item.UserName,
+                                    Password = item.Password,
+                                    TenPhanQuyen = perm.TenPhanQuyen
+                                }).ToList<dynamic>();
+                return result;
+            }
+        }
+
+        public String autoID()
+        {
+            using (CellphoneComponentEntities db = new CellphoneComponentEntities())
+            {
+                //var maxID = db.Database
+                //    .SqlQuery<String>("select MaNhanVien from dbo.NhaCungCap where MaNhaCungCap = (Select Max(MaNhaCungCap) from dbo.NhaCungCap)")
+                //    .FirstOrDefault();
+
+                return null;
+            }
+        }
+
+        public List<NhanVien> searchNV(string str)
+        {
+            using (CellphoneComponentEntities db = new CellphoneComponentEntities())
+            {
+                var result = (from item in db.NhanViens
+                              where item.MaNhanVien.Contains(str.ToUpper())
+                              || item.TenNhanVien.Contains(str)
+                              || item.UserName.Contains(str)
+                              || item.Password.Contains(str)
+                              //|| item.TenPhanQuyen.Contains(str)
+                              select item).ToList();
+                return result;
+            }
+        }
     }
 }
