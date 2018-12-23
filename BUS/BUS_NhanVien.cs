@@ -33,14 +33,14 @@ namespace BUS
             NhanVien.Instance.DeleteNV(obj);
         }
 
-        public NhanVien InsertNV(NhanVien obj)
+        public void InsertNV(NhanVien obj, String str)
         {
-            return NhanVien.Instance.InsertNV(obj);
+            NhanVien.Instance.InsertNV(obj, str);
         }
 
-        public void UpdateNV(NhanVien obj)
+        public void UpdateNV(NhanVien obj, String str)
         {
-            NhanVien.Instance.UpdateNV(obj);
+            NhanVien.Instance.UpdateNV(obj, str);
         }
 
         public String generateAutoID()

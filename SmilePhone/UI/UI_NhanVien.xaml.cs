@@ -32,7 +32,7 @@ namespace SmilePhone.UI
         }
         private void btnThem_Click(object sender, RoutedEventArgs e)
         {
-            UserControl usc = new UI_ThemNhanVien(gridMain, dgvEmployees.SelectedItem as NhanVien);
+            UserControl usc = new UI_ThemNhanVien(gridMain, dgvEmployees.SelectedItem as dynamic);
             gridMain.Children.Clear();
             gridMain.Children.Add(usc);
         }
@@ -54,7 +54,7 @@ namespace SmilePhone.UI
         private void btnRefresh_Click(object sender, RoutedEventArgs e)
         {
             //dgvSuppliers.Rows.Clear();
-            //dgvEmployees.ItemsSource = BUS_NhanVien.showData();
+            dgvEmployees.ItemsSource = BUS_NhanVien.showData();
         }
     }
 }

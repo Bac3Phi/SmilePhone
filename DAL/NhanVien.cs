@@ -67,20 +67,37 @@ namespace DAL
             }
         }
 
-        public NhanVien InsertNV(NhanVien obj)
+        public void InsertNV(NhanVien obj, String str)
         {
             using (CellphoneComponentEntities db = new CellphoneComponentEntities())
             {
+                //NhanVien employee = new NhanVien();
+                //Type t = obj.GetType();
+                //employee.MaNhanVien = t.GetProperty("MaNhanVien").GetValue(obj, null);
+                //employee.TenNhanVien = t.GetProperty("TenNhanVien").GetValue(obj, null);
+                //employee.UserName = t.GetProperty("UserName").GetValue(obj, null);
+                //employee.Password = t.GetProperty("Password").GetValue(obj, null);
+
+                //String pqName = t.GetProperty("TenPhanQuyen").GetValue(obj, null);
+                var result = db.Database
+                    .SqlQuery<String>("select MaPhanQuyen from dbo.PhanQuyen where TenPhanQuyen = N'" + str + "'")
+                    .FirstOrDefault();
+                obj.MaPhanQuyen = result;
+
                 db.NhanViens.Add(obj);
                 db.SaveChanges();
-                return obj;
             }
         }
 
-        public void UpdateNV(NhanVien obj)
+        public void UpdateNV(NhanVien obj, String str)
         {
             using (CellphoneComponentEntities db = new CellphoneComponentEntities())
             {
+                var result = db.Database
+                    .SqlQuery<String>("select MaPhanQuyen from dbo.PhanQuyen where TenPhanQuyen = N'" + str + "'")
+                    .FirstOrDefault();
+                obj.MaPhanQuyen = result;
+
                 db.NhanViens.Attach(obj);
                 db.Entry(obj).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
@@ -109,11 +126,11 @@ namespace DAL
         {
             using (CellphoneComponentEntities db = new CellphoneComponentEntities())
             {
-                //var maxID = db.Database
-                //    .SqlQuery<String>("select MaNhanVien from dbo.NhaCungCap where MaNhaCungCap = (Select Max(MaNhaCungCap) from dbo.NhaCungCap)")
-                //    .FirstOrDefault();
+                var maxID = db.Database
+                    .SqlQuery<String>("select MaNhanVien from dbo.NhanVien where MaNhanVien = (Select Max(MaNhanVien) from dbo.NhanVien)")
+                    .FirstOrDefault();
 
-                return null;
+                return maxID;
             }
         }
 

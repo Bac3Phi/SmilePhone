@@ -40,6 +40,6 @@
         <TextBox x:Name="txtEmployeesName" Grid.Row="2" materialDesign:HintAssist.Hint="Tên nhân viên" Margin="10" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
         <TextBox x:Name="txtEmployeesUserName" Grid.Row="3" materialDesign:HintAssist.Hint="Username" Margin="10" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
         <TextBox x:Name="txtEmployeesPass" Grid.Row="4" materialDesign:HintAssist.Hint="Password" Margin="10" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
-        <ComboBox x:Name="cbbPermissionName" Grid.Row="5" Margin="10" materialDesign:HintAssist.Hint="Tên phân quyền" IsEditable="True" Style="{StaticResource MaterialDesignFloatingHintComboBox}" DisplayMemberPath="CompanyName" SelectedValuePath="CompanyName" SelectedValue="{Binding Path=CompanyName}" />
+        <ComboBox x:Name="cbbPermissionName" Grid.Row="5" SelectedValuePath="TenPhanQuyen" DisplayMemberPath="TenPhanQuyen" Margin="10" materialDesign:HintAssist.Hint="Tên phân quyền" IsEditable="True" Style="{StaticResource MaterialDesignFloatingHintComboBox}" />
     </Grid>
 </UserControl>
