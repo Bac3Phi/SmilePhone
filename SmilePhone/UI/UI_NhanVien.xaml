@@ -71,7 +71,7 @@
                 <DataGridTextColumn x:Name="EmployeesIDCol" Binding="{Binding MaNhanVien}" Header="Mã NV" Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="EmployeesNameCol" Binding="{Binding TenNhanVien}" Header="Tên NV" Width="Auto"/>
                 <DataGridTextColumn x:Name="EmployeesUserNameCol" Binding="{Binding UserName}" Header="Username" Width="Auto"/>
-                <DataGridTextColumn x:Name="EmployeesPasswordCol" Binding="{Binding Password}" Header="Password" Width="Auto"/>
+                <DataGridTextColumn x:Name="EmployeesPasswordCol" Binding="{Binding Password}" Header="Password" Width="Auto" Visibility="Hidden"/>
                 <DataGridTextColumn x:Name="PermissionNameCol" Binding="{Binding TenPhanQuyen}" Header="Tên Phân quyền" Width="Auto"/>
             </DataGrid.Columns>
         </DataGrid>
