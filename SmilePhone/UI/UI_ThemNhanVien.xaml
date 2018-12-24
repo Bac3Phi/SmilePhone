@@ -3,8 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:SmilePhone.UI"
+             
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              d:DesignHeight="350" d:DesignWidth="650">
     <Grid Background="WhiteSmoke">
@@ -20,20 +21,25 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Style="{StaticResource MaterialDesignRaisedButton}" Margin="10" Width="100" ToolTip="Resource name: MaterialDesignRaisedButton"
-                    Click="btnLuu_Click">
+            <Button Grid.Column="1" Style="{StaticResource MaterialDesignRaisedButton}" Margin="10" Width="100" ToolTip="Resource name: MaterialDesignRaisedButton"
+                            Click="btnLuu_Click">
                 Lưu
             </Button>
-            <Button Grid.Column="1" Style="{StaticResource MaterialDesignRaisedButton}" Margin="10" Width="100" ToolTip="Resource name: MaterialDesignRaisedButton"
-                    Click="btnQuayLai_Click">
+            <Button Grid.Column="0" Style="{StaticResource MaterialDesignRaisedButton}" Margin="10" Width="100" ToolTip="Resource name: MaterialDesignRaisedButton"
+                            Click="btnQuayLai_Click">
                 Quay lại
             </Button>
+            <Button Grid.Column="2" Style="{StaticResource MaterialDesignRaisedButton}" Margin="10" Width="100" ToolTip="Resource name: MaterialDesignRaisedButton"
+                            Click="btnRefresh_Click">
+                Làm mới
+            </Button>
         </Grid>
-        <TextBox Grid.Row="1" materialDesign:HintAssist.Hint="Mã nhân viên" Margin="10" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
-        <TextBox Grid.Row="2" materialDesign:HintAssist.Hint="Tên nhân viên" Margin="10" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
-        <TextBox Grid.Row="3" materialDesign:HintAssist.Hint="Username" Margin="10" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
-        <TextBox Grid.Row="4" materialDesign:HintAssist.Hint="Password" Margin="10" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
-        <TextBox Grid.Row="5" materialDesign:HintAssist.Hint="Mã Phân quyền" Margin="10" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+        <TextBox x:Name="txtEmployeesID" Grid.Row="1" materialDesign:HintAssist.Hint="Mã nhân viên" Margin="10" Style="{StaticResource MaterialDesignFloatingHintTextBox}" IsReadOnly="True" />
+        <TextBox x:Name="txtEmployeesName" Grid.Row="2" materialDesign:HintAssist.Hint="Tên nhân viên" Margin="10" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+        <TextBox x:Name="txtEmployeesUserName" Grid.Row="3" materialDesign:HintAssist.Hint="Username" Margin="10" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+        <TextBox x:Name="txtEmployeesPass" Grid.Row="4" materialDesign:HintAssist.Hint="Password" Margin="10" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+        <ComboBox x:Name="cbbPermissionName" Grid.Row="5" SelectedValuePath="TenPhanQuyen" DisplayMemberPath="TenPhanQuyen" Margin="10" materialDesign:HintAssist.Hint="Tên phân quyền" IsEditable="True" Style="{StaticResource MaterialDesignFloatingHintComboBox}" />
     </Grid>
 </UserControl>

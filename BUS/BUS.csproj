@@ -50,17 +50,19 @@
   <ItemGroup>
     <Compile Include="BUS_DangNhap.cs" />
     <Compile Include="BUS_NhaCungCap.cs" />
+    <Compile Include="BUS_NhanVien.cs" />
+    <Compile Include="BUS_PhanQuyen.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DAL\DAL.csproj">
       <Project>{77ff60c0-4736-427b-8712-7bfe1f78c07e}</Project>
       <Name>DAL</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

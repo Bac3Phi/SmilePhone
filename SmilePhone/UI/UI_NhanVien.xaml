@@ -3,8 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:SmilePhone.UI"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid Background="WhiteSmoke">
@@ -16,12 +16,17 @@
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0.58*" />
-                <ColumnDefinition Width="0.3*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
             <Label Grid.Column="0" Content="Danh sách Nhân viên" FontFamily="Segoe UI Semibold" FontSize="18" Padding="10" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-            <Button Grid.Column="1" Style="{StaticResource MaterialDesignRaisedButton}" Width="100" ToolTip="Resource name: MaterialDesignRaisedButton"
+            <Button Grid.Column="1" Style="{StaticResource MaterialDesignRaisedButton}" Margin="10,5,10,5" Width="100" ToolTip="Resource name: MaterialDesignRaisedButton"
                     Click="btnThem_Click">
                 Thêm
+            </Button>
+            <Button Grid.Column="2" Style="{StaticResource MaterialDesignRaisedButton}" Margin="10,5,10,5" Width="100" ToolTip="Resource name: MaterialDesignRaisedButton"
+                    Click="btnRefresh_Click">
+                Làm mới
             </Button>
         </Grid>
         <Grid Grid.Row="1" >
@@ -29,17 +34,46 @@
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <TextBox Grid.Column="0"  materialDesign:HintAssist.Hint="Tìm kiếm" Height="45" Width="500" Margin="100,5,5,5" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+            <TextBox x:Name="txtSearch" Grid.Column="0"  materialDesign:HintAssist.Hint="Tìm kiếm" Height="45" Width="500" Margin="100,5,5,5" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
             <RepeatButton Grid.Column="1" Width="100" ToolTip="Resource name: MaterialDesignRaisedButton"
                           Click="btnTim_Click">
                 Tìm
             </RepeatButton>
         </Grid>
-        <DataGrid
-            Grid.Row="2"
-            Margin="10"
-            ItemsSource="{Binding Items3}"
-            CanUserSortColumns="True"
-            CanUserAddRows="False" />
+        <DataGrid 
+            x:Name="dgvEmployees" 
+            Grid.Row="2" 
+            SelectionUnit="FullRow" 
+            SelectionMode="Extended" 
+            CanUserSortColumns="True" 
+            AutoGenerateColumns="False" 
+            CanUserAddRows="false" 
+            IsEnabled="True" 
+            EnableRowVirtualization="True" 
+            Width="auto"
+            Margin="10,10,10,10" 
+            RowDetailsVisibilityMode="VisibleWhenSelected">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <ToggleButton
+                                Style="{StaticResource MaterialDesignFlatToggleButton}"
+                                ToolTip="MaterialDesignFlatToggleButton" 
+                                Click="btnDelete_Click"
+                                CommandParameter="{Binding}" >
+                                <materialDesign:PackIcon
+                                    Kind="DeleteForever"/>
+                            </ToggleButton>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn x:Name="EmployeesIDCol" Binding="{Binding MaNhanVien}" Header="Mã NV" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="EmployeesNameCol" Binding="{Binding TenNhanVien}" Header="Tên NV" Width="Auto"/>
+                <DataGridTextColumn x:Name="EmployeesUserNameCol" Binding="{Binding UserName}" Header="Username" Width="Auto"/>
+                <DataGridTextColumn x:Name="EmployeesPasswordCol" Binding="{Binding Password}" Header="Password" Width="Auto" Visibility="Hidden"/>
+                <DataGridTextColumn x:Name="PermissionNameCol" Binding="{Binding TenPhanQuyen}" Header="Tên Phân quyền" Width="Auto"/>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </UserControl>
