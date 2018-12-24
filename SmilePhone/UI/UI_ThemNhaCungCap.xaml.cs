@@ -64,6 +64,7 @@ namespace SmilePhone.UI
                     || txtSupplierAddress.Text != "" || txtSupplierName.Text != "")
                 {
                     BUS_NhaCungCap.Instance.InsertNCC(item);
+                    AutoGenerateID();
                     txtSupplierID.Clear();
                     txtSupplierName.Clear();
                     txtSupplierPhone.Clear();
@@ -87,6 +88,7 @@ namespace SmilePhone.UI
                     || txtSupplierAddress.Text != "" || txtSupplierName.Text != "")
                 {
                     BUS_NhaCungCap.Instance.UpdateNCC(item);
+                    AutoGenerateID();
                     txtSupplierID.Clear();
                     txtSupplierName.Clear();
                     txtSupplierPhone.Clear();

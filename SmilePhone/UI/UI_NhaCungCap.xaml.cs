@@ -54,6 +54,7 @@ namespace SmilePhone.UI
         private void btnRefresh_Click(object sender, RoutedEventArgs e)
         {
             //dgvSuppliers.Rows.Clear();
+            txtSearch.Clear();
             dgvSuppliers.ItemsSource = BUS_NhaCungCap.showData();
         }
     }
