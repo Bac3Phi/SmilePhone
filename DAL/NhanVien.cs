@@ -121,8 +121,8 @@ namespace DAL
                 var maxID = db.Database
                     .SqlQuery<String>("select MaNhanVien from dbo.NhanVien where MaNhanVien = (Select Max(MaNhanVien) from dbo.NhanVien)")
                     .FirstOrDefault();
-
-                return maxID;
+                if (maxID != null) return maxID.ToString();
+                else return maxID;
             }
         }
 

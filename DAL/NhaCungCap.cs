@@ -88,8 +88,9 @@ namespace DAL
                 var maxID = db.Database
                     .SqlQuery<String>("select MaNhaCungCap from dbo.NhaCungCap where MaNhaCungCap = (Select Max(MaNhaCungCap) from dbo.NhaCungCap)")
                     .FirstOrDefault();
-                
-                return maxID.ToString();
+
+                if (maxID != null) return maxID.ToString();
+                else return maxID;
             }
         }
 

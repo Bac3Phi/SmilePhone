@@ -49,6 +49,7 @@
             AutoGenerateColumns="False" 
             CanUserAddRows="false" 
             IsEnabled="True" 
+            IsReadOnly="true"
             EnableRowVirtualization="True" 
             Width="auto"
             Margin="10,10,10,10" 
@@ -68,11 +69,11 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn x:Name="SuppliersIDCol" Binding="{Binding MaNhaCungCap}" Header="Mã NCC" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="SuppliersNameCol" Binding="{Binding TenNhaCungCap}" Header="Tên NCC" Width="Auto"/>
-                <DataGridTextColumn x:Name="SuppliersAddressCol" Binding="{Binding DiaChi}" Header="Địa chỉ" Width="Auto"/>
-                <DataGridTextColumn x:Name="SuppliersPhoneCol" Binding="{Binding SoDienThoai}" Header="Số ĐT" Width="Auto"/>
-                <DataGridTextColumn x:Name="SuppliersEmailCol" Binding="{Binding Email}" Header="Email" Width="Auto"/>
+                <DataGridTextColumn x:Name="SuppliersIDCol" Binding="{Binding MaNhaCungCap}" Header="Mã NCC" Width="SizeToHeader" IsReadOnly="true"/>
+                <DataGridTextColumn x:Name="SuppliersNameCol" Binding="{Binding TenNhaCungCap}" Header="Tên NCC" Width="Auto" IsReadOnly="true"/>
+                <DataGridTextColumn x:Name="SuppliersAddressCol" Binding="{Binding DiaChi}" Header="Địa chỉ" Width="Auto" IsReadOnly="true"/>
+                <DataGridTextColumn x:Name="SuppliersPhoneCol" Binding="{Binding SoDienThoai}" Header="Số ĐT" Width="Auto" IsReadOnly="true"/>
+                <DataGridTextColumn x:Name="SuppliersEmailCol" Binding="{Binding Email}" Header="Email" Width="Auto" IsReadOnly="true"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>
