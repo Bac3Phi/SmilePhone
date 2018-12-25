@@ -125,6 +125,12 @@
                             <TextBlock Text="Nhân viên" VerticalAlignment="Center"  FontWeight="Bold"  Margin="20 10"/>
                         </StackPanel>
                     </ListViewItem>
+                    <ListViewItem x:Name="ItemReceipt" Height="60">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Receipt" Height="25" Width="25" Margin="10"/>
+                            <TextBlock Text="Phiếu Chi" VerticalAlignment="Center"  FontWeight="Bold"  Margin="20 10"/>
+                        </StackPanel>
+                    </ListViewItem>
                 </ListView>
             </StackPanel>
         </Grid>

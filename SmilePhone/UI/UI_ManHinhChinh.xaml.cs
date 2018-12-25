@@ -58,6 +58,10 @@ namespace SmilePhone.UI
                     usc = new UI_NhanVien(GridMain);
                     GridMain.Children.Add(usc);
                     break;
+                case "ItemReceipt":
+                    usc = new UI_PhieuChi(GridMain);
+                    GridMain.Children.Add(usc);
+                    break;
                 default:
                     break;
             }

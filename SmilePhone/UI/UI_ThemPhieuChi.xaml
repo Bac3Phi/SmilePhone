@@ -1,0 +1,54 @@
+﻿<UserControl x:Class="SmilePhone.UI.UI_ThemPhieuChi"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SmilePhone.UI"
+             
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             d:DesignHeight="550" d:DesignWidth="650">
+    <Grid Background="WhiteSmoke">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="1" Style="{StaticResource MaterialDesignRaisedButton}" Margin="10" Width="100" ToolTip="Resource name: MaterialDesignRaisedButton"
+                            Click="btnLuu_Click">
+                Lưu
+            </Button>
+            <Button Grid.Column="0" Style="{StaticResource MaterialDesignRaisedButton}" Margin="10" Width="100" ToolTip="Resource name: MaterialDesignRaisedButton"
+                            Click="btnQuayLai_Click">
+                Quay lại
+            </Button>
+            <Button Grid.Column="2" Style="{StaticResource MaterialDesignRaisedButton}" Margin="10" Width="100" ToolTip="Resource name: MaterialDesignRaisedButton"
+                            Click="btnExportPDF_Click">
+                Xuất PDF
+            </Button>
+            <Button Grid.Column="3" Style="{StaticResource MaterialDesignRaisedButton}" Margin="10" Width="100" ToolTip="Resource name: MaterialDesignRaisedButton"
+                            Click="btnRefresh_Click">
+                Làm mới
+            </Button>
+        </Grid>
+        <TextBox x:Name="txtReceiptID" Grid.Row="1" materialDesign:HintAssist.Hint="Mã nhân viên" Margin="10" Style="{StaticResource MaterialDesignFloatingHintTextBox}" IsReadOnly="True" />
+        <DatePicker x:Name="dpReceiptDate" Grid.Row="2" Margin="10" materialDesign:HintAssist.Hint="Pick Date" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+        <TextBox x:Name="txtEmployeeName" Grid.Row="3" materialDesign:HintAssist.Hint="Tên nhân viên" Margin="10" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+        <TextBox x:Name="txtImportID" Grid.Row="4" materialDesign:HintAssist.Hint="Password" Margin="10" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+        <TextBox x:Name="txtReceiptNote" Grid.Row="5" materialDesign:HintAssist.Hint="Username" Margin="10" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+        <DatePicker x:Name="dpReceiptEditDate" Grid.Row="6" Margin="10" materialDesign:HintAssist.Hint="Pick Date" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+        <TextBox x:Name="txtSumMoney" Grid.Row="7" Style="{StaticResource MaterialDesignFilledTextFieldTextBox}" VerticalAlignment="Top" AcceptsReturn="True" TextWrapping="Wrap" Margin="10" materialDesign:HintAssist.Hint="Tổng tiền" IsEnabled="True" FontWeight="Bold" FontSize="18" IsReadOnly="True"/>        
+    </Grid>
+</UserControl>

@@ -94,6 +94,12 @@
     <Compile Include="UI\UI_ThemNhanVien.xaml.cs">
       <DependentUpon>UI_ThemNhanVien.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\UI_PhieuChi.xaml.cs">
+      <DependentUpon>UI_PhieuChi.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\UI_ThemPhieuChi.xaml.cs">
+      <DependentUpon>UI_ThemPhieuChi.xaml</DependentUpon>
+    </Compile>
     <Page Include="Assets\assets.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -139,6 +145,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\UI_ThemNhanVien.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\UI_PhieuChi.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\UI_ThemPhieuChi.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
