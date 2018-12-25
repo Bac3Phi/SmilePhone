@@ -34,7 +34,7 @@
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <TextBox x:Name="txtSearch" Grid.Column="0"  materialDesign:HintAssist.Hint="Tìm kiếm" Height="45" Width="500" Margin="100,5,5,5" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+            <TextBox x:Name="txtSearch" Grid.Column="0" TextChanged="TxtSearchText_TextChanged" materialDesign:HintAssist.Hint="Tìm kiếm" Height="45" Width="500" Margin="100,5,5,5" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
             <RepeatButton Grid.Column="1" Width="100" ToolTip="Resource name: MaterialDesignRaisedButton"
                           Click="btnTim_Click">
                 Tìm
@@ -55,25 +55,37 @@
             Margin="10,10,10,10" 
             RowDetailsVisibilityMode="VisibleWhenSelected">
             <DataGrid.Columns>
-                <DataGridTemplateColumn>
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <ToggleButton
-                                Style="{StaticResource MaterialDesignFlatToggleButton}"
-                                ToolTip="MaterialDesignFlatToggleButton" 
-                                Click="btnDelete_Click"
-                                CommandParameter="{Binding}" >
-                                <materialDesign:PackIcon
-                                    Kind="DeleteForever"/>                   
-                            </ToggleButton>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
                 <DataGridTextColumn x:Name="SuppliersIDCol" Binding="{Binding MaNhaCungCap}" Header="Mã NCC" Width="SizeToHeader" IsReadOnly="true"/>
                 <DataGridTextColumn x:Name="SuppliersNameCol" Binding="{Binding TenNhaCungCap}" Header="Tên NCC" Width="Auto" IsReadOnly="true"/>
                 <DataGridTextColumn x:Name="SuppliersAddressCol" Binding="{Binding DiaChi}" Header="Địa chỉ" Width="Auto" IsReadOnly="true"/>
                 <DataGridTextColumn x:Name="SuppliersPhoneCol" Binding="{Binding SoDienThoai}" Header="Số ĐT" Width="Auto" IsReadOnly="true"/>
                 <DataGridTextColumn x:Name="SuppliersEmailCol" Binding="{Binding Email}" Header="Email" Width="Auto" IsReadOnly="true"/>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <ToggleButton Grid.Column="0" Height="15"
+                                Style="{StaticResource MaterialDesignFlatToggleButton}"
+                                ToolTip="MaterialDesignFlatToggleButton" 
+                                Click="btnEdit_Click" >
+                                    <materialDesign:PackIcon
+                                    Kind="Edit"/>
+                                </ToggleButton>
+                                <ToggleButton Grid.Column="1" Height="15"
+                                Style="{StaticResource MaterialDesignFlatToggleButton}"
+                                ToolTip="MaterialDesignFlatToggleButton" 
+                                Click="btnDelete_Click" >
+                                    <materialDesign:PackIcon
+                                    Kind="DeleteForever"/>
+                                </ToggleButton>
+                            </Grid>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>
