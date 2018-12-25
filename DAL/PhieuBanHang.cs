@@ -14,6 +14,12 @@ namespace DAL
     
     public partial class PhieuBanHang
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public PhieuBanHang()
+        {
+            this.ChiTietPhieuBanHangs = new HashSet<ChiTietPhieuBanHang>();
+        }
+    
         public string MaPhieuBanHang { get; set; }
         public Nullable<System.DateTime> NgayBan { get; set; }
         public string MaNhanVien { get; set; }
@@ -23,6 +29,8 @@ namespace DAL
         public string GhiChu { get; set; }
         public Nullable<System.DateTime> NgayChinhSua { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ChiTietPhieuBanHang> ChiTietPhieuBanHangs { get; set; }
         public virtual NhanVien NhanVien { get; set; }
     }
 }

@@ -174,10 +174,6 @@
       <Project>{3a76a284-b4d9-4502-b244-16d8cb89e9f2}</Project>
       <Name>BUS</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DAL\DAL.csproj">
-      <Project>{77ff60c0-4736-427b-8712-7bfe1f78c07e}</Project>
-      <Name>DAL</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\placeholder.png" />

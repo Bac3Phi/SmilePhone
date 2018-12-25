@@ -20,33 +20,36 @@
         </EntityType>
         <EntityType Name="ChiTietPhieuBanHang">
           <Key>
-            <PropertyRef Name="MaPhieuBanHang" />
+            <PropertyRef Name="MaChiTietPhieuBan" />
           </Key>
           <Property Name="MaPhieuBanHang" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="MaHangHoa" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="SoLuong" Type="int" />
           <Property Name="Gia" Type="decimal" Precision="18" Scale="0" />
           <Property Name="ThanhTien" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="MaChiTietPhieuBan" Type="nchar" MaxLength="10" Nullable="false" />
         </EntityType>
         <EntityType Name="ChiTietPhieuDatHang">
           <Key>
-            <PropertyRef Name="MaPhieuDatHang" />
+            <PropertyRef Name="MaChiTietPhieuDat" />
           </Key>
           <Property Name="MaPhieuDatHang" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="MaHangHoa" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="SoLuong" Type="int" />
           <Property Name="Gia" Type="decimal" Precision="18" Scale="0" />
           <Property Name="ThanhTien" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="MaChiTietPhieuDat" Type="nchar" MaxLength="10" Nullable="false" />
         </EntityType>
         <EntityType Name="ChiTietPhieuNhap">
           <Key>
-            <PropertyRef Name="MaPhieuNhap" />
+            <PropertyRef Name="MaChiTietPhieuNhap" />
           </Key>
           <Property Name="MaPhieuNhap" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="MaHangHoa" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="SoLuong" Type="int" />
           <Property Name="GiaNhap" Type="decimal" Precision="18" Scale="0" />
           <Property Name="ThanhTien" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="MaChiTietPhieuNhap" Type="nchar" MaxLength="10" Nullable="false" />
         </EntityType>
         <EntityType Name="HangHoa">
           <Key>
@@ -201,6 +204,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ChiTietPhieuBanHang_PhieuBanHang">
+          <End Role="PhieuBanHang" Type="Self.PhieuBanHang" Multiplicity="1" />
+          <End Role="ChiTietPhieuBanHang" Type="Self.ChiTietPhieuBanHang" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PhieuBanHang">
+              <PropertyRef Name="MaPhieuBanHang" />
+            </Principal>
+            <Dependent Role="ChiTietPhieuBanHang">
+              <PropertyRef Name="MaPhieuBanHang" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ChiTietPhieuDatHang_HangHoa">
           <End Role="HangHoa" Type="Self.HangHoa" Multiplicity="1" />
           <End Role="ChiTietPhieuDatHang" Type="Self.ChiTietPhieuDatHang" Multiplicity="*" />
@@ -213,9 +228,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ChiTietPhieuDatHang_PhieuDatHang">
+        <Association Name="FK_ChiTietPhieuDatHang_PhieuDatHang1">
           <End Role="PhieuDatHang" Type="Self.PhieuDatHang" Multiplicity="1" />
-          <End Role="ChiTietPhieuDatHang" Type="Self.ChiTietPhieuDatHang" Multiplicity="0..1" />
+          <End Role="ChiTietPhieuDatHang" Type="Self.ChiTietPhieuDatHang" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PhieuDatHang">
               <PropertyRef Name="MaPhieuDatHang" />
@@ -237,9 +252,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ChiTietPhieuNhap_PhieuNhap">
+        <Association Name="FK_ChiTietPhieuNhap_PhieuNhap1">
           <End Role="PhieuNhap" Type="Self.PhieuNhap" Multiplicity="1" />
-          <End Role="ChiTietPhieuNhap" Type="Self.ChiTietPhieuNhap" Multiplicity="0..1" />
+          <End Role="ChiTietPhieuNhap" Type="Self.ChiTietPhieuNhap" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PhieuNhap">
               <PropertyRef Name="MaPhieuNhap" />
@@ -381,11 +396,15 @@
             <End Role="HangHoa" EntitySet="HangHoa" />
             <End Role="ChiTietPhieuBanHang" EntitySet="ChiTietPhieuBanHang" />
           </AssociationSet>
+          <AssociationSet Name="FK_ChiTietPhieuBanHang_PhieuBanHang" Association="Self.FK_ChiTietPhieuBanHang_PhieuBanHang">
+            <End Role="PhieuBanHang" EntitySet="PhieuBanHang" />
+            <End Role="ChiTietPhieuBanHang" EntitySet="ChiTietPhieuBanHang" />
+          </AssociationSet>
           <AssociationSet Name="FK_ChiTietPhieuDatHang_HangHoa" Association="Self.FK_ChiTietPhieuDatHang_HangHoa">
             <End Role="HangHoa" EntitySet="HangHoa" />
             <End Role="ChiTietPhieuDatHang" EntitySet="ChiTietPhieuDatHang" />
           </AssociationSet>
-          <AssociationSet Name="FK_ChiTietPhieuDatHang_PhieuDatHang" Association="Self.FK_ChiTietPhieuDatHang_PhieuDatHang">
+          <AssociationSet Name="FK_ChiTietPhieuDatHang_PhieuDatHang1" Association="Self.FK_ChiTietPhieuDatHang_PhieuDatHang1">
             <End Role="PhieuDatHang" EntitySet="PhieuDatHang" />
             <End Role="ChiTietPhieuDatHang" EntitySet="ChiTietPhieuDatHang" />
           </AssociationSet>
@@ -393,7 +412,7 @@
             <End Role="HangHoa" EntitySet="HangHoa" />
             <End Role="ChiTietPhieuNhap" EntitySet="ChiTietPhieuNhap" />
           </AssociationSet>
-          <AssociationSet Name="FK_ChiTietPhieuNhap_PhieuNhap" Association="Self.FK_ChiTietPhieuNhap_PhieuNhap">
+          <AssociationSet Name="FK_ChiTietPhieuNhap_PhieuNhap1" Association="Self.FK_ChiTietPhieuNhap_PhieuNhap1">
             <End Role="PhieuNhap" EntitySet="PhieuNhap" />
             <End Role="ChiTietPhieuNhap" EntitySet="ChiTietPhieuNhap" />
           </AssociationSet>
@@ -455,38 +474,42 @@
         </EntityType>
         <EntityType Name="ChiTietPhieuBanHang">
           <Key>
-            <PropertyRef Name="MaPhieuBanHang" />
+            <PropertyRef Name="MaChiTietPhieuBan" />
           </Key>
           <Property Name="MaPhieuBanHang" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="MaHangHoa" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="SoLuong" Type="Int32" />
           <Property Name="Gia" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="ThanhTien" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="MaChiTietPhieuBan" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
           <NavigationProperty Name="HangHoa" Relationship="Self.FK_ChiTietPhieuBanHang_HangHoa" FromRole="ChiTietPhieuBanHang" ToRole="HangHoa" />
+          <NavigationProperty Name="PhieuBanHang" Relationship="Self.FK_ChiTietPhieuBanHang_PhieuBanHang" FromRole="ChiTietPhieuBanHang" ToRole="PhieuBanHang" />
         </EntityType>
         <EntityType Name="ChiTietPhieuDatHang">
           <Key>
-            <PropertyRef Name="MaPhieuDatHang" />
+            <PropertyRef Name="MaChiTietPhieuDat" />
           </Key>
           <Property Name="MaPhieuDatHang" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="MaHangHoa" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="SoLuong" Type="Int32" />
           <Property Name="Gia" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="ThanhTien" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="MaChiTietPhieuDat" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
           <NavigationProperty Name="HangHoa" Relationship="Self.FK_ChiTietPhieuDatHang_HangHoa" FromRole="ChiTietPhieuDatHang" ToRole="HangHoa" />
-          <NavigationProperty Name="PhieuDatHang" Relationship="Self.FK_ChiTietPhieuDatHang_PhieuDatHang" FromRole="ChiTietPhieuDatHang" ToRole="PhieuDatHang" />
+          <NavigationProperty Name="PhieuDatHang" Relationship="Self.FK_ChiTietPhieuDatHang_PhieuDatHang1" FromRole="ChiTietPhieuDatHang" ToRole="PhieuDatHang" />
         </EntityType>
         <EntityType Name="ChiTietPhieuNhap">
           <Key>
-            <PropertyRef Name="MaPhieuNhap" />
+            <PropertyRef Name="MaChiTietPhieuNhap" />
           </Key>
           <Property Name="MaPhieuNhap" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="MaHangHoa" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="SoLuong" Type="Int32" />
           <Property Name="GiaNhap" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="ThanhTien" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="MaChiTietPhieuNhap" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
           <NavigationProperty Name="HangHoa" Relationship="Self.FK_ChiTietPhieuNhap_HangHoa" FromRole="ChiTietPhieuNhap" ToRole="HangHoa" />
-          <NavigationProperty Name="PhieuNhap" Relationship="Self.FK_ChiTietPhieuNhap_PhieuNhap" FromRole="ChiTietPhieuNhap" ToRole="PhieuNhap" />
+          <NavigationProperty Name="PhieuNhap" Relationship="Self.FK_ChiTietPhieuNhap_PhieuNhap1" FromRole="ChiTietPhieuNhap" ToRole="PhieuNhap" />
         </EntityType>
         <EntityType Name="HangHoa">
           <Key>
@@ -568,6 +591,7 @@
           <Property Name="TongTien" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="GhiChu" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="NgayChinhSua" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="ChiTietPhieuBanHangs" Relationship="Self.FK_ChiTietPhieuBanHang_PhieuBanHang" FromRole="PhieuBanHang" ToRole="ChiTietPhieuBanHang" />
           <NavigationProperty Name="NhanVien" Relationship="Self.FK_PhieuBanHang_NhanVien" FromRole="PhieuBanHang" ToRole="NhanVien" />
         </EntityType>
         <EntityType Name="PhieuBaoHang">
@@ -612,7 +636,7 @@
           <Property Name="TongTien" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="GhiChu" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="NgayChinhSua" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="ChiTietPhieuDatHang" Relationship="Self.FK_ChiTietPhieuDatHang_PhieuDatHang" FromRole="PhieuDatHang" ToRole="ChiTietPhieuDatHang" />
+          <NavigationProperty Name="ChiTietPhieuDatHangs" Relationship="Self.FK_ChiTietPhieuDatHang_PhieuDatHang1" FromRole="PhieuDatHang" ToRole="ChiTietPhieuDatHang" />
           <NavigationProperty Name="NhanVien" Relationship="Self.FK_PhieuDatHang_NhanVien" FromRole="PhieuDatHang" ToRole="NhanVien" />
         </EntityType>
         <EntityType Name="PhieuNhap">
@@ -626,7 +650,7 @@
           <Property Name="TongTien" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="GhiChu" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="NgayChinhSua" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="ChiTietPhieuNhap" Relationship="Self.FK_ChiTietPhieuNhap_PhieuNhap" FromRole="PhieuNhap" ToRole="ChiTietPhieuNhap" />
+          <NavigationProperty Name="ChiTietPhieuNhaps" Relationship="Self.FK_ChiTietPhieuNhap_PhieuNhap1" FromRole="PhieuNhap" ToRole="ChiTietPhieuNhap" />
           <NavigationProperty Name="NhaCungCap" Relationship="Self.FK_PhieuNhap_NhaCungCap" FromRole="PhieuNhap" ToRole="NhaCungCap" />
           <NavigationProperty Name="NhanVien" Relationship="Self.FK_PhieuNhap_NhanVien" FromRole="PhieuNhap" ToRole="NhanVien" />
           <NavigationProperty Name="PhieuChis" Relationship="Self.FK_PhieuChi_PhieuNhap" FromRole="PhieuNhap" ToRole="PhieuChi" />
@@ -665,6 +689,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ChiTietPhieuBanHang_PhieuBanHang">
+          <End Role="PhieuBanHang" Type="Self.PhieuBanHang" Multiplicity="1" />
+          <End Role="ChiTietPhieuBanHang" Type="Self.ChiTietPhieuBanHang" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PhieuBanHang">
+              <PropertyRef Name="MaPhieuBanHang" />
+            </Principal>
+            <Dependent Role="ChiTietPhieuBanHang">
+              <PropertyRef Name="MaPhieuBanHang" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ChiTietPhieuDatHang_HangHoa">
           <End Role="HangHoa" Type="Self.HangHoa" Multiplicity="1" />
           <End Role="ChiTietPhieuDatHang" Type="Self.ChiTietPhieuDatHang" Multiplicity="*" />
@@ -677,9 +713,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ChiTietPhieuDatHang_PhieuDatHang">
+        <Association Name="FK_ChiTietPhieuDatHang_PhieuDatHang1">
           <End Role="PhieuDatHang" Type="Self.PhieuDatHang" Multiplicity="1" />
-          <End Role="ChiTietPhieuDatHang" Type="Self.ChiTietPhieuDatHang" Multiplicity="0..1" />
+          <End Role="ChiTietPhieuDatHang" Type="Self.ChiTietPhieuDatHang" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PhieuDatHang">
               <PropertyRef Name="MaPhieuDatHang" />
@@ -701,9 +737,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ChiTietPhieuNhap_PhieuNhap">
+        <Association Name="FK_ChiTietPhieuNhap_PhieuNhap1">
           <End Role="PhieuNhap" Type="Self.PhieuNhap" Multiplicity="1" />
-          <End Role="ChiTietPhieuNhap" Type="Self.ChiTietPhieuNhap" Multiplicity="0..1" />
+          <End Role="ChiTietPhieuNhap" Type="Self.ChiTietPhieuNhap" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PhieuNhap">
               <PropertyRef Name="MaPhieuNhap" />
@@ -845,11 +881,15 @@
             <End Role="HangHoa" EntitySet="HangHoas" />
             <End Role="ChiTietPhieuBanHang" EntitySet="ChiTietPhieuBanHangs" />
           </AssociationSet>
+          <AssociationSet Name="FK_ChiTietPhieuBanHang_PhieuBanHang" Association="Self.FK_ChiTietPhieuBanHang_PhieuBanHang">
+            <End Role="PhieuBanHang" EntitySet="PhieuBanHangs" />
+            <End Role="ChiTietPhieuBanHang" EntitySet="ChiTietPhieuBanHangs" />
+          </AssociationSet>
           <AssociationSet Name="FK_ChiTietPhieuDatHang_HangHoa" Association="Self.FK_ChiTietPhieuDatHang_HangHoa">
             <End Role="HangHoa" EntitySet="HangHoas" />
             <End Role="ChiTietPhieuDatHang" EntitySet="ChiTietPhieuDatHangs" />
           </AssociationSet>
-          <AssociationSet Name="FK_ChiTietPhieuDatHang_PhieuDatHang" Association="Self.FK_ChiTietPhieuDatHang_PhieuDatHang">
+          <AssociationSet Name="FK_ChiTietPhieuDatHang_PhieuDatHang1" Association="Self.FK_ChiTietPhieuDatHang_PhieuDatHang1">
             <End Role="PhieuDatHang" EntitySet="PhieuDatHangs" />
             <End Role="ChiTietPhieuDatHang" EntitySet="ChiTietPhieuDatHangs" />
           </AssociationSet>
@@ -857,7 +897,7 @@
             <End Role="HangHoa" EntitySet="HangHoas" />
             <End Role="ChiTietPhieuNhap" EntitySet="ChiTietPhieuNhaps" />
           </AssociationSet>
-          <AssociationSet Name="FK_ChiTietPhieuNhap_PhieuNhap" Association="Self.FK_ChiTietPhieuNhap_PhieuNhap">
+          <AssociationSet Name="FK_ChiTietPhieuNhap_PhieuNhap1" Association="Self.FK_ChiTietPhieuNhap_PhieuNhap1">
             <End Role="PhieuNhap" EntitySet="PhieuNhaps" />
             <End Role="ChiTietPhieuNhap" EntitySet="ChiTietPhieuNhaps" />
           </AssociationSet>
@@ -926,6 +966,7 @@
                 <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
                 <ScalarProperty Name="Gia" ColumnName="Gia" />
                 <ScalarProperty Name="ThanhTien" ColumnName="ThanhTien" />
+                <ScalarProperty Name="MaChiTietPhieuBan" ColumnName="MaChiTietPhieuBan" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -937,6 +978,7 @@
                 <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
                 <ScalarProperty Name="Gia" ColumnName="Gia" />
                 <ScalarProperty Name="ThanhTien" ColumnName="ThanhTien" />
+                <ScalarProperty Name="MaChiTietPhieuDat" ColumnName="MaChiTietPhieuDat" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -948,6 +990,7 @@
                 <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
                 <ScalarProperty Name="GiaNhap" ColumnName="GiaNhap" />
                 <ScalarProperty Name="ThanhTien" ColumnName="ThanhTien" />
+                <ScalarProperty Name="MaChiTietPhieuNhap" ColumnName="MaChiTietPhieuNhap" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

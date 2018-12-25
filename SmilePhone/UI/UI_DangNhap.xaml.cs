@@ -12,7 +12,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using BUS;
-using DAL;
 
 namespace SmilePhone.UI
 {
@@ -30,7 +29,7 @@ namespace SmilePhone.UI
         {
             if (BUS_DangNhap.Instance.DangNhap(tbUserName.Text, tbPassword.Password) != null)
             {
-                NhanVien nhanVien = BUS_DangNhap.Instance.DangNhap(tbUserName.Text, tbPassword.Password);
+                dynamic nhanVien = BUS_DangNhap.Instance.DangNhap(tbUserName.Text, tbPassword.Password);
                 Properties.Settings.Default.MaNV = nhanVien.MaNhanVien;
                 Properties.Settings.Default.TenNhanVien = nhanVien.TenNhanVien;
                 Properties.Settings.Default.Save();

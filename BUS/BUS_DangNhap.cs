@@ -23,7 +23,7 @@ namespace BUS
             }
         }
 
-        public NhanVien DangNhap(string userName, string password)
+        public dynamic DangNhap(string userName, string password)
         {
             return DAL_DangNhap.Instance.CheckDangNhap(userName, password);
         }

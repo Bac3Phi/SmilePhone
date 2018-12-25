@@ -17,6 +17,7 @@ namespace DAL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public PhieuNhap()
         {
+            this.ChiTietPhieuNhaps = new HashSet<ChiTietPhieuNhap>();
             this.PhieuChis = new HashSet<PhieuChi>();
         }
     
@@ -28,7 +29,8 @@ namespace DAL
         public string GhiChu { get; set; }
         public Nullable<System.DateTime> NgayChinhSua { get; set; }
     
-        public virtual ChiTietPhieuNhap ChiTietPhieuNhap { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ChiTietPhieuNhap> ChiTietPhieuNhaps { get; set; }
         public virtual NhaCungCap NhaCungCap { get; set; }
         public virtual NhanVien NhanVien { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

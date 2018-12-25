@@ -26,7 +26,7 @@ namespace DAL
             }
         }
 
-        public NhanVien CheckDangNhap(string userName, string password)
+        public dynamic CheckDangNhap(string userName, string password)
         {
             var result = from nv in db.NhanViens
                          where (nv.UserName == userName) && (nv.Password == password)

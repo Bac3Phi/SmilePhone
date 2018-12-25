@@ -50,95 +50,93 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaoCaoTonKho.cs">
-      <DependentUpon>CellphoneEntities.tt</DependentUpon>
+      <DependentUpon>CellphoneComponentEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="CellphoneEntities.Context.cs">
+    <Compile Include="CellphoneComponentEntities.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>CellphoneEntities.Context.tt</DependentUpon>
+      <DependentUpon>CellphoneComponentEntities.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="CellphoneEntities.cs">
+    <Compile Include="CellphoneComponentEntities.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>CellphoneEntities.tt</DependentUpon>
+      <DependentUpon>CellphoneComponentEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="CellphoneEntities.Designer.cs">
+    <Compile Include="CellphoneComponentEntities.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>CellphoneEntities.edmx</DependentUpon>
+      <DependentUpon>CellphoneComponentEntities.edmx</DependentUpon>
     </Compile>
     <Compile Include="ChiTietPhieuBanHang.cs">
-      <DependentUpon>CellphoneEntities.tt</DependentUpon>
+      <DependentUpon>CellphoneComponentEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="ChiTietPhieuDatHang.cs">
-      <DependentUpon>CellphoneEntities.tt</DependentUpon>
+      <DependentUpon>CellphoneComponentEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="ChiTietPhieuNhap.cs">
-      <DependentUpon>CellphoneEntities.tt</DependentUpon>
+      <DependentUpon>CellphoneComponentEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL_DangNhap.cs" />
     <Compile Include="HangHoa.cs">
-      <DependentUpon>CellphoneEntities.tt</DependentUpon>
+      <DependentUpon>CellphoneComponentEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="LoaiHangHoa.cs">
-      <DependentUpon>CellphoneEntities.tt</DependentUpon>
+      <DependentUpon>CellphoneComponentEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="NhaCungCap.cs">
-      <DependentUpon>CellphoneEntities.tt</DependentUpon>
+      <DependentUpon>CellphoneComponentEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="NhanVien.cs">
-      <DependentUpon>CellphoneEntities.tt</DependentUpon>
+      <DependentUpon>CellphoneComponentEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="PhanQuyen.cs">
-      <DependentUpon>CellphoneEntities.tt</DependentUpon>
+      <DependentUpon>CellphoneComponentEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="PhieuBanHang.cs">
-      <DependentUpon>CellphoneEntities.tt</DependentUpon>
+      <DependentUpon>CellphoneComponentEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="PhieuBaoHang.cs">
-      <DependentUpon>CellphoneEntities.tt</DependentUpon>
+      <DependentUpon>CellphoneComponentEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="PhieuChi.cs">
-      <DependentUpon>CellphoneEntities.tt</DependentUpon>
+      <DependentUpon>CellphoneComponentEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="PhieuDatHang.cs">
-      <DependentUpon>CellphoneEntities.tt</DependentUpon>
+      <DependentUpon>CellphoneComponentEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="PhieuNhap.cs">
-      <DependentUpon>CellphoneEntities.tt</DependentUpon>
+      <DependentUpon>CellphoneComponentEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="sysdiagram.cs">
-      <DependentUpon>CellphoneEntities.tt</DependentUpon>
+      <DependentUpon>CellphoneComponentEntities.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EntityDeploy Include="CellphoneEntities.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>CellphoneEntities.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="App.Config" />
-    <None Include="CellphoneEntities.edmx.diagram">
-      <DependentUpon>CellphoneEntities.edmx</DependentUpon>
+    <EntityDeploy Include="CellphoneComponentEntities.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>CellphoneComponentEntities.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="CellphoneComponentEntities.edmx.diagram">
+      <DependentUpon>CellphoneComponentEntities.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="CellphoneEntities.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>CellphoneEntities.Context.cs</LastGenOutput>
-      <DependentUpon>CellphoneEntities.edmx</DependentUpon>
-    </Content>
-    <Content Include="CellphoneEntities.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>CellphoneEntities.edmx</DependentUpon>
-      <LastGenOutput>CellphoneEntities.cs</LastGenOutput>
-    </Content>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+    <Content Include="CellphoneComponentEntities.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>CellphoneComponentEntities.edmx</DependentUpon>
+      <LastGenOutput>CellphoneComponentEntities.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="CellphoneComponentEntities.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>CellphoneComponentEntities.edmx</DependentUpon>
+      <LastGenOutput>CellphoneComponentEntities.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

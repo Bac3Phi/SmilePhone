@@ -19,7 +19,9 @@ namespace DAL
         public Nullable<int> SoLuong { get; set; }
         public Nullable<decimal> Gia { get; set; }
         public Nullable<decimal> ThanhTien { get; set; }
+        public string MaChiTietPhieuBan { get; set; }
     
         public virtual HangHoa HangHoa { get; set; }
+        public virtual PhieuBanHang PhieuBanHang { get; set; }
     }
 }
