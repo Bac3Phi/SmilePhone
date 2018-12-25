@@ -44,6 +44,7 @@ namespace SmilePhone.UI
             dgvSuppliers.ItemsSource = BUS_NhaCungCap.Instance.searchData(searchStr);
         }
 
+        #region Highlight Search
         private void TxtSearchText_TextChanged(object sender, TextChangedEventArgs e)
         {
             FindListViewItem(dgvSuppliers);
@@ -103,15 +104,26 @@ namespace SmilePhone.UI
                 }
             }
         }
-
+        #endregion
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
-            if (dgvSuppliers.SelectedItem != null)
+            MessageBoxResult result = MessageBox.Show("Bạn có muốn xóa dòng này?", "Confirmation", MessageBoxButton.YesNo);
+            if (result == MessageBoxResult.Yes)
             {
-                BUS_NhaCungCap.DeleteNCC(dgvSuppliers.SelectedItem as NhaCungCap);
-                dgvSuppliers.ItemsSource = BUS_NhaCungCap.showData();
-                //dgvSuppliers.Items.Remove(dgvSuppliers.SelectedItem);
+                if (dgvSuppliers.SelectedItem != null)
+                {
+                    BUS_NhaCungCap.DeleteNCC(dgvSuppliers.SelectedItem as NhaCungCap);
+                    dgvSuppliers.ItemsSource = BUS_NhaCungCap.showData();
+                    //dgvSuppliers.Items.Remove(dgvSuppliers.SelectedItem);
+                }
             }
+        }
+
+        private void btnEdit_Click(object sender, RoutedEventArgs e)
+        {
+            UserControl usc = new UI_ThemNhaCungCap(gridMain, dgvSuppliers.SelectedItem as NhaCungCap);
+            gridMain.Children.Clear();
+            gridMain.Children.Add(usc);
         }
         private void btnRefresh_Click(object sender, RoutedEventArgs e)
         {

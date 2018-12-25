@@ -51,6 +51,14 @@ namespace SmilePhone.UI
             //    //dgvSuppliers.Items.Remove(dgvSuppliers.SelectedItem);
             //}
         }
+
+        private void btnEdit_Click(object sender, RoutedEventArgs e)
+        {
+            UserControl usc = new UI_ThemPhieuChi(gridMain, dgvReceipt.SelectedItem as PhieuChi);
+            gridMain.Children.Clear();
+            gridMain.Children.Add(usc);
+        }
+
         private void btnRefresh_Click(object sender, RoutedEventArgs e)
         {
             //dgvSuppliers.Rows.Clear();

@@ -51,6 +51,7 @@ namespace SmilePhone.UI
             
         }
 
+        #region Highlight search
         private void TxtSearchText_TextChanged(object sender, TextChangedEventArgs e)
         {
             FindListViewItem(dgvEmployees);
@@ -110,20 +111,32 @@ namespace SmilePhone.UI
                 }
             }
         }
+        #endregion
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
-            if (dgvEmployees.SelectedItem != null)
+            MessageBoxResult result = MessageBox.Show("Bạn có muốn xóa dòng này?", "Confirmation", MessageBoxButton.YesNo);
+            if (result == MessageBoxResult.Yes)
             {
-                //object obj = dgvEmployees.SelectedItem;
-                dynamic obj = dgvEmployees.SelectedItem;
-                Type t = obj.GetType();
-                String id = t.GetProperty("MaNhanVien").GetValue(obj, null);
+                if (dgvEmployees.SelectedItem != null)
+                {
+                    //object obj = dgvEmployees.SelectedItem;
+                    dynamic obj = dgvEmployees.SelectedItem;
+                    Type t = obj.GetType();
+                    String id = t.GetProperty("MaNhanVien").GetValue(obj, null);
 
-                BUS_NhanVien.DeleteNV(id);
-                dgvEmployees.ItemsSource = BUS_NhanVien.showData();
-                
+                    BUS_NhanVien.DeleteNV(id);
+                    dgvEmployees.ItemsSource = BUS_NhanVien.showData();
+
+                }
             }
+        }
+
+        private void btnEdit_Click(object sender, RoutedEventArgs e)
+        {
+            UserControl usc = new UI_ThemNhanVien(gridMain, dgvEmployees.SelectedItem as dynamic);
+            gridMain.Children.Clear();
+            gridMain.Children.Add(usc);
         }
         private void btnRefresh_Click(object sender, RoutedEventArgs e)
         {

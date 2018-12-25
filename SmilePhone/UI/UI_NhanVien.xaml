@@ -55,26 +55,38 @@
             Width="auto"
             Margin="10,10,10,10" 
             RowDetailsVisibilityMode="VisibleWhenSelected">
-            <DataGrid.Columns>
-                <DataGridTemplateColumn>
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <ToggleButton
-                                Style="{StaticResource MaterialDesignFlatToggleButton}"
-                                ToolTip="MaterialDesignFlatToggleButton" 
-                                Click="btnDelete_Click"
-                                CommandParameter="{Binding}" >
-                                <materialDesign:PackIcon
-                                    Kind="DeleteForever"/>
-                            </ToggleButton>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
+            <DataGrid.Columns>                
                 <DataGridTextColumn x:Name="EmployeesIDCol" Binding="{Binding MaNhanVien}" Header="Mã NV" Width="SizeToHeader" IsReadOnly="true"/>
                 <DataGridTextColumn x:Name="EmployeesNameCol" Binding="{Binding TenNhanVien}" Header="Tên NV" Width="Auto" IsReadOnly="true"/>
                 <DataGridTextColumn x:Name="EmployeesUserNameCol" Binding="{Binding UserName}" Header="Username" Width="Auto" IsReadOnly="true"/>
                 <DataGridTextColumn x:Name="EmployeesPasswordCol" Binding="{Binding Password}" Header="Password" Width="Auto" IsReadOnly="true" Visibility="Hidden"/>
                 <DataGridTextColumn x:Name="PermissionNameCol" Binding="{Binding TenPhanQuyen}" Header="Tên Phân quyền" Width="Auto" IsReadOnly="true"/>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <ToggleButton Grid.Column="0" Height="15"
+                                Style="{StaticResource MaterialDesignFlatToggleButton}"
+                                ToolTip="MaterialDesignFlatToggleButton" 
+                                Click="btnEdit_Click" >
+                                    <materialDesign:PackIcon
+                                    Kind="Edit"/>
+                                </ToggleButton>
+                                <ToggleButton Grid.Column="1" Height="15"
+                                Style="{StaticResource MaterialDesignFlatToggleButton}"
+                                ToolTip="MaterialDesignFlatToggleButton" 
+                                Click="btnDelete_Click" >
+                                    <materialDesign:PackIcon
+                                    Kind="DeleteForever"/>
+                                </ToggleButton>
+                            </Grid>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>
