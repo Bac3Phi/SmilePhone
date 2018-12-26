@@ -117,6 +117,7 @@ namespace SmilePhone.UI
             txtSupplierPhone.Clear();
             txtSupplierAddress.Clear();
             txtSupplierEmail.Clear();
+            isNew = true;
             AutoGenerateID();
         }
     }

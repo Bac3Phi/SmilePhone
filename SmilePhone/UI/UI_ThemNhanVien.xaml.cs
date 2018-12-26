@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using DAL;
 using BUS;
+using DTO;
 
 namespace SmilePhone.UI
 {
@@ -23,10 +24,10 @@ namespace SmilePhone.UI
     public partial class UI_ThemNhanVien : UserControl
     {
         private Grid gridMain;
-        private bool isNew = false;
-        private NhanVien item = new NhanVien();
+        private bool isNew;
+        private DTO_NhanVien item = new DTO_NhanVien();
 
-        public UI_ThemNhanVien(Grid gridMain, dynamic obj)
+        public UI_ThemNhanVien(Grid gridMain, DTO_NhanVien obj)
         {
             InitializeComponent();
             this.gridMain = gridMain;
@@ -39,12 +40,11 @@ namespace SmilePhone.UI
             }
             else
             {
-                Type t = obj.GetType();
-                txtEmployeesID.Text = t.GetProperty("MaNhanVien").GetValue(obj, null);
-                txtEmployeesName.Text = t.GetProperty("TenNhanVien").GetValue(obj, null);
-                txtEmployeesUserName.Text = t.GetProperty("UserName").GetValue(obj, null);
-                txtEmployeesPass.Text = t.GetProperty("Password").GetValue(obj, null);
-                cbbPermissionName.Text = t.GetProperty("TenPhanQuyen").GetValue(obj, null);
+                txtEmployeesID.Text = obj.MaNhanVien;
+                txtEmployeesName.Text = obj.TenNhanVien;
+                txtEmployeesUserName.Text = obj.UserName;
+                txtEmployeesPass.Text = obj.Password;
+                cbbPermissionName.Text = obj.TenPhanQuyen;
                 isNew = false;
             }
         }
@@ -62,13 +62,11 @@ namespace SmilePhone.UI
                 item.TenNhanVien = txtEmployeesName.Text.Trim();
                 item.UserName = txtEmployeesUserName.Text.Trim();
                 item.Password = txtEmployeesPass.Text.Trim();
-                item.MaPhanQuyen = "";
-
-                String pqName = cbbPermissionName.Text;
+                item.TenPhanQuyen = cbbPermissionName.Text;
                 if (txtEmployeesName.Text != "" && txtEmployeesPass.Text != ""
-                    && txtEmployeesUserName.Text != "" && pqName != "")
+                    && txtEmployeesUserName.Text != "" && cbbPermissionName.Text != "")
                 {
-                    BUS_NhanVien.Instance.InsertNV(item, pqName);
+                    BUS_NhanVien.Instance.InsertNV(item);
                     AutoGenerateID();
                     txtEmployeesName.Clear();
                     txtEmployeesPass.Clear();
@@ -87,13 +85,11 @@ namespace SmilePhone.UI
                 item.TenNhanVien = txtEmployeesName.Text.Trim();
                 item.UserName = txtEmployeesUserName.Text.Trim();
                 item.Password = txtEmployeesPass.Text.Trim();
-                item.MaPhanQuyen = "";
-
-                String pqName = cbbPermissionName.Text;
+                item.TenPhanQuyen = cbbPermissionName.Text;
                 if (txtEmployeesName.Text != "" && txtEmployeesPass.Text != ""
-                    && txtEmployeesUserName.Text != "" && pqName != "")
+                    && txtEmployeesUserName.Text != "" && cbbPermissionName.Text != "")
                 {
-                    BUS_NhanVien.Instance.UpdateNV(item, pqName);
+                    BUS_NhanVien.Instance.UpdateNV(item);
                     AutoGenerateID();
                     txtEmployeesName.Clear();
                     txtEmployeesPass.Clear();
@@ -122,6 +118,7 @@ namespace SmilePhone.UI
             txtEmployeesUserName.Clear();
             txtEmployeesPass.Clear();
             cbbPermissionName.SelectedIndex = 0;
+            isNew = true;
             AutoGenerateID();
         }
     }

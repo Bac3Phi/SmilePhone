@@ -13,6 +13,7 @@ namespace DAL
     using System.Linq;
     using System.Collections.Generic;
     using System.Diagnostics;
+    using DTO;
 
     public partial class NhanVien
     {
@@ -66,49 +67,59 @@ namespace DAL
             }
         }
 
-        public void InsertNV(NhanVien obj, String str)
+        public void InsertNV(DTO_NhanVien obj)
         {
             using (CellphoneComponentEntities db = new CellphoneComponentEntities())
             {
                 var result = db.Database
-                    .SqlQuery<String>("select MaPhanQuyen from dbo.PhanQuyen where TenPhanQuyen = N'" + str + "'")
+                    .SqlQuery<String>("select MaPhanQuyen from dbo.PhanQuyen where TenPhanQuyen = N'" + obj.TenPhanQuyen + "'")
                     .FirstOrDefault();
-                obj.MaPhanQuyen = result;
+                NhanVien nhanVien = new NhanVien();
+                nhanVien.MaNhanVien = obj.MaNhanVien;
+                nhanVien.TenNhanVien = obj.TenNhanVien;
+                nhanVien.UserName = obj.UserName;
+                nhanVien.Password = obj.Password;
+                nhanVien.MaPhanQuyen = result;
 
-                db.NhanViens.Add(obj);
+                db.NhanViens.Add(nhanVien);
                 db.SaveChanges();
             }
         }
 
-        public void UpdateNV(NhanVien obj, String str)
+        public void UpdateNV(DTO_NhanVien obj)
         {
             using (CellphoneComponentEntities db = new CellphoneComponentEntities())
             {
                 var result = db.Database
-                    .SqlQuery<String>("select MaPhanQuyen from dbo.PhanQuyen where TenPhanQuyen = N'" + str + "'")
+                    .SqlQuery<String>("select MaPhanQuyen from dbo.PhanQuyen where TenPhanQuyen = N'" + obj.TenPhanQuyen + "'")
                     .FirstOrDefault();
-                obj.MaPhanQuyen = result;
+                NhanVien nhanVien = new NhanVien();
+                nhanVien.MaNhanVien = obj.MaNhanVien;
+                nhanVien.TenNhanVien = obj.TenNhanVien;
+                nhanVien.UserName = obj.UserName;
+                nhanVien.Password = obj.Password;
+                nhanVien.MaPhanQuyen = result;
 
-                db.NhanViens.Attach(obj);
-                db.Entry(obj).State = System.Data.Entity.EntityState.Modified;
+                db.NhanViens.Attach(nhanVien);
+                db.Entry(nhanVien).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
             }
         }
 
-        public List<dynamic> showNV()
+        public List<DTO_NhanVien> showNV()
         {
             using (CellphoneComponentEntities db = new CellphoneComponentEntities())
             {
                 var result = (from item in db.NhanViens
                               join perm in db.PhanQuyens on item.MaPhanQuyen equals perm.MaPhanQuyen
-                              select new
+                              select new DTO_NhanVien
                               {
                                   MaNhanVien = item.MaNhanVien,
                                   TenNhanVien = item.TenNhanVien,
                                   UserName = item.UserName,
                                   Password = item.Password,
                                   TenPhanQuyen = perm.TenPhanQuyen
-                              }).ToList<dynamic>();
+                              }).ToList();
                 return result;
             }
         }
@@ -125,7 +136,7 @@ namespace DAL
             }
         }
 
-        public List<dynamic> searchNV(string str)
+        public List<DTO_NhanVien> searchNV(string str)
         {
             using (CellphoneComponentEntities db = new CellphoneComponentEntities())
             {
@@ -137,14 +148,14 @@ namespace DAL
                               || item.UserName.Contains(str)
                               || item.Password.Contains(str)
                               || perm.TenPhanQuyen.Contains(str)
-                              select new
+                              select new DTO_NhanVien
                               {
                                   MaNhanVien = item.MaNhanVien,
                                   TenNhanVien = item.TenNhanVien,
                                   UserName = item.UserName,
                                   Password = item.Password,
                                   TenPhanQuyen = perm.TenPhanQuyen
-                              }).ToList<dynamic>();
+                              }).ToList<DTO_NhanVien>();
                 return result;
             }
         }
