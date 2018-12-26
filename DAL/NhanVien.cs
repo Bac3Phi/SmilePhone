@@ -26,7 +26,6 @@ namespace DAL
             this.PhieuDatHangs = new HashSet<PhieuDatHang>();
             this.PhieuNhaps = new HashSet<PhieuNhap>();
         }
-
         public static NhanVien Instance
         {
             get
@@ -42,7 +41,7 @@ namespace DAL
         public string UserName { get; set; }
         public string Password { get; set; }
         public string MaPhanQuyen { get; set; }
-
+    
         public virtual PhanQuyen PhanQuyen { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PhieuBanHang> PhieuBanHangs { get; set; }
@@ -60,8 +59,8 @@ namespace DAL
             using (CellphoneComponentEntities db = new CellphoneComponentEntities())
             {
                 NhanVien nv = (from item in db.NhanViens
-                                where item.MaNhanVien == id
-                                select item).SingleOrDefault();
+                               where item.MaNhanVien == id
+                               select item).SingleOrDefault();
                 db.NhanViens.Remove(nv);
                 db.SaveChanges();
             }
@@ -101,15 +100,15 @@ namespace DAL
             using (CellphoneComponentEntities db = new CellphoneComponentEntities())
             {
                 var result = (from item in db.NhanViens
-                                join perm in db.PhanQuyens on item.MaPhanQuyen equals perm.MaPhanQuyen
-                                select new
-                                {
-                                    MaNhanVien = item.MaNhanVien,
-                                    TenNhanVien = item.TenNhanVien,
-                                    UserName = item.UserName,
-                                    Password = item.Password,
-                                    TenPhanQuyen = perm.TenPhanQuyen
-                                }).ToList<dynamic>();
+                              join perm in db.PhanQuyens on item.MaPhanQuyen equals perm.MaPhanQuyen
+                              select new
+                              {
+                                  MaNhanVien = item.MaNhanVien,
+                                  TenNhanVien = item.TenNhanVien,
+                                  UserName = item.UserName,
+                                  Password = item.Password,
+                                  TenPhanQuyen = perm.TenPhanQuyen
+                              }).ToList<dynamic>();
                 return result;
             }
         }

@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="a741d5b2c34d49eb9204b29536135f24" Name="Diagram1">
+      <Diagram DiagramId="d1fbf9d28d1543b1aa64f9e150679049" Name="Diagram1">
         <EntityTypeShape EntityType="CellphoneComponentModel.BaoCaoTonKho" Width="1.5" PointX="12.5" PointY="21.25" IsExpanded="true" />
         <EntityTypeShape EntityType="CellphoneComponentModel.ChiTietPhieuBanHang" Width="1.5" PointX="7.5" PointY="5.625" IsExpanded="true" />
         <EntityTypeShape EntityType="CellphoneComponentModel.ChiTietPhieuDatHang" Width="1.5" PointX="7.5" PointY="16.75" IsExpanded="true" />
@@ -19,7 +19,6 @@
         <EntityTypeShape EntityType="CellphoneComponentModel.PhieuChi" Width="1.5" PointX="8.25" PointY="9.25" IsExpanded="true" />
         <EntityTypeShape EntityType="CellphoneComponentModel.PhieuDatHang" Width="1.5" PointX="5.25" PointY="16.625" IsExpanded="true" />
         <EntityTypeShape EntityType="CellphoneComponentModel.PhieuNhap" Width="1.5" PointX="10.25" PointY="5.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="CellphoneComponentModel.sysdiagram" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <AssociationConnector Association="CellphoneComponentModel.FK_BaoCaoTonKho_HangHoa" ManuallyRouted="false" />
         <AssociationConnector Association="CellphoneComponentModel.FK_ChiTietPhieuBanHang_HangHoa" ManuallyRouted="false" />
         <AssociationConnector Association="CellphoneComponentModel.FK_ChiTietPhieuBanHang_PhieuBanHang" ManuallyRouted="false" />
