@@ -76,6 +76,12 @@
     <Compile Include="UI\UI_DangNhap.xaml.cs">
       <DependentUpon>UI_DangNhap.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\UI_HangHoa.xaml.cs">
+      <DependentUpon>UI_HangHoa.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\UI_LapPhieuBanHang.xaml.cs">
+      <DependentUpon>UI_LapPhieuBanHang.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\UI_ManHinhChinh.xaml.cs">
       <DependentUpon>UI_ManHinhChinh.xaml</DependentUpon>
     </Compile>
@@ -88,6 +94,7 @@
     <Compile Include="UI\UI_QuanTri.xaml.cs">
       <DependentUpon>UI_QuanTri.xaml</DependentUpon>
     </Compile>
+<<<<<<< HEAD
     <Compile Include="UI\UI_ThemNhaCungCap.xaml.cs">
       <DependentUpon>UI_ThemNhaCungCap.xaml</DependentUpon>
     </Compile>
@@ -99,6 +106,10 @@
     </Compile>
     <Compile Include="UI\UI_ThemPhieuChi.xaml.cs">
       <DependentUpon>UI_ThemPhieuChi.xaml</DependentUpon>
+=======
+    <Compile Include="UI\UI_ThemHangHoa.xaml.cs">
+      <DependentUpon>UI_ThemHangHoa.xaml</DependentUpon>
+>>>>>>> FeatureBanHang
     </Compile>
     <Page Include="Assets\assets.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -124,6 +135,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UI\UI_HangHoa.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\UI_LapPhieuBanHang.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UI\UI_ManHinhChinh.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -140,6 +159,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+<<<<<<< HEAD
     <Page Include="UI\UI_ThemNhaCungCap.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -153,6 +173,9 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\UI_ThemPhieuChi.xaml">
+=======
+    <Page Include="UI\UI_ThemHangHoa.xaml">
+>>>>>>> FeatureBanHang
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -196,10 +219,20 @@
       <Project>{3a76a284-b4d9-4502-b244-16d8cb89e9f2}</Project>
       <Name>BUS</Name>
     </ProjectReference>
+<<<<<<< HEAD
     <ProjectReference Include="..\DAL\DAL.csproj">
       <Project>{77FF60C0-4736-427B-8712-7BFE1F78C07E}</Project>
       <Name>DAL</Name>
     </ProjectReference>
+=======
+    <ProjectReference Include="..\DTO\DTO.csproj">
+      <Project>{95b768e1-c868-4ccf-b9a5-70dd9ba39681}</Project>
+      <Name>DTO</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\placeholder.png" />
+>>>>>>> FeatureBanHang
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

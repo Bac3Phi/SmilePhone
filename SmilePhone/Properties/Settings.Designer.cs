@@ -22,5 +22,29 @@ namespace SmilePhone.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string TenNhanVien {
+            get {
+                return ((string)(this["TenNhanVien"]));
+            }
+            set {
+                this["TenNhanVien"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string MaNV {
+            get {
+                return ((string)(this["MaNV"]));
+            }
+            set {
+                this["MaNV"] = value;
+            }
+        }
     }
 }

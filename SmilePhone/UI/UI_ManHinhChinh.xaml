@@ -39,7 +39,7 @@
                 </Grid.Effect>
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                    <TextBlock Text="FiFi" VerticalAlignment="Center" FontSize="16"/>
+                    <TextBlock x:Name="txtTenNhanVien" Text="FiFi" VerticalAlignment="Center" FontSize="16"/>
                     <materialDesign:PopupBox PlacementMode="BottomAndAlignRightEdges" StaysOpen="False" Margin="10">
                         <StackPanel Width="150">
                             <Button Content="Settings"/>
@@ -107,7 +107,7 @@
                             <TextBlock Text="Đặt Hàng" VerticalAlignment="Center"  FontWeight="Bold"  Margin="20 10"/>
                         </StackPanel>
                     </ListViewItem>
-                    <ListViewItem Height="60">
+                    <ListViewItem x:Name="ItemHangHoa" Height="60">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="PackageVariant" Height="25" Width="25" Margin="10"/>
                             <TextBlock Text="Hàng Hóa" VerticalAlignment="Center"  FontWeight="Bold"  Margin="20 10"/>
