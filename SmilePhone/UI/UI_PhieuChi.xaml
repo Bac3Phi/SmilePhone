@@ -4,9 +4,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SmilePhone.UI"
+             
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800"
+             Loaded="Window_Loaded">
     <Grid Background="WhiteSmoke">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -36,8 +38,8 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <DatePicker Grid.Column="0" Width="250" materialDesign:HintAssist.Hint="Từ ngày" Margin="30,5,10,5" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
-            <DatePicker Grid.Column="1" Width="250" materialDesign:HintAssist.Hint="Đến ngày" Margin="10,5,10,5" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+            <DatePicker x:Name="dpFromPC" Grid.Column="0" Width="250" SelectedDateChanged="onFromDateChanged" materialDesign:HintAssist.Hint="Từ ngày" Margin="30,5,10,5" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+            <DatePicker x:Name="dpToPC" Grid.Column="1" Width="250" SelectedDateChanged="onToDateChanged" materialDesign:HintAssist.Hint="Đến ngày" Margin="10,5,10,5" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
             <Button Grid.Column="2" Style="{StaticResource MaterialDesignRaisedButton}" Margin="10,5,10,5" Width="100" ToolTip="Resource name: MaterialDesignRaisedButton"
                     Click="btnSearchDate_Click">
                 Tìm
@@ -47,19 +49,10 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <ComboBox Grid.Column="0" materialDesign:HintAssist.Hint="Ghi chú" Width="250" Margin="30,5,10,5" Style="{StaticResource MaterialDesignFloatingHintComboBox}">
-                <ComboBoxItem>
-                    Hoàn thành
-                </ComboBoxItem>
-                <ComboBoxItem>
-                    Chưa hoàn thành
-                </ComboBoxItem>
-            </ComboBox>
-            <TextBox x:Name="txtSearch" Grid.Column="1"  materialDesign:HintAssist.Hint="Tìm kiếm" Height="45" Width="250" Margin="10,5,10,5" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
-            <RepeatButton Grid.Column="2" Width="100" ToolTip="Resource name: MaterialDesignRaisedButton" Margin="10,5,10,5"
-                          Click="btnTim_Click">
+            <TextBox x:Name="txtSearch" Grid.Column="0"  materialDesign:HintAssist.Hint="Tìm kiếm" Height="45" Width="520" Margin="30,5,10,5" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+            <RepeatButton Grid.Column="1" Width="100" ToolTip="Resource name: MaterialDesignRaisedButton" Margin="10,5,10,5"
+                          Click="btnSearchStr_Click">
                 Tìm
             </RepeatButton>
         </Grid>

@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using DAL;
 using BUS;
+using DTO;
 
 namespace SmilePhone.UI
 {
@@ -24,34 +25,36 @@ namespace SmilePhone.UI
     {
         private Grid gridMain;
         private bool isNew = false;
-        private NhanVien item = new NhanVien();
+        private PhieuChi item = new PhieuChi();
 
-        public UI_ThemPhieuChi(Grid gridMain, dynamic obj)
+        public UI_ThemPhieuChi(Grid gridMain, DTO_PhieuChi obj)
         {
             InitializeComponent();
             this.gridMain = gridMain;
-            //cbbPermissionName.ItemsSource = BUS_PhanQuyen.showData();
-            //cbbPermissionName.SelectedIndex = 0;
-            //if (obj == null)
-            //{
-            //    AutoGenerateID();
-            //    isNew = true;
-            //}
-            //else
-            //{
-            //    Type t = obj.GetType();
-            //    txtEmployeesID.Text = t.GetProperty("MaNhanVien").GetValue(obj, null);
-            //    txtEmployeesName.Text = t.GetProperty("TenNhanVien").GetValue(obj, null);
-            //    txtEmployeesUserName.Text = t.GetProperty("UserName").GetValue(obj, null);
-            //    txtEmployeesPass.Text = t.GetProperty("Password").GetValue(obj, null);
-            //    cbbPermissionName.Text = t.GetProperty("TenPhanQuyen").GetValue(obj, null);
-            //    isNew = false;
-            //}
+            if (obj == null)
+            {
+                AutoGenerateID();
+                isNew = true;
+            }
+            else
+            {
+                txtReceiptID.Text = obj.MaPhieuChi;
+                cbbEmployeeName.Text = obj.TenNhanVien;
+                txtImportID.Text = obj.MaPhieuNhap;
+                txtReceiptNote.Text = obj.GhiChu;
+                txtSumMoney.Text = obj.TongTienChi.ToString();
+                isNew = false;
+            }
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            cbbEmployeeName.ItemsSource = BUS_NhanVien.showData();
         }
 
         private void AutoGenerateID()
         {
-            //txtEmployeesID.Text = BUS_NhanVien.Instance.generateAutoID();
+            txtReceiptID.Text = BUS_PhieuChi.Instance.generateAutoID();
         }
 
         private void btnLuu_Click(object sender, RoutedEventArgs e)
@@ -124,12 +127,15 @@ namespace SmilePhone.UI
 
         private void btnRefresh_Click(object sender, RoutedEventArgs e)
         {
-            //txtEmployeesID.Clear();
-            //txtEmployeesName.Clear();
-            //txtEmployeesUserName.Clear();
-            //txtEmployeesPass.Clear();
-            //cbbPermissionName.SelectedIndex = 0;
-            //AutoGenerateID();
+            txtReceiptID.Clear();
+            cbbEmployeeName.Text = "";
+            txtImportID.Clear();
+            txtReceiptNote.Clear();
+            txtSumMoney.Clear();
+            dpReceiptDate.SelectedDate = null;
+            dpReceiptEditDate.SelectedDate = null;
+            isNew = true;
+            AutoGenerateID();
         }
     }
 }
