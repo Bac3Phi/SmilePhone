@@ -174,6 +174,10 @@
       <Project>{3a76a284-b4d9-4502-b244-16d8cb89e9f2}</Project>
       <Name>BUS</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DTO\DTO.csproj">
+      <Project>{95b768e1-c868-4ccf-b9a5-70dd9ba39681}</Project>
+      <Name>DTO</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\placeholder.png" />
