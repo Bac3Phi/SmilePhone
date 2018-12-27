@@ -107,7 +107,7 @@ namespace DAL
                               join emp in db.NhanViens on item.MaNhanVien equals emp.MaNhanVien
                               select new DTO_PhieuChi
                               {
-                                  MaPhieuChi = item.MaNhanVien,
+                                  MaPhieuChi = item.MaPhieuChi,
                                   NgayChi = item.NgayChi,
                                   TenNhanVien = emp.TenNhanVien,
                                   MaPhieuNhap = item.MaPhieuNhap,
@@ -116,6 +116,14 @@ namespace DAL
                                   NgayChinhSua = item.NgayChinhSua
                               }).ToList();
                 return result;
+            }
+        }
+
+        public List<PhieuNhap> showPN()
+        {
+            using (CellphoneComponentEntities db = new CellphoneComponentEntities())
+            {
+                return db.PhieuNhaps.ToList();
             }
         }
 
@@ -145,7 +153,7 @@ namespace DAL
                               || item.MaPhieuNhap.Contains(str)
                               select new DTO_PhieuChi
                               {
-                                  MaPhieuChi = item.MaNhanVien,
+                                  MaPhieuChi = item.MaPhieuChi,
                                   NgayChi = item.NgayChi,
                                   TenNhanVien = emp.TenNhanVien,
                                   MaPhieuNhap = item.MaPhieuNhap,
@@ -166,7 +174,7 @@ namespace DAL
                               on item.MaNhanVien equals emp.MaNhanVien
                               select new DTO_PhieuChi
                               {
-                                  MaPhieuChi = item.MaNhanVien,
+                                  MaPhieuChi = item.MaPhieuChi,
                                   NgayChi = item.NgayChi,
                                   TenNhanVien = emp.TenNhanVien,
                                   MaPhieuNhap = item.MaPhieuNhap,
@@ -178,6 +186,19 @@ namespace DAL
                               || (fromPC <= res.NgayChinhSua && res.NgayChinhSua <= toPC))
                               .ToList<DTO_PhieuChi>();
                 return result;
+            }
+        }
+
+        public Decimal sumMoneyPC(String importID)
+        {
+            using (CellphoneComponentEntities db = new CellphoneComponentEntities())
+            {
+                Decimal res = 0;
+                var sum = db.Database
+                        .SqlQuery<Decimal>("select TongTien from dbo.PhieuNhap where MaPhieuNhap = '" + importID + "'")
+                        .FirstOrDefault();
+                res = sum;
+                return res;
             }
         }
     }

@@ -40,9 +40,11 @@ namespace SmilePhone.UI
             {
                 txtReceiptID.Text = obj.MaPhieuChi;
                 cbbEmployeeName.Text = obj.TenNhanVien;
-                txtImportID.Text = obj.MaPhieuNhap;
+                cbbImportID.Text = obj.MaPhieuNhap;
                 txtReceiptNote.Text = obj.GhiChu;
-                txtSumMoney.Text = obj.TongTienChi.ToString();
+                txtSumMoney.Text = BUS_PhieuChi.Instance.sumMoneyPC(obj.MaPhieuNhap).ToString();
+                dpReceiptDate.SelectedDate = obj.NgayChi;
+                dpReceiptEditDate.SelectedDate = obj.NgayChinhSua;
                 isNew = false;
             }
         }
@@ -50,6 +52,7 @@ namespace SmilePhone.UI
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             cbbEmployeeName.ItemsSource = BUS_NhanVien.showData();
+            cbbImportID.ItemsSource = BUS_PhieuChi.Instance.showPN();
         }
 
         private void AutoGenerateID()
@@ -129,13 +132,19 @@ namespace SmilePhone.UI
         {
             txtReceiptID.Clear();
             cbbEmployeeName.Text = "";
-            txtImportID.Clear();
+            cbbImportID.Text = "";
             txtReceiptNote.Clear();
             txtSumMoney.Clear();
             dpReceiptDate.SelectedDate = null;
             dpReceiptEditDate.SelectedDate = null;
             isNew = true;
             AutoGenerateID();
+        }
+
+        private void onChangeMoney(object sender, SelectionChangedEventArgs e)
+        {
+            PhieuNhap phieuNhap = cbbImportID.SelectedItem as PhieuNhap;
+            txtSumMoney.Text = BUS_PhieuChi.Instance.sumMoneyPC(phieuNhap.MaPhieuNhap).ToString();
         }
     }
 }

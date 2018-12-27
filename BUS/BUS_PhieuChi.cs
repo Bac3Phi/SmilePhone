@@ -86,5 +86,15 @@ namespace BUS
         {
             return PhieuChi.Instance.searchDatePC(fromPC, toPC);
         }
+
+        public Decimal sumMoneyPC(String importID)
+        {
+            return PhieuChi.Instance.sumMoneyPC(importID);
+        }
+
+        public List<PhieuNhap> showPN()
+        {
+            return PhieuChi.Instance.showPN();
+        }
     }
 }
