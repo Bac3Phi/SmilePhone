@@ -129,7 +129,7 @@ namespace SmilePhone.UI
                     DTO_PhieuChi obj = dgvReceipt.SelectedItem as DTO_PhieuChi;
                     String id = obj.MaPhieuChi;
 
-                    BUS_NhanVien.DeleteNV(id);
+                    BUS_PhieuChi.DeletePC(id);
                     dgvReceipt.ItemsSource = BUS_PhieuChi.showData();
 
                 }
