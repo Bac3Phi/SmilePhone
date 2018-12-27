@@ -16,6 +16,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using BUS;
 using DAL;
+using DTO;
 
 namespace SmilePhone.UI
 {
@@ -40,7 +41,7 @@ namespace SmilePhone.UI
 
         private void btnThem_Click(object sender, RoutedEventArgs e)
         {
-            UserControl usc = new UI_ThemNhanVien(gridMain, dgvEmployees.SelectedItem as dynamic);
+            UserControl usc = new UI_ThemNhanVien(gridMain, dgvEmployees.SelectedItem as DTO_NhanVien);
             gridMain.Children.Clear();
             gridMain.Children.Add(usc);
         }
@@ -121,9 +122,8 @@ namespace SmilePhone.UI
                 if (dgvEmployees.SelectedItem != null)
                 {
                     //object obj = dgvEmployees.SelectedItem;
-                    dynamic obj = dgvEmployees.SelectedItem;
-                    Type t = obj.GetType();
-                    String id = t.GetProperty("MaNhanVien").GetValue(obj, null);
+                    DTO_NhanVien obj = dgvEmployees.SelectedItem as DTO_NhanVien;
+                    String id = obj.MaNhanVien;
 
                     BUS_NhanVien.DeleteNV(id);
                     dgvEmployees.ItemsSource = BUS_NhanVien.showData();
@@ -134,7 +134,7 @@ namespace SmilePhone.UI
 
         private void btnEdit_Click(object sender, RoutedEventArgs e)
         {
-            UserControl usc = new UI_ThemNhanVien(gridMain, dgvEmployees.SelectedItem as dynamic);
+            UserControl usc = new UI_ThemNhanVien(gridMain, dgvEmployees.SelectedItem as DTO_NhanVien);
             gridMain.Children.Clear();
             gridMain.Children.Add(usc);
         }

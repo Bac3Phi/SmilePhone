@@ -21,7 +21,6 @@ namespace DAL
         {
             this.NhanViens = new HashSet<NhanVien>();
         }
-
         public static PhanQuyen Instance
         {
             get

@@ -54,22 +54,22 @@ namespace BUS
             else
             {
                 int lastChar = Int32.Parse(str.Substring(str.Length - 1));
-                int secondLastChar = Int32.Parse(str.Substring(str.Length - 2,1));
+                int secondLastChar = Int32.Parse(str.Substring(str.Length - 2, 1));
                 if (lastChar < 9)
                 {
                     lastChar++;
-                    res = str.Substring(0,str.Length - 1) + lastChar.ToString();
+                    res = str.Substring(0, str.Length - 1) + lastChar.ToString();
                 }
                 else if (lastChar == 9)
                 {
                     if (secondLastChar < 9)
                     {
                         lastChar++;
-                        res = str.Substring(0,str.Length - 2) + lastChar.ToString();
+                        res = str.Substring(0, str.Length - 2) + lastChar.ToString();
                     }
                     else if (secondLastChar == 9)
                     {
-                        res = str.Substring(0,str.Length - 3) + "100";
+                        res = str.Substring(0, str.Length - 3) + "100";
                     }
                 }
             }

@@ -11,9 +11,27 @@ namespace DAL
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
+    using DTO;
     
     public partial class PhieuChi
     {
+        private static PhieuChi instance;
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public PhieuChi()
+        {
+            //this.PhieuNhaps = new HashSet<PhieuNhap>();
+        }
+        public static PhieuChi Instance
+        {
+            get
+            {
+                if (instance == null)
+                    instance = new PhieuChi();
+                return instance;
+            }
+        }
+
         public string MaPhieuChi { get; set; }
         public Nullable<System.DateTime> NgayChi { get; set; }
         public string MaNhanVien { get; set; }
@@ -23,6 +41,165 @@ namespace DAL
         public Nullable<System.DateTime> NgayChinhSua { get; set; }
     
         public virtual NhanVien NhanVien { get; set; }
-        public virtual PhieuNhap PhieuNhap { get; set; }
+
+        public virtual PhieuNhap PhieuNhap { get; set; }        
+
+        public void DeletePC(String id)
+        {
+            using (CellphoneComponentEntities db = new CellphoneComponentEntities())
+            {
+                PhieuChi nv = (from item in db.PhieuChis
+                               where item.MaPhieuChi == id
+                               select item).SingleOrDefault();
+                db.PhieuChis.Remove(nv);
+                db.SaveChanges();
+            }
+        }
+
+        public void InsertPC(DTO_PhieuChi obj)
+        {
+            using (CellphoneComponentEntities db = new CellphoneComponentEntities())
+            {
+                var result = db.Database
+                    .SqlQuery<String>("select MaNhanVien from dbo.NhanVien where TenNhanVien = N'" + obj.TenNhanVien + "'")
+                    .FirstOrDefault();
+                PhieuChi phieuChi = new PhieuChi();
+                phieuChi.MaPhieuChi = obj.MaPhieuChi;
+                phieuChi.NgayChi = obj.NgayChi;
+                phieuChi.NgayChinhSua = obj.NgayChinhSua;
+                phieuChi.MaPhieuNhap = obj.MaPhieuNhap;
+                phieuChi.GhiChu = obj.GhiChu;
+                phieuChi.TongTienChi = obj.TongTienChi;
+                phieuChi.MaNhanVien = result;
+
+                db.PhieuChis.Add(phieuChi);
+                db.SaveChanges();
+            }
+        }
+
+        public void UpdatePC(DTO_PhieuChi obj)
+        {
+            using (CellphoneComponentEntities db = new CellphoneComponentEntities())
+            {
+                var result = db.Database
+                    .SqlQuery<String>("select MaNhanVien from dbo.NhanVien where TenNhanVien = N'" + obj.TenNhanVien + "'")
+                    .FirstOrDefault();
+                PhieuChi phieuChi = new PhieuChi();
+                phieuChi.MaPhieuChi = obj.MaPhieuChi;
+                phieuChi.NgayChi = obj.NgayChi;
+                phieuChi.NgayChinhSua = obj.NgayChinhSua;
+                phieuChi.MaPhieuNhap = obj.MaPhieuNhap;
+                phieuChi.GhiChu = obj.GhiChu;
+                phieuChi.TongTienChi = obj.TongTienChi;
+                phieuChi.MaNhanVien = result;
+
+                db.PhieuChis.Attach(phieuChi);
+                db.Entry(phieuChi).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+            }
+        }
+
+        public List<DTO_PhieuChi> showPC()
+        {
+            using (CellphoneComponentEntities db = new CellphoneComponentEntities())
+            {
+                var result = (from item in db.PhieuChis
+                              join emp in db.NhanViens on item.MaNhanVien equals emp.MaNhanVien
+                              select new DTO_PhieuChi
+                              {
+                                  MaPhieuChi = item.MaPhieuChi,
+                                  NgayChi = item.NgayChi,
+                                  TenNhanVien = emp.TenNhanVien,
+                                  MaPhieuNhap = item.MaPhieuNhap,
+                                  GhiChu = item.GhiChu,
+                                  TongTienChi = item.TongTienChi,
+                                  NgayChinhSua = item.NgayChinhSua
+                              }).ToList();
+                return result;
+            }
+        }
+
+        public List<PhieuNhap> showPN()
+        {
+            using (CellphoneComponentEntities db = new CellphoneComponentEntities())
+            {
+                return db.PhieuNhaps.ToList();
+            }
+        }
+
+        public String autoID()
+        {
+            using (CellphoneComponentEntities db = new CellphoneComponentEntities())
+            {
+                var maxID = db.Database
+                    .SqlQuery<String>("select MaPhieuChi from dbo.PhieuChi where MaPhieuChi = (Select Max(MaPhieuChi) from dbo.PhieuChi)")
+                    .FirstOrDefault();
+                if (maxID != null) return maxID.ToString();
+                else return maxID;
+            }
+        }
+
+        public List<DTO_PhieuChi> searchStrPC(string str)
+        {
+            using (CellphoneComponentEntities db = new CellphoneComponentEntities())
+            {
+                var result = (from item in db.PhieuChis
+                              join emp in db.NhanViens
+                              on item.MaNhanVien equals emp.MaNhanVien
+                              where item.MaPhieuChi.Contains(str.ToUpper())
+                              || emp.TenNhanVien.Contains(str)
+                              || item.TongTienChi.ToString().Contains(str)
+                              || item.GhiChu.Contains(str)
+                              || item.MaPhieuNhap.Contains(str)
+                              select new DTO_PhieuChi
+                              {
+                                  MaPhieuChi = item.MaPhieuChi,
+                                  NgayChi = item.NgayChi,
+                                  TenNhanVien = emp.TenNhanVien,
+                                  MaPhieuNhap = item.MaPhieuNhap,
+                                  GhiChu = item.GhiChu,
+                                  TongTienChi = item.TongTienChi,
+                                  NgayChinhSua = item.NgayChinhSua
+                              }).ToList<DTO_PhieuChi>();
+                return result;
+            }
+        }
+
+        public List<DTO_PhieuChi> searchDatePC(DateTime fromPC, DateTime toPC)
+        {
+            using (CellphoneComponentEntities db = new CellphoneComponentEntities())
+            {
+                var result = (from item in db.PhieuChis
+                              join emp in db.NhanViens
+                              on item.MaNhanVien equals emp.MaNhanVien
+                              select new DTO_PhieuChi
+                              {
+                                  MaPhieuChi = item.MaPhieuChi,
+                                  NgayChi = item.NgayChi,
+                                  TenNhanVien = emp.TenNhanVien,
+                                  MaPhieuNhap = item.MaPhieuNhap,
+                                  GhiChu = item.GhiChu,
+                                  TongTienChi = item.TongTienChi,
+                                  NgayChinhSua = item.NgayChinhSua
+                              })
+                              .Where(res => (fromPC <= res.NgayChi && res.NgayChi <= toPC)
+                              || (fromPC <= res.NgayChinhSua && res.NgayChinhSua <= toPC))
+                              .ToList<DTO_PhieuChi>();
+                return result;
+            }
+        }
+
+        public Decimal sumMoneyPC(String importID)
+        {
+            using (CellphoneComponentEntities db = new CellphoneComponentEntities())
+            {
+                Decimal res = 0;
+                var sum = db.Database
+                        .SqlQuery<Decimal>("select TongTien from dbo.PhieuNhap where MaPhieuNhap = '" + importID + "'")
+                        .FirstOrDefault();
+                res = sum;
+                return res;
+            }
+        }
     }
 }

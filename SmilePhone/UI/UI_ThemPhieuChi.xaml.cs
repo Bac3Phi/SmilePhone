@@ -14,6 +14,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using DAL;
 using BUS;
+using DTO;
+using SmilePhone.CrystalReports;
 
 namespace SmilePhone.UI
 {
@@ -24,88 +26,99 @@ namespace SmilePhone.UI
     {
         private Grid gridMain;
         private bool isNew = false;
-        private NhanVien item = new NhanVien();
+        private DTO_PhieuChi item = new DTO_PhieuChi();
 
-        public UI_ThemPhieuChi(Grid gridMain, dynamic obj)
+        public UI_ThemPhieuChi(Grid gridMain, DTO_PhieuChi obj)
         {
             InitializeComponent();
             this.gridMain = gridMain;
-            //cbbPermissionName.ItemsSource = BUS_PhanQuyen.showData();
-            //cbbPermissionName.SelectedIndex = 0;
-            //if (obj == null)
-            //{
-            //    AutoGenerateID();
-            //    isNew = true;
-            //}
-            //else
-            //{
-            //    Type t = obj.GetType();
-            //    txtEmployeesID.Text = t.GetProperty("MaNhanVien").GetValue(obj, null);
-            //    txtEmployeesName.Text = t.GetProperty("TenNhanVien").GetValue(obj, null);
-            //    txtEmployeesUserName.Text = t.GetProperty("UserName").GetValue(obj, null);
-            //    txtEmployeesPass.Text = t.GetProperty("Password").GetValue(obj, null);
-            //    cbbPermissionName.Text = t.GetProperty("TenPhanQuyen").GetValue(obj, null);
-            //    isNew = false;
-            //}
+            if (obj == null)
+            {
+                AutoGenerateID();
+                isNew = true;
+            }
+            else
+            {
+                txtReceiptID.Text = obj.MaPhieuChi;
+                cbbEmployeeName.Text = obj.TenNhanVien;
+                cbbImportID.Text = obj.MaPhieuNhap;
+                txtReceiptNote.Text = obj.GhiChu;
+                txtSumMoney.Text = BUS_PhieuChi.Instance.sumMoneyPC(obj.MaPhieuNhap).ToString();
+                dpReceiptDate.SelectedDate = obj.NgayChi;
+                dpReceiptEditDate.SelectedDate = obj.NgayChinhSua;
+                isNew = false;
+            }
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            cbbEmployeeName.ItemsSource = BUS_NhanVien.showData();
+            cbbImportID.ItemsSource = BUS_PhieuChi.Instance.showPN();
         }
 
         private void AutoGenerateID()
         {
-            //txtEmployeesID.Text = BUS_NhanVien.Instance.generateAutoID();
+            txtReceiptID.Text = BUS_PhieuChi.Instance.generateAutoID();
         }
 
         private void btnLuu_Click(object sender, RoutedEventArgs e)
         {
-            //if (isNew == true)
-            //{
-            //    item.MaNhanVien = txtEmployeesID.Text.Trim();
-            //    item.TenNhanVien = txtEmployeesName.Text.Trim();
-            //    item.UserName = txtEmployeesUserName.Text.Trim();
-            //    item.Password = txtEmployeesPass.Text.Trim();
-            //    item.MaPhanQuyen = "";
+            if (isNew == true)
+            {                
+                if (txtSumMoney.Text != "" && dpReceiptDate.SelectedDate != null
+                    && txtReceiptID.Text != "" && cbbImportID.Text != "" && cbbEmployeeName.Text != "")
+                {
+                    item.MaPhieuChi = txtReceiptID.Text.Trim();
+                    item.NgayChi = dpReceiptDate.SelectedDate.Value;
+                    item.NgayChinhSua = dpReceiptEditDate.SelectedDate.Value;
+                    item.TongTienChi = decimal.Parse(txtSumMoney.Text);
+                    item.MaPhieuNhap = cbbImportID.Text;
+                    item.TenNhanVien = cbbEmployeeName.Text;
+                    item.GhiChu = txtReceiptNote.Text.Trim();
 
-            //    String pqName = cbbPermissionName.Text;
-            //    if (txtEmployeesName.Text != "" && txtEmployeesPass.Text != ""
-            //        && txtEmployeesUserName.Text != "" && pqName != "")
-            //    {
-            //        BUS_NhanVien.Instance.InsertNV(item, pqName);
-            //        AutoGenerateID();
-            //        txtEmployeesName.Clear();
-            //        txtEmployeesPass.Clear();
-            //        txtEmployeesUserName.Clear();
-            //        cbbPermissionName.SelectedIndex = 0;
-            //        MessageBox.Show("Thêm mới thành công!");
-            //    }
-            //    else
-            //    {
-            //        MessageBox.Show("Hãy điền tất cả các ô còn trống!!!");
-            //    }
-            //}
-            //else
-            //{
-            //    item.MaNhanVien = txtEmployeesID.Text.Trim();
-            //    item.TenNhanVien = txtEmployeesName.Text.Trim();
-            //    item.UserName = txtEmployeesUserName.Text.Trim();
-            //    item.Password = txtEmployeesPass.Text.Trim();
-            //    item.MaPhanQuyen = "";
+                    BUS_PhieuChi.Instance.InsertPC(item);
+                    AutoGenerateID();
+                    cbbEmployeeName.Text = "";
+                    cbbImportID.Text = "";
+                    txtReceiptNote.Clear();
+                    txtSumMoney.Clear();
+                    dpReceiptDate.SelectedDate = null;
+                    dpReceiptEditDate.SelectedDate = null;
+                    MessageBox.Show("Thêm mới thành công!");
+                }
+                else
+                {
+                    MessageBox.Show("Hãy điền tất cả các ô còn trống!!!");
+                }
+            }
+            else
+            {                
+                if (txtSumMoney.Text != "" && dpReceiptDate.SelectedDate.Value != null
+                    && txtReceiptID.Text != "" && cbbImportID.Text != "" && cbbEmployeeName.Text != "")
+                {
+                    item.MaPhieuChi = txtReceiptID.Text.Trim();
+                    item.NgayChi = dpReceiptDate.SelectedDate.Value;
+                    item.NgayChinhSua = dpReceiptEditDate.SelectedDate.Value;
+                    item.TongTienChi = decimal.Parse(txtSumMoney.Text);
+                    item.MaPhieuNhap = cbbImportID.Text;
+                    item.TenNhanVien = cbbEmployeeName.Text;
+                    item.GhiChu = txtReceiptNote.Text.Trim();
 
-            //    String pqName = cbbPermissionName.Text;
-            //    if (txtEmployeesName.Text != "" && txtEmployeesPass.Text != ""
-            //        && txtEmployeesUserName.Text != "" && pqName != "")
-            //    {
-            //        BUS_NhanVien.Instance.UpdateNV(item, pqName);
-            //        AutoGenerateID();
-            //        txtEmployeesName.Clear();
-            //        txtEmployeesPass.Clear();
-            //        txtEmployeesUserName.Clear();
-            //        cbbPermissionName.SelectedIndex = 0;
-            //        MessageBox.Show("Cập nhật nhân viên thành công!");
-            //    }
-            //    else
-            //    {
-            //        MessageBox.Show("Hãy điền tất cả các ô còn trống!!!");
-            //    }
-            //}
+                    BUS_PhieuChi.Instance.UpdatePC(item);
+                    AutoGenerateID();
+                    cbbEmployeeName.Text = "";
+                    cbbImportID.Text = "";
+                    txtReceiptNote.Clear();
+                    txtSumMoney.Clear();
+                    dpReceiptDate.SelectedDate = null;
+                    dpReceiptEditDate.SelectedDate = null;
+                    MessageBox.Show("Cập nhật nhân viên thành công!");
+                }
+                else
+                {
+                    MessageBox.Show("Hãy điền tất cả các ô còn trống!!!");
+                }
+            }
         }
 
         private void btnQuayLai_Click(object sender, RoutedEventArgs e)
@@ -117,19 +130,44 @@ namespace SmilePhone.UI
 
         private void btnExportPDF_Click(object sender, RoutedEventArgs e)
         {
-            UserControl usc = new UI_PhieuChi(gridMain);
-            gridMain.Children.Clear();
-            gridMain.Children.Add(usc);
+            if (txtSumMoney.Text != "" && dpReceiptDate.SelectedDate.Value != null
+                    && txtReceiptID.Text != "" && cbbImportID.Text != "" && cbbEmployeeName.Text != "")
+            {
+                item.MaPhieuChi = txtReceiptID.Text.Trim();
+                item.NgayChi = dpReceiptDate.SelectedDate.Value;
+                item.NgayChinhSua = dpReceiptEditDate.SelectedDate.Value;
+                item.TongTienChi = decimal.Parse(txtSumMoney.Text);
+                item.MaPhieuNhap = cbbImportID.Text;
+                item.TenNhanVien = cbbEmployeeName.Text;
+                item.GhiChu = txtReceiptNote.Text.Trim();
+
+                UserControl usc = new PrintForm_PhieuChi(gridMain, item);
+                gridMain.Children.Clear();
+                gridMain.Children.Add(usc);
+            }
+            else
+            {
+                MessageBox.Show("Hãy điền tất cả các ô còn trống!!!");
+            }
         }
 
         private void btnRefresh_Click(object sender, RoutedEventArgs e)
         {
-            //txtEmployeesID.Clear();
-            //txtEmployeesName.Clear();
-            //txtEmployeesUserName.Clear();
-            //txtEmployeesPass.Clear();
-            //cbbPermissionName.SelectedIndex = 0;
-            //AutoGenerateID();
+            txtReceiptID.Clear();
+            cbbEmployeeName.Text = "";
+            cbbImportID.Text = "";
+            txtReceiptNote.Clear();
+            txtSumMoney.Clear();
+            dpReceiptDate.SelectedDate = null;
+            dpReceiptEditDate.SelectedDate = null;
+            isNew = true;
+            AutoGenerateID();
+        }
+
+        private void onChangeMoney(object sender, SelectionChangedEventArgs e)
+        {
+            PhieuNhap phieuNhap = cbbImportID.SelectedItem as PhieuNhap;
+            txtSumMoney.Text = BUS_PhieuChi.Instance.sumMoneyPC(phieuNhap.MaPhieuNhap).ToString();
         }
     }
 }

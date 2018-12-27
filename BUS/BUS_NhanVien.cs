@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DAL;
+using DTO;
 
 namespace BUS
 {
@@ -23,7 +24,7 @@ namespace BUS
             }
         }
 
-        public static List<dynamic> showData()
+        public static List<DTO_NhanVien> showData()
         {
             return NhanVien.Instance.showNV();
         }
@@ -33,14 +34,14 @@ namespace BUS
             NhanVien.Instance.DeleteNV(id);
         }
 
-        public void InsertNV(NhanVien obj, String str)
+        public void InsertNV(DTO_NhanVien obj)
         {
-            NhanVien.Instance.InsertNV(obj, str);
+            NhanVien.Instance.InsertNV(obj);
         }
 
-        public void UpdateNV(NhanVien obj, String str)
+        public void UpdateNV(DTO_NhanVien obj)
         {
-            NhanVien.Instance.UpdateNV(obj, str);
+            NhanVien.Instance.UpdateNV(obj);
         }
 
         public String generateAutoID()
@@ -76,7 +77,7 @@ namespace BUS
             return res;
         }
 
-        public List<dynamic> searchData(String str)
+        public List<DTO_NhanVien> searchData(String str)
         {
             return NhanVien.Instance.searchNV(str);
         }
