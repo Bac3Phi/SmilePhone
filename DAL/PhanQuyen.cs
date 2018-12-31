@@ -11,19 +11,38 @@ namespace DAL
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Linq;
+
     public partial class PhanQuyen
     {
+        private static PhanQuyen instance;
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public PhanQuyen()
         {
             this.NhanViens = new HashSet<NhanVien>();
         }
-    
+        public static PhanQuyen Instance
+        {
+            get
+            {
+                if (instance == null)
+                    instance = new PhanQuyen();
+                return instance;
+            }
+        }
+
         public string MaPhanQuyen { get; set; }
         public string TenPhanQuyen { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<NhanVien> NhanViens { get; set; }
+
+        public List<PhanQuyen> showPQ()
+        {
+            using (CellphoneComponentEntities db = new CellphoneComponentEntities())
+            {
+                return db.PhanQuyens.ToList();
+            }
+        }
     }
 }
