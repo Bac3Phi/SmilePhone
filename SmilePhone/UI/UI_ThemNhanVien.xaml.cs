@@ -43,7 +43,7 @@ namespace SmilePhone.UI
                 txtEmployeesID.Text = obj.MaNhanVien;
                 txtEmployeesName.Text = obj.TenNhanVien;
                 txtEmployeesUserName.Text = obj.UserName;
-                txtEmployeesPass.Text = obj.Password;
+                txtEmployeesPass.Password = obj.Password;
                 cbbPermissionName.Text = obj.TenPhanQuyen;
                 isNew = false;
             }
@@ -61,9 +61,9 @@ namespace SmilePhone.UI
                 item.MaNhanVien = txtEmployeesID.Text.Trim();
                 item.TenNhanVien = txtEmployeesName.Text.Trim();
                 item.UserName = txtEmployeesUserName.Text.Trim();
-                item.Password = txtEmployeesPass.Text.Trim();
+                item.Password = txtEmployeesPass.Password.Trim();
                 item.TenPhanQuyen = cbbPermissionName.Text;
-                if (txtEmployeesName.Text != "" && txtEmployeesPass.Text != ""
+                if (txtEmployeesName.Text != "" && txtEmployeesPass.Password != ""
                     && txtEmployeesUserName.Text != "" && cbbPermissionName.Text != "")
                 {
                     BUS_NhanVien.Instance.InsertNV(item);
@@ -84,9 +84,9 @@ namespace SmilePhone.UI
                 item.MaNhanVien = txtEmployeesID.Text.Trim();
                 item.TenNhanVien = txtEmployeesName.Text.Trim();
                 item.UserName = txtEmployeesUserName.Text.Trim();
-                item.Password = txtEmployeesPass.Text.Trim();
+                item.Password = txtEmployeesPass.Password.Trim();
                 item.TenPhanQuyen = cbbPermissionName.Text;
-                if (txtEmployeesName.Text != "" && txtEmployeesPass.Text != ""
+                if (txtEmployeesName.Text != "" && txtEmployeesPass.Password != ""
                     && txtEmployeesUserName.Text != "" && cbbPermissionName.Text != "")
                 {
                     BUS_NhanVien.Instance.UpdateNV(item);
