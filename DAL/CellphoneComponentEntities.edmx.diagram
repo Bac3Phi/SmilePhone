@@ -35,6 +35,15 @@
         <AssociationConnector Association="CellphoneComponentModel.FK_PhieuDatHang_NhanVien" ManuallyRouted="false" />
         <AssociationConnector Association="CellphoneComponentModel.FK_PhieuNhap_NhanVien" ManuallyRouted="false" />
         <AssociationConnector Association="CellphoneComponentModel.FK_PhieuChi_PhieuNhap" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="CellphoneComponentModel.BaoCaoThuChi" Width="1.5" PointX="5.375" PointY="1.875" />
+        <EntityTypeShape EntityType="CellphoneComponentModel.ChiTietThu" Width="1.5" PointX="7.625" PointY="0.5" />
+        <EntityTypeShape EntityType="CellphoneComponentModel.sysdiagram" Width="1.5" PointX="0.5" PointY="1.375" />
+        <EntityTypeShape EntityType="CellphoneComponentModel.ChiTietChi" Width="1.5" PointX="12.625" PointY="2.5" />
+        <AssociationConnector Association="CellphoneComponentModel.FK_BaoCaoThuChi_NhanVien" />
+        <AssociationConnector Association="CellphoneComponentModel.FK_ChiTietChi_BaoCaoThuChi" />
+        <AssociationConnector Association="CellphoneComponentModel.FK_ChiTietThu_BaoCaoThuChi" />
+        <AssociationConnector Association="CellphoneComponentModel.FK_ChiTietThu_PhieuBanHang" />
+        <AssociationConnector Association="CellphoneComponentModel.FK_ChiTietChi_PhieuNhap" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -39,5 +39,9 @@ namespace DAL
         public virtual DbSet<PhieuChi> PhieuChis { get; set; }
         public virtual DbSet<PhieuDatHang> PhieuDatHangs { get; set; }
         public virtual DbSet<PhieuNhap> PhieuNhaps { get; set; }
+        public virtual DbSet<BaoCaoThuChi> BaoCaoThuChis { get; set; }
+        public virtual DbSet<ChiTietThu> ChiTietThus { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
+        public virtual DbSet<ChiTietChi> ChiTietChis { get; set; }
     }
 }

@@ -12,27 +12,27 @@ namespace DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class PhieuBanHang
+    public partial class BaoCaoThuChi
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public PhieuBanHang()
+        public BaoCaoThuChi()
         {
-            this.ChiTietPhieuBanHangs = new HashSet<ChiTietPhieuBanHang>();
+            this.ChiTietChis = new HashSet<ChiTietChi>();
             this.ChiTietThus = new HashSet<ChiTietThu>();
         }
     
-        public string MaPhieuBanHang { get; set; }
-        public Nullable<System.DateTime> NgayBan { get; set; }
+        public string MaBaoCaoThuChi { get; set; }
+        public Nullable<decimal> TongThu { get; set; }
+        public Nullable<decimal> TongChi { get; set; }
+        public Nullable<int> ThoiGian { get; set; }
+        public Nullable<int> Nam { get; set; }
+        public Nullable<System.DateTime> ThoiGianLap { get; set; }
         public string MaNhanVien { get; set; }
-        public string TenKhachHang { get; set; }
-        public string SoDienThoai { get; set; }
-        public Nullable<decimal> TongTien { get; set; }
-        public string GhiChu { get; set; }
-        public Nullable<System.DateTime> NgayChinhSua { get; set; }
+        public string LoaiBaoCao { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ChiTietPhieuBanHang> ChiTietPhieuBanHangs { get; set; }
         public virtual NhanVien NhanVien { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ChiTietChi> ChiTietChis { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ChiTietThu> ChiTietThus { get; set; }
     }
