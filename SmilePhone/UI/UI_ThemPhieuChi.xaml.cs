@@ -35,12 +35,15 @@ namespace SmilePhone.UI
             if (obj == null)
             {
                 AutoGenerateID();
+                dpReceiptEditDate.SelectedDate = DateTime.Today;
+                dpReceiptDate.SelectedDate = DateTime.Today;
+                txtEmployeeName.Text = Properties.Settings.Default.TenNhanVien;
                 isNew = true;
             }
             else
             {
                 txtReceiptID.Text = obj.MaPhieuChi;
-                cbbEmployeeName.Text = obj.TenNhanVien;
+                txtEmployeeName.Text = obj.TenNhanVien;
                 cbbImportID.Text = obj.MaPhieuNhap;
                 txtReceiptNote.Text = obj.GhiChu;
                 txtSumMoney.Text = BUS_PhieuChi.Instance.sumMoneyPC(obj.MaPhieuNhap).ToString();
@@ -52,7 +55,6 @@ namespace SmilePhone.UI
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            cbbEmployeeName.ItemsSource = BUS_NhanVien.showData();
             cbbImportID.ItemsSource = BUS_PhieuChi.Instance.showPN();
         }
 
@@ -66,19 +68,19 @@ namespace SmilePhone.UI
             if (isNew == true)
             {                
                 if (txtSumMoney.Text != "" && dpReceiptDate.SelectedDate != null
-                    && txtReceiptID.Text != "" && cbbImportID.Text != "" && cbbEmployeeName.Text != "")
+                    && txtReceiptID.Text != "" && cbbImportID.Text != "" && txtEmployeeName.Text != "")
                 {
                     item.MaPhieuChi = txtReceiptID.Text.Trim();
                     item.NgayChi = dpReceiptDate.SelectedDate.Value;
                     item.NgayChinhSua = dpReceiptEditDate.SelectedDate.Value;
                     item.TongTienChi = decimal.Parse(txtSumMoney.Text);
                     item.MaPhieuNhap = cbbImportID.Text;
-                    item.TenNhanVien = cbbEmployeeName.Text;
+                    item.TenNhanVien = txtEmployeeName.Text;
                     item.GhiChu = txtReceiptNote.Text.Trim();
 
                     BUS_PhieuChi.Instance.InsertPC(item);
                     AutoGenerateID();
-                    cbbEmployeeName.Text = "";
+                    txtEmployeeName.Text = "";
                     cbbImportID.Text = "";
                     txtReceiptNote.Clear();
                     txtSumMoney.Clear();
@@ -94,19 +96,19 @@ namespace SmilePhone.UI
             else
             {                
                 if (txtSumMoney.Text != "" && dpReceiptDate.SelectedDate.Value != null
-                    && txtReceiptID.Text != "" && cbbImportID.Text != "" && cbbEmployeeName.Text != "")
+                    && txtReceiptID.Text != "" && cbbImportID.Text != "" && txtEmployeeName.Text != "")
                 {
                     item.MaPhieuChi = txtReceiptID.Text.Trim();
                     item.NgayChi = dpReceiptDate.SelectedDate.Value;
                     item.NgayChinhSua = dpReceiptEditDate.SelectedDate.Value;
                     item.TongTienChi = decimal.Parse(txtSumMoney.Text);
                     item.MaPhieuNhap = cbbImportID.Text;
-                    item.TenNhanVien = cbbEmployeeName.Text;
+                    item.TenNhanVien = txtEmployeeName.Text;
                     item.GhiChu = txtReceiptNote.Text.Trim();
 
                     BUS_PhieuChi.Instance.UpdatePC(item);
                     AutoGenerateID();
-                    cbbEmployeeName.Text = "";
+                    txtEmployeeName.Text = "";
                     cbbImportID.Text = "";
                     txtReceiptNote.Clear();
                     txtSumMoney.Clear();
@@ -131,14 +133,14 @@ namespace SmilePhone.UI
         private void btnExportPDF_Click(object sender, RoutedEventArgs e)
         {
             if (txtSumMoney.Text != "" && dpReceiptDate.SelectedDate.Value != null
-                    && txtReceiptID.Text != "" && cbbImportID.Text != "" && cbbEmployeeName.Text != "")
+                    && txtReceiptID.Text != "" && cbbImportID.Text != "" && txtEmployeeName.Text != "")
             {
                 item.MaPhieuChi = txtReceiptID.Text.Trim();
                 item.NgayChi = dpReceiptDate.SelectedDate.Value;
                 item.NgayChinhSua = dpReceiptEditDate.SelectedDate.Value;
                 item.TongTienChi = decimal.Parse(txtSumMoney.Text);
                 item.MaPhieuNhap = cbbImportID.Text;
-                item.TenNhanVien = cbbEmployeeName.Text;
+                item.TenNhanVien = txtEmployeeName.Text;
                 item.GhiChu = txtReceiptNote.Text.Trim();
 
                 UserControl usc = new PrintForm_PhieuChi(gridMain, item);
@@ -154,12 +156,12 @@ namespace SmilePhone.UI
         private void btnRefresh_Click(object sender, RoutedEventArgs e)
         {
             txtReceiptID.Clear();
-            cbbEmployeeName.Text = "";
+            txtEmployeeName.Text = Properties.Settings.Default.TenNhanVien;
             cbbImportID.Text = "";
             txtReceiptNote.Clear();
             txtSumMoney.Clear();
-            dpReceiptDate.SelectedDate = null;
-            dpReceiptEditDate.SelectedDate = null;
+            dpReceiptDate.SelectedDate = DateTime.Today;
+            dpReceiptEditDate.SelectedDate = DateTime.Today;
             isNew = true;
             AutoGenerateID();
         }
