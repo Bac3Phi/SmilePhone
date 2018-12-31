@@ -39,7 +39,7 @@
         <TextBox x:Name="txtEmployeesID" Grid.Row="1" materialDesign:HintAssist.Hint="Mã nhân viên" Margin="10" Style="{StaticResource MaterialDesignFloatingHintTextBox}" IsReadOnly="True" />
         <TextBox x:Name="txtEmployeesName" Grid.Row="2" materialDesign:HintAssist.Hint="Tên nhân viên" Margin="10" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
         <TextBox x:Name="txtEmployeesUserName" Grid.Row="3" materialDesign:HintAssist.Hint="Username" Margin="10" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
-        <TextBox x:Name="txtEmployeesPass" Grid.Row="4" materialDesign:HintAssist.Hint="Password" Margin="10" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+        <PasswordBox x:Name="txtEmployeesPass" Grid.Row="4" materialDesign:HintAssist.Hint="Password" Margin="10" />
         <ComboBox x:Name="cbbPermissionName" Grid.Row="5" SelectedValuePath="TenPhanQuyen" DisplayMemberPath="TenPhanQuyen" Margin="10" materialDesign:HintAssist.Hint="Tên phân quyền" IsEditable="True" Style="{StaticResource MaterialDesignFloatingHintComboBox}" />
     </Grid>
 </UserControl>
