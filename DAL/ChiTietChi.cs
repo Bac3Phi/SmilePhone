@@ -12,17 +12,13 @@ namespace DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class PhieuChi
+    public partial class ChiTietChi
     {
-        public string MaPhieuChi { get; set; }
-        public Nullable<System.DateTime> NgayChi { get; set; }
-        public string MaNhanVien { get; set; }
-        public string MaPhieuNhap { get; set; }
-        public Nullable<decimal> TongTienChi { get; set; }
-        public string GhiChu { get; set; }
-        public Nullable<System.DateTime> NgayChinhSua { get; set; }
+        public string MaChiTietChi { get; set; }
+        public string MaBaoCaoThuChi { get; set; }
+        public string MaPhieuNhapHang { get; set; }
     
-        public virtual NhanVien NhanVien { get; set; }
+        public virtual BaoCaoThuChi BaoCaoThuChi { get; set; }
         public virtual PhieuNhap PhieuNhap { get; set; }
     }
 }

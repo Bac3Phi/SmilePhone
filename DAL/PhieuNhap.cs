@@ -19,6 +19,7 @@ namespace DAL
         {
             this.ChiTietPhieuNhaps = new HashSet<ChiTietPhieuNhap>();
             this.PhieuChis = new HashSet<PhieuChi>();
+            this.ChiTietChis = new HashSet<ChiTietChi>();
         }
     
         public string MaPhieuNhap { get; set; }
@@ -35,5 +36,7 @@ namespace DAL
         public virtual NhanVien NhanVien { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PhieuChi> PhieuChis { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ChiTietChi> ChiTietChis { get; set; }
     }
 }
