@@ -50,7 +50,7 @@ warning 6002: The table/view 'CellphoneComponent.dbo.ChiTietChi' does not have a
           <Property Name="SoLuong" Type="int" />
           <Property Name="Gia" Type="decimal" Precision="18" Scale="0" />
           <Property Name="ThanhTien" Type="decimal" Precision="18" Scale="0" />
-          <Property Name="MaChiTietPhieuBan" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="MaChiTietPhieuBan" Type="nvarchar" MaxLength="10" Nullable="false" />
         </EntityType>
         <EntityType Name="ChiTietPhieuDatHang">
           <Key>
@@ -61,7 +61,7 @@ warning 6002: The table/view 'CellphoneComponent.dbo.ChiTietChi' does not have a
           <Property Name="SoLuong" Type="int" />
           <Property Name="Gia" Type="decimal" Precision="18" Scale="0" />
           <Property Name="ThanhTien" Type="decimal" Precision="18" Scale="0" />
-          <Property Name="MaChiTietPhieuDat" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="MaChiTietPhieuDat" Type="nvarchar" MaxLength="10" Nullable="false" />
         </EntityType>
         <EntityType Name="ChiTietPhieuNhap">
           <Key>
@@ -72,7 +72,7 @@ warning 6002: The table/view 'CellphoneComponent.dbo.ChiTietChi' does not have a
           <Property Name="SoLuong" Type="int" />
           <Property Name="GiaNhap" Type="decimal" Precision="18" Scale="0" />
           <Property Name="ThanhTien" Type="decimal" Precision="18" Scale="0" />
-          <Property Name="MaChiTietPhieuNhap" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="MaChiTietPhieuNhap" Type="nvarchar" MaxLength="10" Nullable="false" />
         </EntityType>
         <EntityType Name="ChiTietThu">
           <Key>
@@ -600,7 +600,7 @@ warning 6002: The table/view 'CellphoneComponent.dbo.ChiTietChi' does not have a
           <Property Name="SoLuong" Type="Int32" />
           <Property Name="Gia" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="ThanhTien" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="MaChiTietPhieuBan" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="MaChiTietPhieuBan" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="HangHoa" Relationship="Self.FK_ChiTietPhieuBanHang_HangHoa" FromRole="ChiTietPhieuBanHang" ToRole="HangHoa" />
           <NavigationProperty Name="PhieuBanHang" Relationship="Self.FK_ChiTietPhieuBanHang_PhieuBanHang" FromRole="ChiTietPhieuBanHang" ToRole="PhieuBanHang" />
         </EntityType>
@@ -613,7 +613,7 @@ warning 6002: The table/view 'CellphoneComponent.dbo.ChiTietChi' does not have a
           <Property Name="SoLuong" Type="Int32" />
           <Property Name="Gia" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="ThanhTien" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="MaChiTietPhieuDat" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="MaChiTietPhieuDat" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="HangHoa" Relationship="Self.FK_ChiTietPhieuDatHang_HangHoa" FromRole="ChiTietPhieuDatHang" ToRole="HangHoa" />
           <NavigationProperty Name="PhieuDatHang" Relationship="Self.FK_ChiTietPhieuDatHang_PhieuDatHang1" FromRole="ChiTietPhieuDatHang" ToRole="PhieuDatHang" />
         </EntityType>
@@ -626,7 +626,7 @@ warning 6002: The table/view 'CellphoneComponent.dbo.ChiTietChi' does not have a
           <Property Name="SoLuong" Type="Int32" />
           <Property Name="GiaNhap" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="ThanhTien" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="MaChiTietPhieuNhap" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="MaChiTietPhieuNhap" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="HangHoa" Relationship="Self.FK_ChiTietPhieuNhap_HangHoa" FromRole="ChiTietPhieuNhap" ToRole="HangHoa" />
           <NavigationProperty Name="PhieuNhap" Relationship="Self.FK_ChiTietPhieuNhap_PhieuNhap1" FromRole="ChiTietPhieuNhap" ToRole="PhieuNhap" />
         </EntityType>
