@@ -31,5 +31,6 @@ namespace DAL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ChiTietPhieuDatHang> ChiTietPhieuDatHangs { get; set; }
         public virtual NhanVien NhanVien { get; set; }
+        public virtual NhaCungCap NhaCungCap { get; set; }
     }
 }

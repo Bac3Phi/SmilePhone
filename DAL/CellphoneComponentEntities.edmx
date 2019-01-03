@@ -184,7 +184,7 @@ warning 6002: The table/view 'CellphoneComponent.dbo.ChiTietChi' does not have a
           <Property Name="MaPhieuDatHang" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="NgayDat" Type="date" />
           <Property Name="MaNhanVien" Type="nvarchar" MaxLength="10" />
-          <Property Name="MaNhaCungCap" Type="nchar" MaxLength="10" />
+          <Property Name="MaNhaCungCap" Type="nvarchar" MaxLength="10" />
           <Property Name="TongTien" Type="decimal" Precision="18" Scale="0" />
           <Property Name="GhiChu" Type="nvarchar" MaxLength="200" />
           <Property Name="NgayChinhSua" Type="datetime" />
@@ -210,6 +210,17 @@ warning 6002: The table/view 'CellphoneComponent.dbo.ChiTietChi' does not have a
           <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'CellphoneComponent.dbo.ThamSo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ThamSo">
+          <Key>
+            <PropertyRef Name="MaThamSo" />
+          </Key>
+          <Property Name="MaThamSo" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="TenThamSo" Type="nchar" MaxLength="100" />
+          <Property Name="GiaTri" Type="float" />
+          <Property Name="NgayApDung" Type="datetime" />
         </EntityType>
         <Association Name="FK_BaoCaoThuChi_NhanVien">
           <End Role="NhanVien" Type="Self.NhanVien" Multiplicity="0..1" />
@@ -427,6 +438,18 @@ warning 6002: The table/view 'CellphoneComponent.dbo.ChiTietChi' does not have a
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_PhieuDatHang_NhaCungCap">
+          <End Role="NhaCungCap" Type="Self.NhaCungCap" Multiplicity="0..1" />
+          <End Role="PhieuDatHang" Type="Self.PhieuDatHang" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NhaCungCap">
+              <PropertyRef Name="MaNhaCungCap" />
+            </Principal>
+            <Dependent Role="PhieuDatHang">
+              <PropertyRef Name="MaNhaCungCap" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_PhieuDatHang_NhanVien">
           <End Role="NhanVien" Type="Self.NhanVien" Multiplicity="0..1" />
           <End Role="PhieuDatHang" Type="Self.PhieuDatHang" Multiplicity="*" />
@@ -487,6 +510,14 @@ warning 6002: The table/view 'CellphoneComponent.dbo.ChiTietChi' does not have a
     [ChiTietChi].[MaBaoCaoThuChi] AS [MaBaoCaoThuChi], 
     [ChiTietChi].[MaPhieuNhapHang] AS [MaPhieuNhapHang]
     FROM [dbo].[ChiTietChi] AS [ChiTietChi]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="ThamSo" EntityType="Self.ThamSo" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ThamSo].[MaThamSo] AS [MaThamSo], 
+    [ThamSo].[TenThamSo] AS [TenThamSo], 
+    [ThamSo].[GiaTri] AS [GiaTri], 
+    [ThamSo].[NgayApDung] AS [NgayApDung]
+    FROM [dbo].[ThamSo] AS [ThamSo]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_BaoCaoThuChi_NhanVien" Association="Self.FK_BaoCaoThuChi_NhanVien">
             <End Role="NhanVien" EntitySet="NhanVien" />
@@ -559,6 +590,10 @@ warning 6002: The table/view 'CellphoneComponent.dbo.ChiTietChi' does not have a
           <AssociationSet Name="FK_PhieuChi_PhieuNhap" Association="Self.FK_PhieuChi_PhieuNhap">
             <End Role="PhieuNhap" EntitySet="PhieuNhap" />
             <End Role="PhieuChi" EntitySet="PhieuChi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PhieuDatHang_NhaCungCap" Association="Self.FK_PhieuDatHang_NhaCungCap">
+            <End Role="NhaCungCap" EntitySet="NhaCungCap" />
+            <End Role="PhieuDatHang" EntitySet="PhieuDatHang" />
           </AssociationSet>
           <AssociationSet Name="FK_PhieuDatHang_NhanVien" Association="Self.FK_PhieuDatHang_NhanVien">
             <End Role="NhanVien" EntitySet="NhanVien" />
@@ -673,6 +708,7 @@ warning 6002: The table/view 'CellphoneComponent.dbo.ChiTietChi' does not have a
           <Property Name="SoDienThoai" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Email" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="PhieuNhaps" Relationship="Self.FK_PhieuNhap_NhaCungCap" FromRole="NhaCungCap" ToRole="PhieuNhap" />
+          <NavigationProperty Name="PhieuDatHangs" Relationship="CellphoneComponentModel.FK_PhieuDatHang_NhaCungCap" FromRole="NhaCungCap" ToRole="PhieuDatHang" />
         </EntityType>
         <EntityType Name="NhanVien">
           <Key>
@@ -753,12 +789,13 @@ warning 6002: The table/view 'CellphoneComponent.dbo.ChiTietChi' does not have a
           <Property Name="MaPhieuDatHang" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="NgayDat" Type="DateTime" Precision="0" />
           <Property Name="MaNhanVien" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="MaNhaCungCap" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="MaNhaCungCap" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="TongTien" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="GhiChu" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="NgayChinhSua" Type="DateTime" Precision="3" />
           <NavigationProperty Name="ChiTietPhieuDatHangs" Relationship="Self.FK_ChiTietPhieuDatHang_PhieuDatHang1" FromRole="PhieuDatHang" ToRole="ChiTietPhieuDatHang" />
           <NavigationProperty Name="NhanVien" Relationship="Self.FK_PhieuDatHang_NhanVien" FromRole="PhieuDatHang" ToRole="NhanVien" />
+          <NavigationProperty Name="NhaCungCap" Relationship="CellphoneComponentModel.FK_PhieuDatHang_NhaCungCap" FromRole="PhieuDatHang" ToRole="NhaCungCap" />
         </EntityType>
         <EntityType Name="PhieuNhap">
           <Key>
@@ -1072,6 +1109,11 @@ warning 6002: The table/view 'CellphoneComponent.dbo.ChiTietChi' does not have a
             <End Role="PhieuNhap" EntitySet="PhieuNhaps" />
             <End Role="ChiTietChi" EntitySet="ChiTietChis" />
           </AssociationSet>
+          <EntitySet Name="ThamSoes" EntityType="CellphoneComponentModel.ThamSo" />
+          <AssociationSet Name="FK_PhieuDatHang_NhaCungCap" Association="CellphoneComponentModel.FK_PhieuDatHang_NhaCungCap">
+            <End Role="NhaCungCap" EntitySet="NhaCungCaps" />
+            <End Role="PhieuDatHang" EntitySet="PhieuDatHangs" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="BaoCaoThuChi">
           <Key>
@@ -1176,6 +1218,27 @@ warning 6002: The table/view 'CellphoneComponent.dbo.ChiTietChi' does not have a
             </Principal>
             <Dependent Role="ChiTietChi">
               <PropertyRef Name="MaPhieuNhapHang" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ThamSo">
+          <Key>
+            <PropertyRef Name="MaThamSo" />
+          </Key>
+          <Property Name="MaThamSo" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="TenThamSo" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="GiaTri" Type="Double" />
+          <Property Name="NgayApDung" Type="DateTime" Precision="3" />
+        </EntityType>
+        <Association Name="FK_PhieuDatHang_NhaCungCap">
+          <End Type="CellphoneComponentModel.NhaCungCap" Role="NhaCungCap" Multiplicity="0..1" />
+          <End Type="CellphoneComponentModel.PhieuDatHang" Role="PhieuDatHang" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NhaCungCap">
+              <PropertyRef Name="MaNhaCungCap" />
+            </Principal>
+            <Dependent Role="PhieuDatHang">
+              <PropertyRef Name="MaNhaCungCap" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1404,6 +1467,16 @@ warning 6002: The table/view 'CellphoneComponent.dbo.ChiTietChi' does not have a
                 <ScalarProperty Name="MaPhieuNhapHang" ColumnName="MaPhieuNhapHang" />
                 <ScalarProperty Name="MaBaoCaoThuChi" ColumnName="MaBaoCaoThuChi" />
                 <ScalarProperty Name="MaChiTietChi" ColumnName="MaChiTietChi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ThamSoes">
+            <EntityTypeMapping TypeName="CellphoneComponentModel.ThamSo">
+              <MappingFragment StoreEntitySet="ThamSo">
+                <ScalarProperty Name="NgayApDung" ColumnName="NgayApDung" />
+                <ScalarProperty Name="GiaTri" ColumnName="GiaTri" />
+                <ScalarProperty Name="TenThamSo" ColumnName="TenThamSo" />
+                <ScalarProperty Name="MaThamSo" ColumnName="MaThamSo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

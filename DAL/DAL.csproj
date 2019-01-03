@@ -120,6 +120,9 @@
     <Compile Include="sysdiagram.cs">
       <DependentUpon>CellphoneComponentEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="ThamSo.cs">
+      <DependentUpon>CellphoneComponentEntities.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />

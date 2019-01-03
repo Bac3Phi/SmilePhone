@@ -43,5 +43,6 @@ namespace DAL
         public virtual DbSet<ChiTietThu> ChiTietThus { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<ChiTietChi> ChiTietChis { get; set; }
+        public virtual DbSet<ThamSo> ThamSoes { get; set; }
     }
 }
