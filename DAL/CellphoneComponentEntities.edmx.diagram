@@ -44,6 +44,8 @@
         <AssociationConnector Association="CellphoneComponentModel.FK_ChiTietThu_BaoCaoThuChi" />
         <AssociationConnector Association="CellphoneComponentModel.FK_ChiTietThu_PhieuBanHang" />
         <AssociationConnector Association="CellphoneComponentModel.FK_ChiTietChi_PhieuNhap" />
+        <EntityTypeShape EntityType="CellphoneComponentModel.ThamSo" Width="1.5" PointX="0.75" PointY="4.75" />
+        <AssociationConnector Association="CellphoneComponentModel.FK_PhieuDatHang_NhaCungCap" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
