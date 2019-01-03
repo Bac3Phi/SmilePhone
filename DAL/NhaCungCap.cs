@@ -20,6 +20,7 @@ namespace DAL
         public NhaCungCap()
         {
             this.PhieuNhaps = new HashSet<PhieuNhap>();
+            this.PhieuDatHangs = new HashSet<PhieuDatHang>();
         }
 
         public static NhaCungCap Instance
@@ -40,6 +41,8 @@ namespace DAL
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PhieuNhap> PhieuNhaps { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PhieuDatHang> PhieuDatHangs { get; set; }
 
         public void DeleteNCC(NhaCungCap obj)
         {
