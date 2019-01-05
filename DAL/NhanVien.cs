@@ -43,7 +43,8 @@ namespace DAL
         public string UserName { get; set; }
         public string Password { get; set; }
         public string MaPhanQuyen { get; set; }
-    
+        public Nullable<bool> TrangThai { get; set; }
+
         public virtual PhanQuyen PhanQuyen { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PhieuBanHang> PhieuBanHangs { get; set; }

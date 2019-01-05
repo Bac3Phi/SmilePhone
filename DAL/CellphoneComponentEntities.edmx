@@ -128,6 +128,7 @@ warning 6002: The table/view 'CellphoneComponent.dbo.ChiTietChi' does not have a
           <Property Name="UserName" Type="nvarchar" MaxLength="50" />
           <Property Name="Password" Type="nvarchar" MaxLength="50" />
           <Property Name="MaPhanQuyen" Type="nvarchar" MaxLength="10" />
+          <Property Name="TrangThai" Type="bit" />
         </EntityType>
         <EntityType Name="PhanQuyen">
           <Key>
@@ -247,7 +248,9 @@ warning 6002: The table/view 'CellphoneComponent.dbo.ThamSo' does not have a pri
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ChiTietChi_BaoCaoThuChi">
-          <End Role="BaoCaoThuChi" Type="Self.BaoCaoThuChi" Multiplicity="0..1" />
+          <End Role="BaoCaoThuChi" Type="Self.BaoCaoThuChi" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="ChiTietChi" Type="Self.ChiTietChi" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="BaoCaoThuChi">
@@ -259,7 +262,9 @@ warning 6002: The table/view 'CellphoneComponent.dbo.ThamSo' does not have a pri
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ChiTietChi_PhieuNhap">
-          <End Role="PhieuNhap" Type="Self.PhieuNhap" Multiplicity="0..1" />
+          <End Role="PhieuNhap" Type="Self.PhieuNhap" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="ChiTietChi" Type="Self.ChiTietChi" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PhieuNhap">
@@ -283,7 +288,9 @@ warning 6002: The table/view 'CellphoneComponent.dbo.ThamSo' does not have a pri
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ChiTietPhieuBanHang_PhieuBanHang">
-          <End Role="PhieuBanHang" Type="Self.PhieuBanHang" Multiplicity="1" />
+          <End Role="PhieuBanHang" Type="Self.PhieuBanHang" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="ChiTietPhieuBanHang" Type="Self.ChiTietPhieuBanHang" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PhieuBanHang">
@@ -307,7 +314,9 @@ warning 6002: The table/view 'CellphoneComponent.dbo.ThamSo' does not have a pri
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ChiTietPhieuDatHang_PhieuDatHang1">
-          <End Role="PhieuDatHang" Type="Self.PhieuDatHang" Multiplicity="1" />
+          <End Role="PhieuDatHang" Type="Self.PhieuDatHang" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="ChiTietPhieuDatHang" Type="Self.ChiTietPhieuDatHang" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PhieuDatHang">
@@ -331,7 +340,9 @@ warning 6002: The table/view 'CellphoneComponent.dbo.ThamSo' does not have a pri
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ChiTietPhieuNhap_PhieuNhap1">
-          <End Role="PhieuNhap" Type="Self.PhieuNhap" Multiplicity="1" />
+          <End Role="PhieuNhap" Type="Self.PhieuNhap" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="ChiTietPhieuNhap" Type="Self.ChiTietPhieuNhap" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PhieuNhap">
@@ -343,7 +354,9 @@ warning 6002: The table/view 'CellphoneComponent.dbo.ThamSo' does not have a pri
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ChiTietThu_BaoCaoThuChi">
-          <End Role="BaoCaoThuChi" Type="Self.BaoCaoThuChi" Multiplicity="0..1" />
+          <End Role="BaoCaoThuChi" Type="Self.BaoCaoThuChi" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="ChiTietThu" Type="Self.ChiTietThu" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="BaoCaoThuChi">
@@ -355,7 +368,9 @@ warning 6002: The table/view 'CellphoneComponent.dbo.ThamSo' does not have a pri
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ChiTietThu_PhieuBanHang">
-          <End Role="PhieuBanHang" Type="Self.PhieuBanHang" Multiplicity="0..1" />
+          <End Role="PhieuBanHang" Type="Self.PhieuBanHang" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="ChiTietThu" Type="Self.ChiTietThu" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PhieuBanHang">
@@ -427,7 +442,9 @@ warning 6002: The table/view 'CellphoneComponent.dbo.ThamSo' does not have a pri
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PhieuChi_PhieuNhap">
-          <End Role="PhieuNhap" Type="Self.PhieuNhap" Multiplicity="0..1" />
+          <End Role="PhieuNhap" Type="Self.PhieuNhap" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="PhieuChi" Type="Self.PhieuChi" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PhieuNhap">
@@ -439,7 +456,9 @@ warning 6002: The table/view 'CellphoneComponent.dbo.ThamSo' does not have a pri
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PhieuDatHang_NhaCungCap">
-          <End Role="NhaCungCap" Type="Self.NhaCungCap" Multiplicity="0..1" />
+          <End Role="NhaCungCap" Type="Self.NhaCungCap" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="PhieuDatHang" Type="Self.PhieuDatHang" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="NhaCungCap">
@@ -463,7 +482,9 @@ warning 6002: The table/view 'CellphoneComponent.dbo.ThamSo' does not have a pri
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PhieuNhap_NhaCungCap">
-          <End Role="NhaCungCap" Type="Self.NhaCungCap" Multiplicity="0..1" />
+          <End Role="NhaCungCap" Type="Self.NhaCungCap" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="PhieuNhap" Type="Self.PhieuNhap" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="NhaCungCap">
@@ -726,6 +747,7 @@ warning 6002: The table/view 'CellphoneComponent.dbo.ThamSo' does not have a pri
           <NavigationProperty Name="PhieuDatHangs" Relationship="Self.FK_PhieuDatHang_NhanVien" FromRole="NhanVien" ToRole="PhieuDatHang" />
           <NavigationProperty Name="PhieuNhaps" Relationship="Self.FK_PhieuNhap_NhanVien" FromRole="NhanVien" ToRole="PhieuNhap" />
           <NavigationProperty Name="BaoCaoThuChis" Relationship="CellphoneComponentModel.FK_BaoCaoThuChi_NhanVien" FromRole="NhanVien" ToRole="BaoCaoThuChi" />
+          <Property Name="TrangThai" Type="Boolean" />
         </EntityType>
         <EntityType Name="PhanQuyen">
           <Key>
@@ -1341,6 +1363,7 @@ warning 6002: The table/view 'CellphoneComponent.dbo.ThamSo' does not have a pri
           <EntitySetMapping Name="NhanViens">
             <EntityTypeMapping TypeName="CellphoneComponentModel.NhanVien">
               <MappingFragment StoreEntitySet="NhanVien">
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
                 <ScalarProperty Name="MaNhanVien" ColumnName="MaNhanVien" />
                 <ScalarProperty Name="TenNhanVien" ColumnName="TenNhanVien" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
