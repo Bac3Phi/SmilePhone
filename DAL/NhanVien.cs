@@ -59,18 +59,6 @@ namespace DAL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BaoCaoThuChi> BaoCaoThuChis { get; set; }
 
-        public void DeleteNV(String id)
-        {
-            using (CellphoneComponentEntities db = new CellphoneComponentEntities())
-            {
-                NhanVien nv = (from item in db.NhanViens
-                               where item.MaNhanVien == id
-                               select item).SingleOrDefault();
-                db.NhanViens.Remove(nv);
-                db.SaveChanges();
-            }
-        }
-
         public void InsertNV(DTO_NhanVien obj)
         {
             using (CellphoneComponentEntities db = new CellphoneComponentEntities())
@@ -84,6 +72,7 @@ namespace DAL
                 nhanVien.UserName = obj.UserName;
                 nhanVien.Password = obj.Password;
                 nhanVien.MaPhanQuyen = result;
+                nhanVien.TrangThai = obj.TrangThai;
 
                 db.NhanViens.Add(nhanVien);
                 db.SaveChanges();
@@ -103,6 +92,7 @@ namespace DAL
                 nhanVien.UserName = obj.UserName;
                 nhanVien.Password = obj.Password;
                 nhanVien.MaPhanQuyen = result;
+                nhanVien.TrangThai = obj.TrangThai;
 
                 db.NhanViens.Attach(nhanVien);
                 db.Entry(nhanVien).State = System.Data.Entity.EntityState.Modified;
@@ -122,7 +112,8 @@ namespace DAL
                                   TenNhanVien = item.TenNhanVien,
                                   UserName = item.UserName,
                                   Password = item.Password,
-                                  TenPhanQuyen = perm.TenPhanQuyen
+                                  TenPhanQuyen = perm.TenPhanQuyen,
+                                  TrangThai = item.TrangThai
                               }).ToList();
                 return result;
             }
@@ -158,7 +149,8 @@ namespace DAL
                                   TenNhanVien = item.TenNhanVien,
                                   UserName = item.UserName,
                                   Password = item.Password,
-                                  TenPhanQuyen = perm.TenPhanQuyen
+                                  TenPhanQuyen = perm.TenPhanQuyen,
+                                  TrangThai = item.TrangThai
                               }).ToList<DTO_NhanVien>();
                 return result;
             }

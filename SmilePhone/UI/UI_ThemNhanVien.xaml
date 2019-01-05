@@ -34,9 +34,16 @@
             <Button Grid.Column="2" Style="{StaticResource MaterialDesignRaisedButton}" Margin="10" Width="100" ToolTip="Resource name: MaterialDesignRaisedButton"
                             Click="btnRefresh_Click">
                 Làm mới
-            </Button>
+            </Button>            
         </Grid>
-        <TextBox x:Name="txtEmployeesID" Grid.Row="1" materialDesign:HintAssist.Hint="Mã nhân viên" Margin="10" Style="{StaticResource MaterialDesignFloatingHintTextBox}" IsReadOnly="True" />
+        <Grid  Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="5*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <TextBox x:Name="txtEmployeesID" Grid.Column="0" materialDesign:HintAssist.Hint="Mã nhân viên" Margin="10" Style="{StaticResource MaterialDesignFloatingHintTextBox}" IsReadOnly="True" />
+            <ToggleButton x:Name="btnVisible" Grid.Column="1" Style="{StaticResource MaterialDesignSwitchToggleButton}" ToolTip="MaterialDesignSwitchToggleButton"/>
+        </Grid>        
         <TextBox x:Name="txtEmployeesName" Grid.Row="2" materialDesign:HintAssist.Hint="Tên nhân viên" Margin="10" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
         <TextBox x:Name="txtEmployeesUserName" Grid.Row="3" materialDesign:HintAssist.Hint="Username" Margin="10" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
         <PasswordBox x:Name="txtEmployeesPass" Grid.Row="4" materialDesign:HintAssist.Hint="Password" Margin="10" />

@@ -12,7 +12,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using DAL;
 using BUS;
 using DTO;
 using SmilePhone.CrystalReports;
@@ -168,8 +167,9 @@ namespace SmilePhone.UI
 
         private void onChangeMoney(object sender, SelectionChangedEventArgs e)
         {
-            PhieuNhap phieuNhap = cbbImportID.SelectedItem as PhieuNhap;
-            txtSumMoney.Text = BUS_PhieuChi.Instance.sumMoneyPC(phieuNhap.MaPhieuNhap).ToString();
+            DTO_NhapChi phieuNhap = cbbImportID.SelectedItem as DTO_NhapChi;
+            if (phieuNhap != null)
+                txtSumMoney.Text = BUS_PhieuChi.Instance.sumMoneyPC(phieuNhap.MaPhieuNhap).ToString();
         }
     }
 }

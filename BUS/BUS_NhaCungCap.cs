@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DAL;
+using DTO;
 
 namespace BUS
 {
@@ -23,22 +24,22 @@ namespace BUS
             }
         }
 
-        public static List<NhaCungCap> showData()
+        public static List<DTO_NhaCungCap> showData()
         {
             return NhaCungCap.Instance.showNCC();
         }
 
-        public static void DeleteNCC(NhaCungCap obj)
+        public static void DeleteNCC(DTO_NhaCungCap obj)
         {
             NhaCungCap.Instance.DeleteNCC(obj);
         }
 
-        public NhaCungCap InsertNCC(NhaCungCap obj)
+        public void InsertNCC(DTO_NhaCungCap obj)
         {
-            return NhaCungCap.Instance.InsertNCC(obj);
+            NhaCungCap.Instance.InsertNCC(obj);
         }
 
-        public void UpdateNCC(NhaCungCap obj)
+        public void UpdateNCC(DTO_NhaCungCap obj)
         {
             NhaCungCap.Instance.UpdateNCC(obj);
         }
@@ -64,8 +65,9 @@ namespace BUS
                 {
                     if (secondLastChar < 9)
                     {
-                        lastChar++;
-                        res = str.Substring(0, str.Length - 2) + lastChar.ToString();
+                        lastChar = 0;
+                        secondLastChar++;
+                        res = str.Substring(0, str.Length - 2) + secondLastChar.ToString() + lastChar.ToString();
                     }
                     else if (secondLastChar == 9)
                     {
@@ -76,7 +78,7 @@ namespace BUS
             return res;
         }
 
-        public List<NhaCungCap> searchData(String str)
+        public List<DTO_NhaCungCap> searchData(String str)
         {
             return NhaCungCap.Instance.searchNCC(str);
         }

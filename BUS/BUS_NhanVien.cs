@@ -28,12 +28,7 @@ namespace BUS
         {
             return NhanVien.Instance.showNV();
         }
-
-        public static void DeleteNV(String id)
-        {
-            NhanVien.Instance.DeleteNV(id);
-        }
-
+        
         public void InsertNV(DTO_NhanVien obj)
         {
             NhanVien.Instance.InsertNV(obj);
@@ -65,8 +60,9 @@ namespace BUS
                 {
                     if (secondLastChar < 9)
                     {
-                        lastChar++;
-                        res = str.Substring(0, str.Length - 2) + lastChar.ToString();
+                        lastChar = 0;
+                        secondLastChar++;
+                        res = str.Substring(0, str.Length - 2) + secondLastChar.ToString() + lastChar.ToString();
                     }
                     else if (secondLastChar == 9)
                     {

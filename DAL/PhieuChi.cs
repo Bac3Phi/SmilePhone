@@ -119,11 +119,16 @@ namespace DAL
             }
         }
 
-        public List<PhieuNhap> showPN()
+        public List<DTO_NhapChi> showPN()
         {
             using (CellphoneComponentEntities db = new CellphoneComponentEntities())
             {
-                return db.PhieuNhaps.ToList();
+                var result = (from item in db.PhieuNhaps
+                              select new DTO_NhapChi
+                              {
+                                  MaPhieuNhap = item.MaPhieuNhap
+                              }).ToList();
+                return result;
             }
         }
 

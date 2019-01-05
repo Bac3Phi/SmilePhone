@@ -12,6 +12,7 @@ namespace DAL
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using DTO;
 
     public partial class NhaCungCap
     {
@@ -44,7 +45,7 @@ namespace DAL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PhieuDatHang> PhieuDatHangs { get; set; }
 
-        public void DeleteNCC(NhaCungCap obj)
+        public void DeleteNCC(DTO_NhaCungCap obj)
         {
             using (CellphoneComponentEntities db = new CellphoneComponentEntities())
             {
@@ -56,31 +57,51 @@ namespace DAL
             }
         }
 
-        public NhaCungCap InsertNCC(NhaCungCap obj)
+        public void InsertNCC(DTO_NhaCungCap obj)
         {
             using (CellphoneComponentEntities db = new CellphoneComponentEntities())
             {
-                db.NhaCungCaps.Add(obj);
+                this.MaNhaCungCap = obj.MaNhaCungCap;
+                this.TenNhaCungCap = obj.TenNhaCungCap;
+                this.Email = obj.Email;
+                this.DiaChi = obj.DiaChi;
+                this.SoDienThoai = obj.SoDienThoai;
+
+                db.NhaCungCaps.Add(this);
                 db.SaveChanges();
-                return obj;
             }
         }
 
-        public void UpdateNCC(NhaCungCap obj)
+        public void UpdateNCC(DTO_NhaCungCap obj)
         {
             using (CellphoneComponentEntities db = new CellphoneComponentEntities())
             {
-                db.NhaCungCaps.Attach(obj);
+                this.MaNhaCungCap = obj.MaNhaCungCap;
+                this.TenNhaCungCap = obj.TenNhaCungCap;
+                this.Email = obj.Email;
+                this.DiaChi = obj.DiaChi;
+                this.SoDienThoai = obj.SoDienThoai;
+
+                db.NhaCungCaps.Attach(this);
                 db.Entry(obj).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
             }
         }
 
-        public List<NhaCungCap> showNCC()
+        public List<DTO_NhaCungCap> showNCC()
         {
             using (CellphoneComponentEntities db = new CellphoneComponentEntities())
             {
-                return db.NhaCungCaps.ToList();
+                var result = (from item in db.NhaCungCaps
+                              select new DTO_NhaCungCap
+                              {
+                                  MaNhaCungCap = item.MaNhaCungCap,
+                                  TenNhaCungCap = item.TenNhaCungCap,
+                                  SoDienThoai = item.SoDienThoai,
+                                  DiaChi = item.DiaChi,
+                                  Email = item.Email
+                              }).ToList<DTO_NhaCungCap>();
+                return result;
             }
         }
 
@@ -97,7 +118,7 @@ namespace DAL
             }
         }
 
-        public List<NhaCungCap> searchNCC(string str)
+        public List<DTO_NhaCungCap> searchNCC(string str)
         {
             using (CellphoneComponentEntities db = new CellphoneComponentEntities())
             {
@@ -107,7 +128,14 @@ namespace DAL
                               || item.DiaChi.Contains(str)
                               || item.SoDienThoai.Contains(str)
                               || item.Email.Contains(str)
-                              select item).ToList();
+                              select new DTO_NhaCungCap
+                              {
+                                  MaNhaCungCap = item.MaNhaCungCap,
+                                  TenNhaCungCap = item.TenNhaCungCap,
+                                  SoDienThoai = item.SoDienThoai,
+                                  DiaChi = item.DiaChi,
+                                  Email = item.Email
+                              }).ToList<DTO_NhaCungCap>();
                 return result;
             }
         }

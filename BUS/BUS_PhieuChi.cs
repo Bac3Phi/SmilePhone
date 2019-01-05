@@ -65,8 +65,9 @@ namespace BUS
                 {
                     if (secondLastChar < 9)
                     {
-                        lastChar++;
-                        res = str.Substring(0, str.Length - 2) + lastChar.ToString();
+                        lastChar = 0;
+                        secondLastChar++;
+                        res = str.Substring(0, str.Length - 2) + secondLastChar.ToString() + lastChar.ToString();
                     }
                     else if (secondLastChar == 9)
                     {
@@ -92,7 +93,7 @@ namespace BUS
             return PhieuChi.Instance.sumMoneyPC(importID);
         }
 
-        public List<PhieuNhap> showPN()
+        public List<DTO_NhapChi> showPN()
         {
             return PhieuChi.Instance.showPN();
         }

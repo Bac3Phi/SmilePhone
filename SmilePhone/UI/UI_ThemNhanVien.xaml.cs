@@ -26,16 +26,19 @@ namespace SmilePhone.UI
         private Grid gridMain;
         private bool isNew;
         private DTO_NhanVien item = new DTO_NhanVien();
+        private bool isChangingVisible;
 
         public UI_ThemNhanVien(Grid gridMain, DTO_NhanVien obj)
         {
             InitializeComponent();
             this.gridMain = gridMain;
+            isChangingVisible = false;
             cbbPermissionName.ItemsSource = BUS_PhanQuyen.showData();
             cbbPermissionName.SelectedIndex = 0;
             if (obj == null)
             {
                 AutoGenerateID();
+                btnVisible.IsChecked = true;
                 isNew = true;
             }
             else
@@ -45,6 +48,16 @@ namespace SmilePhone.UI
                 txtEmployeesUserName.Text = obj.UserName;
                 txtEmployeesPass.Password = obj.Password;
                 cbbPermissionName.Text = obj.TenPhanQuyen;
+
+                if (obj.TrangThai == false)
+                {
+                    btnVisible.IsChecked = false;
+                    txtEmployeesID.FontStyle = FontStyles.Oblique;
+                    txtEmployeesName.FontStyle = FontStyles.Oblique;
+                    txtEmployeesUserName.FontStyle = FontStyles.Oblique;
+                    txtEmployeesPass.FontStyle = FontStyles.Oblique;
+                    cbbPermissionName.FontStyle = FontStyles.Oblique;
+                }
                 isNew = false;
             }
         }
@@ -63,6 +76,7 @@ namespace SmilePhone.UI
                 item.UserName = txtEmployeesUserName.Text.Trim();
                 item.Password = txtEmployeesPass.Password.Trim();
                 item.TenPhanQuyen = cbbPermissionName.Text;
+                item.TrangThai = btnVisible.IsChecked;
                 if (txtEmployeesName.Text != "" && txtEmployeesPass.Password != ""
                     && txtEmployeesUserName.Text != "" && cbbPermissionName.Text != "")
                 {
@@ -86,6 +100,10 @@ namespace SmilePhone.UI
                 item.UserName = txtEmployeesUserName.Text.Trim();
                 item.Password = txtEmployeesPass.Password.Trim();
                 item.TenPhanQuyen = cbbPermissionName.Text;
+                if (btnVisible.IsChecked == true)
+                    item.TrangThai = true;
+                else
+                    item.TrangThai = isChangingVisible;
                 if (txtEmployeesName.Text != "" && txtEmployeesPass.Password != ""
                     && txtEmployeesUserName.Text != "" && cbbPermissionName.Text != "")
                 {
@@ -94,6 +112,13 @@ namespace SmilePhone.UI
                     txtEmployeesName.Clear();
                     txtEmployeesPass.Clear();
                     txtEmployeesUserName.Clear();
+                    btnVisible.IsChecked = true;
+
+                    txtEmployeesID.FontStyle = FontStyles.Normal;
+                    txtEmployeesName.FontStyle = FontStyles.Normal;
+                    txtEmployeesPass.FontStyle = FontStyles.Normal;
+                    txtEmployeesUserName.FontStyle = FontStyles.Normal;
+                    cbbPermissionName.FontStyle = FontStyles.Normal;
                     cbbPermissionName.SelectedIndex = 0;
                     MessageBox.Show("Cập nhật nhân viên thành công!");
                 }
@@ -118,6 +143,13 @@ namespace SmilePhone.UI
             txtEmployeesUserName.Clear();
             txtEmployeesPass.Clear();
             cbbPermissionName.SelectedIndex = 0;
+            btnVisible.IsChecked = true;
+
+            txtEmployeesID.FontStyle = FontStyles.Normal;
+            txtEmployeesName.FontStyle = FontStyles.Normal;
+            txtEmployeesPass.FontStyle = FontStyles.Normal;
+            txtEmployeesUserName.FontStyle = FontStyles.Normal;
+            cbbPermissionName.FontStyle = FontStyles.Normal;
             isNew = true;
             AutoGenerateID();
         }

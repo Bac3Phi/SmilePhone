@@ -14,8 +14,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 using BUS;
-using DAL;
 using DTO;
 
 namespace SmilePhone.UI
@@ -27,16 +27,38 @@ namespace SmilePhone.UI
     {
         private Grid gridMain;
         private Regex regex;
+        private List<DTO_NhanVien> blockNV;
 
         public UI_NhanVien(Grid gridMain)
         {
             InitializeComponent();
-            this.gridMain = gridMain;            
+            this.gridMain = gridMain;
+            blockNV = new List<DTO_NhanVien>();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             dgvEmployees.ItemsSource = BUS_NhanVien.showData();
+            if (dgvEmployees.ItemsSource != null)
+            {
+                foreach (DTO_NhanVien item in dgvEmployees.ItemsSource)
+                {
+                    if (item.TrangThai == false)
+                    {
+                        blockNV.Add(item);
+                    }
+                }                
+            }
+
+            dgvEmployees.Dispatcher.BeginInvoke(DispatcherPriority.Input,
+                new Action(delegate () {
+                    foreach (var itemNV in blockNV)
+                    {
+                        var row = dgvEmployees.ItemContainerGenerator.ContainerFromItem(itemNV) as DataGridRow;
+                        row.FontStyle = FontStyles.Oblique;
+                        row.FontWeight = FontWeights.DemiBold;
+                    }
+                }));            
         }
 
         private void btnThem_Click(object sender, RoutedEventArgs e)
@@ -49,7 +71,28 @@ namespace SmilePhone.UI
         {
             string searchStr = txtSearch.Text;
             dgvEmployees.ItemsSource = BUS_NhanVien.Instance.searchData(searchStr);
-            
+
+            blockNV.Clear();
+            if (dgvEmployees.ItemsSource != null)
+            {
+                foreach (DTO_NhanVien item in dgvEmployees.ItemsSource)
+                {
+                    if (item.TrangThai == false)
+                    {
+                        blockNV.Add(item);
+                    }
+                }
+            }
+            dgvEmployees.Dispatcher.BeginInvoke(DispatcherPriority.Input,
+                new Action(delegate () {
+                    foreach (var itemNV in blockNV)
+                    {
+                        var row = dgvEmployees.ItemContainerGenerator.ContainerFromItem(itemNV) as DataGridRow;
+                        row.FontStyle = FontStyles.Oblique;
+                        row.FontWeight = FontWeights.DemiBold;
+                    }
+                }));
+
         }
 
         #region Highlight search
@@ -116,19 +159,41 @@ namespace SmilePhone.UI
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult result = MessageBox.Show("Bạn có muốn xóa dòng này?", "Confirmation", MessageBoxButton.YesNo);
-            if (result == MessageBoxResult.Yes)
+            if (dgvEmployees.SelectedItem != null)
             {
-                if (dgvEmployees.SelectedItem != null)
+                DTO_NhanVien obj = dgvEmployees.SelectedItem as DTO_NhanVien;
+                if (obj.TrangThai == true)
                 {
-                    //object obj = dgvEmployees.SelectedItem;
-                    DTO_NhanVien obj = dgvEmployees.SelectedItem as DTO_NhanVien;
-                    String id = obj.MaNhanVien;
-
-                    BUS_NhanVien.DeleteNV(id);
-                    dgvEmployees.ItemsSource = BUS_NhanVien.showData();
-
+                    MessageBoxResult result = MessageBox.Show("Bạn có muốn khóa dòng này?", "Confirmation", MessageBoxButton.YesNo);
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        obj.TrangThai = false;
+                        BUS_NhanVien.Instance.UpdateNV(obj);
+                        blockNV.Clear();
+                        dgvEmployees.ItemsSource = BUS_NhanVien.showData();
+                        if (dgvEmployees.ItemsSource != null)
+                        {
+                            foreach (DTO_NhanVien item in dgvEmployees.ItemsSource)
+                            {
+                                if (item.TrangThai == false)
+                                {
+                                    blockNV.Add(item);
+                                }
+                            }
+                        }
+                        dgvEmployees.Dispatcher.BeginInvoke(DispatcherPriority.Input,
+                            new Action(delegate () {
+                                foreach (var itemNV in blockNV)
+                                {
+                                    var row = dgvEmployees.ItemContainerGenerator.ContainerFromItem(itemNV) as DataGridRow;
+                                    row.FontStyle = FontStyles.Oblique;
+                                    row.FontWeight = FontWeights.DemiBold;
+                                }
+                            }));
+                    }
                 }
+                else
+                    MessageBox.Show("Bạn đã khóa nhân viên này !");
             }
         }
 
@@ -141,8 +206,30 @@ namespace SmilePhone.UI
         private void btnRefresh_Click(object sender, RoutedEventArgs e)
         {
             //dgvSuppliers.Rows.Clear();
+            blockNV.Clear();
             txtSearch.Clear();
             dgvEmployees.ItemsSource = BUS_NhanVien.showData();
+            if (dgvEmployees.ItemsSource != null)
+            {
+                foreach (DTO_NhanVien item in dgvEmployees.ItemsSource)
+                {
+                    if (item.TrangThai == false)
+                    {
+                        blockNV.Add(item);
+                    }
+                }
+            }
+
+            dgvEmployees.Dispatcher.BeginInvoke(DispatcherPriority.Input,
+                new Action(delegate ()
+                {
+                    foreach (var itemNV in blockNV)
+                    {
+                        var row = dgvEmployees.ItemContainerGenerator.ContainerFromItem(itemNV) as DataGridRow;
+                        row.FontStyle = FontStyles.Oblique;
+                        row.FontWeight = FontWeights.DemiBold;
+                    }
+                }));
         }
     }
 }

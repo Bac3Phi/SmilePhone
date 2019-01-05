@@ -14,7 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using BUS;
-using DAL;
+using DTO;
 
 namespace SmilePhone.UI
 {
@@ -34,7 +34,7 @@ namespace SmilePhone.UI
         }
         private void btnThem_Click(object sender, RoutedEventArgs e)
         {
-            UserControl usc = new UI_ThemNhaCungCap(gridMain, dgvSuppliers.SelectedItem as NhaCungCap);
+            UserControl usc = new UI_ThemNhaCungCap(gridMain, dgvSuppliers.SelectedItem as DTO_NhaCungCap);
             gridMain.Children.Clear();
             gridMain.Children.Add(usc);
         }
@@ -112,7 +112,7 @@ namespace SmilePhone.UI
             {
                 if (dgvSuppliers.SelectedItem != null)
                 {
-                    BUS_NhaCungCap.DeleteNCC(dgvSuppliers.SelectedItem as NhaCungCap);
+                    BUS_NhaCungCap.DeleteNCC(dgvSuppliers.SelectedItem as DTO_NhaCungCap);
                     dgvSuppliers.ItemsSource = BUS_NhaCungCap.showData();
                     //dgvSuppliers.Items.Remove(dgvSuppliers.SelectedItem);
                 }
@@ -121,7 +121,7 @@ namespace SmilePhone.UI
 
         private void btnEdit_Click(object sender, RoutedEventArgs e)
         {
-            UserControl usc = new UI_ThemNhaCungCap(gridMain, dgvSuppliers.SelectedItem as NhaCungCap);
+            UserControl usc = new UI_ThemNhaCungCap(gridMain, dgvSuppliers.SelectedItem as DTO_NhaCungCap);
             gridMain.Children.Clear();
             gridMain.Children.Add(usc);
         }

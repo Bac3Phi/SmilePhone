@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using DAL;
+using DTO;
 using BUS;
 
 namespace SmilePhone.UI
@@ -24,9 +24,9 @@ namespace SmilePhone.UI
     {
         private Grid gridMain;
         private bool isNew = false;
-        private NhaCungCap item = new NhaCungCap();
+        private DTO_NhaCungCap item = new DTO_NhaCungCap();
 
-        public UI_ThemNhaCungCap(Grid gridMain, NhaCungCap obj)
+        public UI_ThemNhaCungCap(Grid gridMain, DTO_NhaCungCap obj)
         {
             InitializeComponent();
             this.gridMain = gridMain;
