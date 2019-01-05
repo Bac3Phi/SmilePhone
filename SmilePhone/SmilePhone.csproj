@@ -45,6 +45,9 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="log4net, Version=1.2.13.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="MaterialDesignColors, Version=1.0.0.14576, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialDesignColors.1.1.1\lib\net45\MaterialDesignColors.dll</HintPath>
     </Reference>
@@ -110,6 +113,9 @@
     <Compile Include="UI\UI_NhanVien.xaml.cs">
       <DependentUpon>UI_NhanVien.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\UI_PhieuNhap.xaml.cs">
+      <DependentUpon>UI_PhieuNhap.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\UI_QuanTri.xaml.cs">
       <DependentUpon>UI_QuanTri.xaml</DependentUpon>
     </Compile>
@@ -127,6 +133,9 @@
     </Compile>
     <Compile Include="UI\UI_ThemHangHoa.xaml.cs">
       <DependentUpon>UI_ThemHangHoa.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\UI_ThemPhieuNhap.xaml.cs">
+      <DependentUpon>UI_ThemPhieuNhap.xaml</DependentUpon>
     </Compile>
     <Page Include="Assets\assets.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -176,6 +185,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UI\UI_PhieuNhap.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UI\UI_QuanTri.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -197,6 +210,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\UI_ThemHangHoa.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\UI_ThemPhieuNhap.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

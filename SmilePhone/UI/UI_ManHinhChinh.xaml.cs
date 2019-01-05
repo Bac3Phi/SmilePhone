@@ -63,7 +63,11 @@ namespace SmilePhone.UI
                     break;
                 case "ItemReceipt":
                     usc = new UI_PhieuChi(GridMain);
-		    GridMain.Children.Add(usc);
+		            GridMain.Children.Add(usc);
+                    break;
+                case "ItemStockImport":
+                    usc = new UI_PhieuNhap(GridMain);
+                    GridMain.Children.Add(usc);
                     break;
                 case "ItemHangHoa":
                     usc = new UI_HangHoa();

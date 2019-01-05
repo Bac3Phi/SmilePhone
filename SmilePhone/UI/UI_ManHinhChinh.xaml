@@ -119,6 +119,12 @@
                             <TextBlock Text="Nhà Cung Cấp" VerticalAlignment="Center"  FontWeight="Bold"  Margin="20 10"/>
                         </StackPanel>
                     </ListViewItem>
+                    <ListViewItem x:Name="ItemStockImport" Height="60">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="DatabaseImport" Height="25" Width="25" Margin="10"/>
+                            <TextBlock Text="Nhập Kho" VerticalAlignment="Center"  FontWeight="Bold"  Margin="20 10"/>
+                        </StackPanel>
+                    </ListViewItem>
                     <ListViewItem x:Name="ItemEmployees" Height="60">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="AccountBox" Height="25" Width="25" Margin="10"/>

@@ -9,9 +9,10 @@
 
 namespace DAL
 {
+    using DTO;
     using System;
     using System.Collections.Generic;
-    
+    using System.Linq;
     public partial class ChiTietPhieuNhap
     {
         public string MaPhieuNhap { get; set; }
@@ -19,9 +20,123 @@ namespace DAL
         public Nullable<int> SoLuong { get; set; }
         public Nullable<decimal> GiaNhap { get; set; }
         public Nullable<decimal> ThanhTien { get; set; }
+
         public string MaChiTietPhieuNhap { get; set; }
     
         public virtual HangHoa HangHoa { get; set; }
         public virtual PhieuNhap PhieuNhap { get; set; }
+
+        private static ChiTietPhieuNhap instance;
+        public static ChiTietPhieuNhap Instance
+        {
+            get
+            {
+                if (instance == null)
+                    instance = new ChiTietPhieuNhap();
+                return instance;
+            }
+        }
+        public ChiTietPhieuNhap()
+        {
+
+        }
+        public void delete(String id)
+        {
+            using (CellphoneComponentEntities db = new CellphoneComponentEntities())
+            {
+                ChiTietPhieuNhap ctpn = (from item in db.ChiTietPhieuNhaps
+                                              where item.MaChiTietPhieuNhap == id
+                                       select item).SingleOrDefault();
+                db.ChiTietPhieuNhaps.Remove(ctpn);
+                db.SaveChanges();
+            }
+        }
+        public void insert(DTO_ChiTietPhieuNhap obj)
+        {
+            using (CellphoneComponentEntities db = new CellphoneComponentEntities())
+            {
+                var resultMaHangHoa = db.Database
+                    .SqlQuery<String>("select MaHangHoa from dbo.HangHoa where TenHangHoa = N'" + obj.TenHangHoa + "'")
+                    .FirstOrDefault();
+                ChiTietPhieuNhap ctpn = new ChiTietPhieuNhap();
+                ctpn.MaChiTietPhieuNhap = obj.MaChiTietPhieuNhap;
+                ctpn.MaHangHoa = resultMaHangHoa;
+                ctpn.MaPhieuNhap = obj.MaPhieuNhap;
+                ctpn.SoLuong = obj.SoLuong;
+                ctpn.GiaNhap = obj.GiaNhap;
+                ctpn.ThanhTien = obj.ThanhTien;
+                
+                db.ChiTietPhieuNhaps.Add(ctpn);
+                db.SaveChanges();
+            }
+        }
+        public void update(DTO_ChiTietPhieuNhap obj)
+        {
+            using (CellphoneComponentEntities db = new CellphoneComponentEntities())
+            {
+                var resultMaHangHoa = db.Database
+                    .SqlQuery<String>("select MaHangHoa from dbo.HangHoa where TenHangHoa = N'" + obj.TenHangHoa + "'")
+                    .FirstOrDefault();
+                ChiTietPhieuNhap ctpn = new ChiTietPhieuNhap();
+                ctpn.MaChiTietPhieuNhap = obj.MaChiTietPhieuNhap;
+                ctpn.MaHangHoa = resultMaHangHoa;
+                ctpn.MaPhieuNhap = obj.MaPhieuNhap;
+                ctpn.SoLuong = obj.SoLuong;
+                ctpn.GiaNhap = obj.GiaNhap;
+                ctpn.ThanhTien = obj.ThanhTien;
+
+                db.ChiTietPhieuNhaps.Attach(ctpn);
+                db.Entry(obj).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+            }
+        }
+        public string autoID()
+        {
+            using (CellphoneComponentEntities db = new CellphoneComponentEntities())
+            {
+                var maxID = db.Database
+                    .SqlQuery<String>("select MaChiTietPhieuNhap from dbo.ChiTietPhieuNhap where MaChiTietPhieuNhap = (Select Max(MaChiTietPhieuNhap) from dbo.ChiTietPhieuNhap)")
+                    .FirstOrDefault();
+                if (maxID != null)
+                    return maxID.ToString();
+                else
+                    return "";
+            }
+        }
+        public List<DTO_ChiTietPhieuNhap> show()
+        {
+            using (CellphoneComponentEntities db = new CellphoneComponentEntities())
+            {
+                var result = (from ctpn in db.ChiTietPhieuNhaps
+                              join hh in db.HangHoas on ctpn.MaHangHoa equals hh.MaHangHoa
+                              select new DTO_ChiTietPhieuNhap
+                              {
+                                  MaChiTietPhieuNhap = ctpn.MaChiTietPhieuNhap,
+                                  TenHangHoa = hh.TenHangHoa,
+                                  SoLuong = ctpn.SoLuong,
+                                  ThanhTien = ctpn.ThanhTien
+                              }).ToList<DTO_ChiTietPhieuNhap>();
+                return result;
+            }
+        }
+        public List<DTO_ChiTietPhieuNhap> showByPhieuNhap(String phieuNhapID)
+        {
+            using (CellphoneComponentEntities db = new CellphoneComponentEntities())
+            {
+                var result = (from ctpn in db.ChiTietPhieuNhaps
+                              join hh in db.HangHoas on ctpn.MaHangHoa equals hh.MaHangHoa
+                              where ctpn.MaPhieuNhap == phieuNhapID
+                              select new DTO_ChiTietPhieuNhap
+                              {
+                                  MaChiTietPhieuNhap = ctpn.MaChiTietPhieuNhap,
+                                  MaPhieuNhap = ctpn.MaPhieuNhap,
+                                  TenHangHoa = hh.TenHangHoa,
+                                  SoLuong = ctpn.SoLuong,
+                                  GiaNhap = ctpn.GiaNhap,
+                                  ThanhTien = ctpn.ThanhTien
+                              }).ToList<DTO_ChiTietPhieuNhap>();
+                return result;
+            }
+        }
     }
 }
