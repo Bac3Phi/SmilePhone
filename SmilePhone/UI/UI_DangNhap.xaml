@@ -24,7 +24,7 @@
 
             <StackPanel Margin="0,15" Orientation="Horizontal">
                 <materialDesign:PackIcon Kind="Account" VerticalAlignment="Center" Foreground="#707070"/>
-                <TextBox x:Name="tbUserName" materialDesign:HintAssist.Hint="Tên đăng nhập" Width="250" Margin="5" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+                <TextBox x:Name="tbUserName" Focusable="True" materialDesign:HintAssist.Hint="Tên đăng nhập" Width="250" Margin="5" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <materialDesign:PackIcon Kind="Key" VerticalAlignment="Center" Foreground="#707070"/>
@@ -32,6 +32,7 @@
             </StackPanel>
             <Button x:Name="btnDangNhap"
             Style="{StaticResource MaterialDesignRaisedButton}"
+            IsDefault="True"
             ToolTip="Resource name: MaterialDesignRaisedButton" Content="_Đăng Nhập" Margin="0,10,17,0" RenderTransformOrigin="0.527,0.75" HorizontalAlignment="Right" Width="249" Click="btnDangNhap_Click"/>
             <ProgressBar Visibility="Hidden"
   IsIndeterminate="False" />
