@@ -132,18 +132,6 @@ namespace DAL
             }
         }
 
-        public String autoID()
-        {
-            using (CellphoneComponentEntities db = new CellphoneComponentEntities())
-            {
-                var maxID = db.Database
-                    .SqlQuery<String>("select MaPhieuChi from dbo.PhieuChi where MaPhieuChi = (Select Max(MaPhieuChi) from dbo.PhieuChi)")
-                    .FirstOrDefault();
-                if (maxID != null) return maxID.ToString();
-                else return maxID;
-            }
-        }
-
         public List<DTO_PhieuChi> searchStrPC(string str)
         {
             using (CellphoneComponentEntities db = new CellphoneComponentEntities())

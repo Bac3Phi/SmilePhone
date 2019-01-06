@@ -90,19 +90,7 @@ namespace DAL
                 db.SaveChanges();
             }
         }
-        public string autoID()
-        {
-            using (CellphoneComponentEntities db = new CellphoneComponentEntities())
-            {
-                var maxID = db.Database
-                    .SqlQuery<String>("select MaChiTietPhieuNhap from dbo.ChiTietPhieuNhap where MaChiTietPhieuNhap = (Select Max(MaChiTietPhieuNhap) from dbo.ChiTietPhieuNhap)")
-                    .FirstOrDefault();
-                if (maxID != null)
-                    return maxID.ToString();
-                else
-                    return "";
-            }
-        }
+
         public List<DTO_ChiTietPhieuNhap> show()
         {
             using (CellphoneComponentEntities db = new CellphoneComponentEntities())

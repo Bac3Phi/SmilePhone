@@ -105,18 +105,6 @@ namespace DAL
             }
         }
 
-        public String autoID()
-        {
-            using (CellphoneComponentEntities db = new CellphoneComponentEntities())
-            {
-                var maxID = db.Database
-                    .SqlQuery<String>("select MaNhaCungCap from dbo.NhaCungCap where MaNhaCungCap = (Select Max(MaNhaCungCap) from dbo.NhaCungCap)")
-                    .FirstOrDefault();
-
-                if (maxID != null) return maxID.ToString();
-                else return maxID;
-            }
-        }
 
         public List<DTO_NhaCungCap> searchNCC(string str)
         {

@@ -41,36 +41,7 @@ namespace BUS
 
         public String generateAutoID()
         {
-            String str = NhanVien.Instance.autoID();
-            String res = "";
-            if (str == null || str == "")
-            {
-                res = "NV001";
-            }
-            else
-            {
-                int lastChar = Int32.Parse(str.Substring(str.Length - 1));
-                int secondLastChar = Int32.Parse(str.Substring(str.Length - 2, 1));
-                if (lastChar < 9)
-                {
-                    lastChar++;
-                    res = str.Substring(0, str.Length - 1) + lastChar.ToString();
-                }
-                else if (lastChar == 9)
-                {
-                    if (secondLastChar < 9)
-                    {
-                        lastChar = 0;
-                        secondLastChar++;
-                        res = str.Substring(0, str.Length - 2) + secondLastChar.ToString() + lastChar.ToString();
-                    }
-                    else if (secondLastChar == 9)
-                    {
-                        res = str.Substring(0, str.Length - 3) + "100";
-                    }
-                }
-            }
-            return res;
+            return Helper.generateAutoID("NhanVien", "MaNhanVien", "NV");
         }
 
         public List<DTO_NhanVien> searchData(String str)
