@@ -23,6 +23,8 @@ namespace SmilePhone.UI
         public UI_DangNhap()
         {
             InitializeComponent();
+            tbUserName.Text = Properties.Settings.Default.Username;
+            tbPassword.Password = Properties.Settings.Default.Password;
         }
 
         private void btnDangNhap_Click(object sender, RoutedEventArgs e)
@@ -32,6 +34,9 @@ namespace SmilePhone.UI
                 dynamic nhanVien = BUS_DangNhap.Instance.DangNhap(tbUserName.Text, tbPassword.Password);
                 Properties.Settings.Default.MaNV = nhanVien.MaNhanVien;
                 Properties.Settings.Default.TenNhanVien = nhanVien.TenNhanVien;
+                Properties.Settings.Default.Username = nhanVien.UserName;
+                Properties.Settings.Default.Password = nhanVien.Password;
+
                 Properties.Settings.Default.Save();
 
                 UI_ManHinhChinh UI_ManHinhChinh = new UI_ManHinhChinh();

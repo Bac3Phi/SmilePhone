@@ -89,6 +89,7 @@
     <Compile Include="HangHoa.cs">
       <DependentUpon>CellphoneComponentEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Helper.cs" />
     <Compile Include="LoaiHangHoa.cs">
       <DependentUpon>CellphoneComponentEntities.tt</DependentUpon>
     </Compile>
