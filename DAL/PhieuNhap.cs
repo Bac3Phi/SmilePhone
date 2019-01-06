@@ -89,17 +89,6 @@ namespace DAL
             }
         }
 
-        public string autoID()
-        {
-            using (CellphoneComponentEntities db = new CellphoneComponentEntities())
-            {
-                var maxID = db.Database
-                    .SqlQuery<String>("select MaPhieuNhap from dbo.PhieuNhap where MaPhieuNhap = (Select Max(MaPhieuNhap) from dbo.PhieuNhap)")
-                    .FirstOrDefault();
-
-                return maxID.ToString();
-            }
-        }
 
         public List<DTO_PhieuNhap> show()
         {
