@@ -11,16 +11,29 @@ namespace DAL
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
+    using DTO;
     
     public partial class PhieuBanHang
     {
+        private static PhieuBanHang instance;
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public PhieuBanHang()
         {
             this.ChiTietPhieuBanHangs = new HashSet<ChiTietPhieuBanHang>();
             this.ChiTietThus = new HashSet<ChiTietThu>();
         }
-    
+
+        public static PhieuBanHang Instance
+        {
+            get
+            {
+                if (instance == null)
+                    instance = new PhieuBanHang();
+                return instance;
+            }
+        }
+
         public string MaPhieuBanHang { get; set; }
         public Nullable<System.DateTime> NgayBan { get; set; }
         public string MaNhanVien { get; set; }
@@ -35,5 +48,119 @@ namespace DAL
         public virtual NhanVien NhanVien { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ChiTietThu> ChiTietThus { get; set; }
+
+        public List<DTO_PhieuBanHang> showPBH()
+        {
+            using (CellphoneComponentEntities db = new CellphoneComponentEntities())
+            {
+                var result = (from item in db.PhieuBanHangs
+                              join emp in db.NhanViens on item.MaNhanVien equals emp.MaNhanVien
+                              select new DTO_PhieuBanHang
+                              {
+                                  MaPhieuBanHang = item.MaPhieuBanHang,
+                                  NgayBan = item.NgayBan,
+                                  TenNhanVien = emp.TenNhanVien,
+                                  TenKhachHang = item.TenKhachHang,
+                                  SoDienThoai = item.SoDienThoai,
+                                  TongTien = item.TongTien,
+                                  GhiChu = item.GhiChu,
+                                  NgayChinhSua = item.NgayChinhSua
+                              }).ToList();
+                return result;
+            }
+        }
+
+        public bool InsertPBH(DTO_PhieuBanHang obj)
+        {
+            using (CellphoneComponentEntities db = new CellphoneComponentEntities())
+            {
+                var result = db.Database
+                    .SqlQuery<String>("select MaNhanVien from dbo.NhanVien where TenNhanVien = N'" + obj.TenNhanVien + "'")
+                    .FirstOrDefault();
+                PhieuBanHang phieuBanHang = new PhieuBanHang();
+                phieuBanHang.MaPhieuBanHang = obj.MaPhieuBanHang;
+                phieuBanHang.NgayBan = obj.NgayBan;
+                phieuBanHang.MaNhanVien = result;
+                phieuBanHang.TenKhachHang = obj.TenKhachHang;
+                phieuBanHang.SoDienThoai = obj.SoDienThoai;
+                phieuBanHang.TongTien = obj.TongTien;
+                phieuBanHang.GhiChu = obj.GhiChu;
+                phieuBanHang.NgayChinhSua = obj.NgayChinhSua;
+
+                db.PhieuBanHangs.Add(phieuBanHang);
+                if (db.SaveChanges() > 0)
+                {
+                    return true;
+                }
+                return false;
+            }
+        }
+
+        public bool DeletePBH(String id)
+        {
+            using (CellphoneComponentEntities db = new CellphoneComponentEntities())
+            {
+                PhieuBanHang phieuBanHang = (from item in db.PhieuBanHangs
+                                       where item.MaPhieuBanHang == id
+                                       select item).SingleOrDefault();
+                db.PhieuBanHangs.Remove(phieuBanHang);
+                if (db.SaveChanges() > 0)
+                    return true;
+                return false;
+            }
+        }
+
+        public List<DTO_PhieuBanHang> SearchPBH(string str)
+        {
+            using (CellphoneComponentEntities db = new CellphoneComponentEntities())
+            {
+                var result = (from item in db.PhieuBanHangs
+                              join nv in db.NhanViens
+                              on item.MaNhanVien equals nv.MaNhanVien
+                              where item.MaPhieuBanHang.Contains(str.ToUpper())
+                              || nv.TenNhanVien.Contains(str)
+                              || item.TongTien.ToString().Contains(str)
+                              || item.GhiChu.Contains(str)
+                              || item.TenKhachHang.Contains(str)
+                              || item.SoDienThoai.Contains(str)
+                              select new DTO_PhieuBanHang
+                              {
+                                  MaPhieuBanHang = item.MaPhieuBanHang,
+                                  NgayBan = item.NgayBan,
+                                  TenNhanVien = nv.TenNhanVien,
+                                  TenKhachHang = item.TenKhachHang,
+                                  SoDienThoai = item.SoDienThoai,
+                                  TongTien = item.TongTien,
+                                  GhiChu = item.GhiChu,
+                                  NgayChinhSua = item.NgayChinhSua
+                              }).ToList<DTO_PhieuBanHang>();
+                return result;
+            }
+        }
+
+        public List<DTO_PhieuBanHang> searchDate(DateTime from, DateTime to)
+        {
+            using (CellphoneComponentEntities db = new CellphoneComponentEntities())
+            {
+                var result = (from item in db.PhieuBanHangs
+                              join nv in db.NhanViens
+                              on item.MaNhanVien equals nv.MaNhanVien
+                              select new DTO_PhieuBanHang
+                              {
+                                  MaPhieuBanHang = item.MaPhieuBanHang,
+                                  NgayBan = item.NgayBan,
+                                  TenNhanVien = nv.TenNhanVien,
+                                  TenKhachHang = item.TenKhachHang,
+                                  SoDienThoai = item.SoDienThoai,
+                                  TongTien = item.TongTien,
+                                  GhiChu = item.GhiChu,
+                                  NgayChinhSua = item.NgayChinhSua
+                              })
+                              .Where(res => (from <= res.NgayBan && res.NgayBan <= to)
+                              || (from <= res.NgayChinhSua && res.NgayChinhSua <= to))
+                              .ToList<DTO_PhieuBanHang>();
+                return result;
+            }
+        }
     }
 }
