@@ -12,7 +12,7 @@
             HorizontalAlignment="Right"
             VerticalAlignment="Top"
             Style="{StaticResource MaterialDesignRaisedLightButton}"
-            ToolTip="Resource name: MaterialDesignRaisedLightButton" Margin="0,20,90,0" Click="btnThemHangHoa_Click">
+            ToolTip="Resource name: MaterialDesignRaisedLightButton" Margin="0,20,110,0" Click="btnThemHangHoa_Click">
             Thêm Hàng Hóa
         </Button>
         <StackPanel Margin="46,106,44,400" Orientation="Vertical" HorizontalAlignment="Center">
@@ -33,17 +33,73 @@
                     materialDesign:HintAssist.Hint="Tìm kiếm"
                     Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="300" />
                 <Button
+                    x:Name="btnSearch"
                     HorizontalAlignment="Center"
                     Style="{StaticResource MaterialDesignRaisedButton}"
-                    Width="128"
-                    ToolTip="Resource name: MaterialDesignRaisedButton" Content="Search"/>
+                    Width="98"
+                    ToolTip="Resource name: MaterialDesignRaisedButton" Content="Tìm kiếm"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0,20,0,0"/>
         </StackPanel>
-        <DataGrid
-            Margin="44,197,44,26"
-            ItemsSource="{Binding Items3}"
-            CanUserSortColumns="True"
-            CanUserAddRows="False" />
+        <DataGrid 
+            x:Name="dgvHangHoa" 
+            SelectionUnit="FullRow" 
+            SelectionMode="Extended" 
+            CanUserSortColumns="True" 
+            AutoGenerateColumns="False" 
+            CanUserAddRows="false" 
+            IsEnabled="True"
+            IsReadOnly="True"
+            EnableRowVirtualization="True" 
+            Width="auto"
+            Margin="10,171,10,10" 
+            ScrollViewer.CanContentScroll="True" 
+            ScrollViewer.VerticalScrollBarVisibility="Auto"
+            ScrollViewer.HorizontalScrollBarVisibility="Auto"
+            materialDesign:DataGridAssist.ColumnHeaderPadding="8"
+            RowDetailsVisibilityMode="VisibleWhenSelected">
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="MaHangHoaCol" Binding="{Binding MaHangHoa}" Header="Mã hàng hóa" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="TenHangHoaCol" Binding="{Binding TenHangHoa}" Header="Tên hàng hóa" Width="Auto"/>
+                <DataGridTextColumn x:Name="GiaBanCol" Binding="{Binding GiaBan}" Header="Giá bán" Width="Auto"/>
+                <DataGridTextColumn x:Name="GiamGiaCol" Binding="{Binding GiamGia}" Header="Giảm giá" Width="Auto"/>
+                <DataGridTextColumn x:Name="SoLuongTonCol" Binding="{Binding SoLuongTon}" Header="Số lượng tồn" Width="Auto"/>
+                <DataGridTextColumn x:Name="DonViTinhCol" Binding="{Binding DonViTinh}" Header="Đơn vị tính" Width="Auto"/>
+                <DataGridTextColumn x:Name="LoaiHangHoaCol" Binding="{Binding TenLoaiHangHoa}" Header="Loại hàng hóa" Width="Auto"/>
+                <DataGridTextColumn x:Name="TrangThaiCol" Binding="{Binding TrangThai}" Header="Trạng thái" Width="Auto"/>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <ToggleButton Grid.Column="1" Height="15"
+                                Style="{StaticResource MaterialDesignFlatToggleButton}"
+                                ToolTip="MaterialDesignFlatToggleButton" 
+                                Click="btnEdit_Click" >
+                                    <materialDesign:PackIcon
+                                    Kind="Edit"/>
+                                </ToggleButton>
+                                <ToggleButton Grid.Column="2" Height="15"
+                                Style="{StaticResource MaterialDesignFlatToggleButton}"
+                                ToolTip="MaterialDesignFlatToggleButton" 
+                                Click="btnDelete_Click" >
+                                    <materialDesign:PackIcon
+                                    Kind="DeleteForever"/>
+                                </ToggleButton>
+                            </Grid>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button x:Name="btnRefresh"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Top"
+            Style="{StaticResource MaterialDesignRaisedLightButton}"
+            ToolTip="Resource name: MaterialDesignRaisedLightButton" Margin="0,20,10,0" Click="BtnRefresh_Click" Content="Làm mới"/>
     </Grid>
 </UserControl>

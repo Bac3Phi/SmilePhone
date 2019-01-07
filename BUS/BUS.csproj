@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="BUS_ChiTietPhieuNhap.cs" />
     <Compile Include="BUS_DangNhap.cs" />
+    <Compile Include="BUS_HangHoa.cs" />
     <Compile Include="BUS_NhaCungCap.cs" />
     <Compile Include="BUS_NhanVien.cs" />
     <Compile Include="BUS_PhanQuyen.cs" />
