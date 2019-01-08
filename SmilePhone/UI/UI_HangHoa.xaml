@@ -15,6 +15,13 @@
             ToolTip="Resource name: MaterialDesignRaisedLightButton" Margin="0,20,110,0" Click="btnThemHangHoa_Click">
             Thêm Hàng Hóa
         </Button>
+        <Button x:Name="btnLoaiHangHoa"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Top"
+            Style="{StaticResource MaterialDesignRaisedLightButton}"
+            ToolTip="Resource name: MaterialDesignRaisedLightButton" Margin="0,20,258,0" Click="BtnLoaiHangHoa_Click">
+            Loại hàng hóa
+        </Button>
         <StackPanel Margin="46,106,44,400" Orientation="Vertical" HorizontalAlignment="Center">
             <StackPanel Orientation="Horizontal">
                 <ComboBox

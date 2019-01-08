@@ -36,6 +36,7 @@ namespace SmilePhone.UI
         public UI_ThemHangHoa(DTO_HangHoa obj)
         {
             InitializeComponent();
+            strMaHangHoa = obj.MaHangHoa;
             txtTenHangHoa.Text = obj.TenHangHoa;
             txtTenModel.Text = obj.TenModel;
             txtGiaBan.Text = obj.GiaBan.ToString();

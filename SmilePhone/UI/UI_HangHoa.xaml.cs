@@ -67,5 +67,12 @@ namespace SmilePhone.UI
                 }
             }
         }
+
+        private void BtnLoaiHangHoa_Click(object sender, RoutedEventArgs e)
+        {
+            UserControl usc = new UI_LoaiHangHoa();
+            UI_ManHinhChinh.gridMain.Children.Clear();
+            UI_ManHinhChinh.gridMain.Children.Add(usc);
+        }
     }
 }

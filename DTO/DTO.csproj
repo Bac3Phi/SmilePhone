@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="DTO_ChiTietPhieuNhap.cs" />
     <Compile Include="DTO_HangHoa.cs" />
+    <Compile Include="DTO_LoaiHangHoa.cs" />
     <Compile Include="DTO_NhaCungCap.cs" />
     <Compile Include="DTO_NhanVien.cs" />
     <Compile Include="DTO_NhapChi.cs" />
