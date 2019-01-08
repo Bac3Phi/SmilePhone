@@ -22,7 +22,7 @@ namespace DAL
         public NhanVien()
         {
             this.PhieuBanHangs = new HashSet<PhieuBanHang>();
-            this.PhieuBaoHangs = new HashSet<PhieuBaoHang>();
+            this.PhieuBaoHanhs = new HashSet<PhieuBaoHanh>();
             this.PhieuChis = new HashSet<PhieuChi>();
             this.PhieuDatHangs = new HashSet<PhieuDatHang>();
             this.PhieuNhaps = new HashSet<PhieuNhap>();
@@ -49,7 +49,7 @@ namespace DAL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PhieuBanHang> PhieuBanHangs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PhieuBaoHang> PhieuBaoHangs { get; set; }
+        public virtual ICollection<PhieuBaoHanh> PhieuBaoHanhs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PhieuChi> PhieuChis { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

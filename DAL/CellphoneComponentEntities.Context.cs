@@ -25,22 +25,22 @@ namespace DAL
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<BaoCaoThuChi> BaoCaoThuChis { get; set; }
         public virtual DbSet<BaoCaoTonKho> BaoCaoTonKhoes { get; set; }
         public virtual DbSet<ChiTietPhieuBanHang> ChiTietPhieuBanHangs { get; set; }
         public virtual DbSet<ChiTietPhieuDatHang> ChiTietPhieuDatHangs { get; set; }
         public virtual DbSet<ChiTietPhieuNhap> ChiTietPhieuNhaps { get; set; }
+        public virtual DbSet<ChiTietThu> ChiTietThus { get; set; }
         public virtual DbSet<HangHoa> HangHoas { get; set; }
         public virtual DbSet<LoaiHangHoa> LoaiHangHoas { get; set; }
         public virtual DbSet<NhaCungCap> NhaCungCaps { get; set; }
         public virtual DbSet<NhanVien> NhanViens { get; set; }
         public virtual DbSet<PhanQuyen> PhanQuyens { get; set; }
         public virtual DbSet<PhieuBanHang> PhieuBanHangs { get; set; }
-        public virtual DbSet<PhieuBaoHang> PhieuBaoHangs { get; set; }
+        public virtual DbSet<PhieuBaoHanh> PhieuBaoHanhs { get; set; }
         public virtual DbSet<PhieuChi> PhieuChis { get; set; }
         public virtual DbSet<PhieuDatHang> PhieuDatHangs { get; set; }
         public virtual DbSet<PhieuNhap> PhieuNhaps { get; set; }
-        public virtual DbSet<BaoCaoThuChi> BaoCaoThuChis { get; set; }
-        public virtual DbSet<ChiTietThu> ChiTietThus { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<ChiTietChi> ChiTietChis { get; set; }
         public virtual DbSet<ThamSo> ThamSoes { get; set; }
