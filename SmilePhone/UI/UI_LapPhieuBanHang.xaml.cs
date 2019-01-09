@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using DTO;
 using BUS;
+using System.ComponentModel;
 
 namespace SmilePhone.UI
 {
@@ -24,6 +25,7 @@ namespace SmilePhone.UI
     {
         private bool isNew = false;
         private DTO_PhieuBanHang item = new DTO_PhieuBanHang();
+        private List<DTO_ChiTietPhieuBanHang> listHangHoa = new List<DTO_ChiTietPhieuBanHang>();
 
         public UI_LapPhieuBanHang()
         {
@@ -33,6 +35,8 @@ namespace SmilePhone.UI
             dpNgayChinhSua.SelectedDate = DateTime.Today;
             txtTenNhanVien.Text = Properties.Settings.Default.TenNhanVien;
             isNew = true;
+            loadCombobox();
+            dgvChiTietPhieuBanHang.ItemsSource = listHangHoa;
         }
 
         public UI_LapPhieuBanHang(DTO_PhieuBanHang obj)
@@ -47,11 +51,48 @@ namespace SmilePhone.UI
             txtGhiChu.Text = obj.GhiChu;
             txtTongTien.Text = obj.TongTien.ToString();
             isNew = false;
+            loadCombobox();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            var dpd = DependencyPropertyDescriptor.FromProperty(ItemsControl.ItemsSourceProperty, typeof(DataGrid));
+            if (dpd != null)
+            {
+                dpd.AddValueChanged(dgvChiTietPhieuBanHang, ThisIsCalledWhenPropertyIsChanged);
+            }
+
+        }
+
+        private void ThisIsCalledWhenPropertyIsChanged(object sender, EventArgs e)
+        {
+            if (listHangHoa.Count > 0)
+            {
+                decimal tongTien = 0;
+                foreach (DTO_ChiTietPhieuBanHang item in listHangHoa)
+                {
+                    tongTien += (decimal)item.ThanhTien;
+                }
+                txtTongTien.Text = tongTien.ToString();
+            }
+            else txtTongTien.Text = "";
+        }
+
+        private void loadCombobox()
+        {
+            cbSanPham.ItemsSource = BUS_HangHoa.showData();
+            cbSanPham.DisplayMemberPath = "TenHangHoa";
+            cbSanPham.SelectedValuePath = "MaHangHoa";
         }
 
         private void generatePhieuBanHangID()
         {
             txtMaPhieuBanHang.Text = BUS_PhieuBanHang.Instance.generateAutoID();
+        }
+
+        private string generateChiTietPhieuBanHangID()
+        {
+            return BUS_ChiTietPhieuBanHang.Instance.generateAutoID();
         }
 
         private void btnQuayLai_Click(object sender, RoutedEventArgs e)
@@ -72,6 +113,15 @@ namespace SmilePhone.UI
 
                     if (BUS_PhieuBanHang.Instance.InsertPBH(item))
                     {
+                        foreach (DTO_ChiTietPhieuBanHang item in listHangHoa)
+                        {
+                            item.MaChiTietPhieuBan = generateChiTietPhieuBanHangID();
+                            if (!BUS_ChiTietPhieuBanHang.Instance.InsertCTPBH(item))
+                            {
+                                MessageBox.Show("Thêm mới thất bại!");
+                                return;
+                            }
+                        }
                         MessageBox.Show("Thêm mới thành công!");
                     }
                     else MessageBox.Show("Thêm mới thất bại!");
@@ -97,17 +147,92 @@ namespace SmilePhone.UI
 
         private void BtnRefresh_Click(object sender, RoutedEventArgs e)
         {
-
+            generatePhieuBanHangID();
+            dpNgayLap.SelectedDate = DateTime.Today;
+            dpNgayChinhSua.SelectedDate = DateTime.Today;
+            txtTenNhanVien.Text = Properties.Settings.Default.TenNhanVien;
+            txtTenKhachHang.Text = "";
+            txtSoDienThoai.Text = "";
+            txtGhiChu.Text = "";
+            txtTongTien.Text = "";
+            isNew = true;
+            cbSanPham.SelectedIndex = -1;
+            txtSoLuong.Text = "";
+            txtGiaNhap.Text = "";
+            txtThanhTien.Text = "";
+            listHangHoa.Clear();
+            dgvChiTietPhieuBanHang.ItemsSource = null;
         }
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
-
+            MessageBoxResult result = MessageBox.Show("Bạn có muốn xóa dòng này?", "Confirmation", MessageBoxButton.YesNo);
+            if (result == MessageBoxResult.Yes)
+            {
+                if (dgvChiTietPhieuBanHang.SelectedItem != null)
+                {
+                    DTO_ChiTietPhieuBanHang obj = dgvChiTietPhieuBanHang.SelectedItem as DTO_ChiTietPhieuBanHang;
+                    listHangHoa.Remove(obj);
+                    dgvChiTietPhieuBanHang.ItemsSource = null;
+                    dgvChiTietPhieuBanHang.ItemsSource = listHangHoa;
+                }
+            }
         }
 
         private void BtnAdd_Click(object sender, RoutedEventArgs e)
         {
+            if (checkContain(cbSanPham.SelectedValue.ToString()))
+            {
+                var obj = listHangHoa.Find(item => item.MaHangHoa == cbSanPham.SelectedValue.ToString());
+                obj.SoLuong += int.Parse(txtSoLuong.Text);
+                obj.ThanhTien += decimal.Parse(txtThanhTien.Text);
+            }
+            else
+            {
+                listHangHoa.Add(new DTO_ChiTietPhieuBanHang(
+                                txtMaPhieuBanHang.Text,
+                                cbSanPham.SelectedValue.ToString(),
+                                cbSanPham.Text,
+                                int.Parse(txtSoLuong.Text),
+                                decimal.Parse(txtGiaNhap.Text),
+                                decimal.Parse(txtThanhTien.Text),
+                                ""));
+            }           
+            dgvChiTietPhieuBanHang.ItemsSource = null;
+            dgvChiTietPhieuBanHang.ItemsSource = listHangHoa;
+        }
 
+        private bool checkContain(string maHangHoa)
+        {
+            foreach (DTO_ChiTietPhieuBanHang item in listHangHoa)
+            {
+                if (item.MaHangHoa.Equals(maHangHoa))
+                    return true;      
+            }
+            return false;
+        }
+
+        private void CbSanPham_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (cbSanPham.SelectedValue != null)
+            {
+                txtGiaNhap.Text = BUS_HangHoa.Instance.getGiaBan(cbSanPham.SelectedValue.ToString()).ToString();
+                TinhTongTien();
+            }          
+        }
+
+        private void TinhTongTien()
+        {
+            if (txtSoLuong.Text != "" && txtGiaNhap.Text != "")
+            {
+                var tongTien = decimal.Parse(txtGiaNhap.Text) * decimal.Parse(txtSoLuong.Text);
+                txtThanhTien.Text = tongTien.ToString();
+            }          
+        }
+
+        private void TxtSoLuong_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            TinhTongTien();
         }
     }
 }

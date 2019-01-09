@@ -27,6 +27,14 @@ namespace SmilePhone.UI
         {
             InitializeComponent();
             dgvHangHoa.ItemsSource = BUS_HangHoa.showData();
+            loadCombobox();
+        }
+
+        private void loadCombobox()
+        {
+            cbTrangThai.Items.Add("Đang kinh doanh");
+            cbTrangThai.Items.Add("Ngừng kinh doanh");
+            cbTrangThai.SelectedIndex = 0;
         }
 
         private void btnThemHangHoa_Click(object sender, RoutedEventArgs e)
@@ -40,6 +48,7 @@ namespace SmilePhone.UI
         {
             isRefreshing = true;
             dgvHangHoa.ItemsSource = BUS_HangHoa.showData();
+            cbTrangThai.SelectedIndex = 0;
             isRefreshing = false;
         }
 
@@ -73,6 +82,16 @@ namespace SmilePhone.UI
             UserControl usc = new UI_LoaiHangHoa();
             UI_ManHinhChinh.gridMain.Children.Clear();
             UI_ManHinhChinh.gridMain.Children.Add(usc);
+        }
+
+        private void BtnSearch_Click(object sender, RoutedEventArgs e)
+        {
+            string searchStr = txtSearch.Text;
+            bool trangthai;
+            if (cbTrangThai.SelectedIndex == 0)
+                trangthai = true;
+            else trangthai = false;
+            dgvHangHoa.ItemsSource = BUS_HangHoa.Instance.searchData(trangthai ,searchStr);
         }
     }
 }

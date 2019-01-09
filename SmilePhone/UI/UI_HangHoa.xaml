@@ -26,7 +26,7 @@
             <StackPanel Orientation="Horizontal">
                 <ComboBox
                     VerticalAlignment="Bottom"
-                    x:Name="LocaleCombo"
+                    x:Name="cbTrangThai"
                     Width="241"
                     Margin="0,0,20,0">
                     <ComboBox.ItemsPanel>
@@ -36,6 +36,7 @@
                     </ComboBox.ItemsPanel>
                 </ComboBox>
                 <TextBox
+                    x:Name="txtSearch"
                     Margin="0,0,50,0"
                     materialDesign:HintAssist.Hint="Tìm kiếm"
                     Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="300" />
@@ -44,7 +45,7 @@
                     HorizontalAlignment="Center"
                     Style="{StaticResource MaterialDesignRaisedButton}"
                     Width="98"
-                    ToolTip="Resource name: MaterialDesignRaisedButton" Content="Tìm kiếm"/>
+                    ToolTip="Resource name: MaterialDesignRaisedButton" Content="Tìm kiếm" Click="BtnSearch_Click"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0,20,0,0"/>
         </StackPanel>

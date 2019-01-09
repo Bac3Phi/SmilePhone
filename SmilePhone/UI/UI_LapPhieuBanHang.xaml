@@ -6,7 +6,8 @@
              xmlns:local="clr-namespace:SmilePhone.UI"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d"
-             d:DesignHeight="550" d:DesignWidth="1000">
+             d:DesignHeight="550" d:DesignWidth="1000"
+             Loaded="Window_Loaded">
     <Grid Background="WhiteSmoke" Margin="0,0,0,-112">
         <StackPanel Margin="419,20,29,392" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top">
             <Button
@@ -36,7 +37,7 @@
                 <ComboBox
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
-                    x:Name="cbSanPham" Margin="0,33,0,0" Width="365" Height="28">
+                    x:Name="cbSanPham" Margin="0,33,0,0" Width="365" Height="28" SelectionChanged="CbSanPham_SelectionChanged">
                     <ComboBox.ItemsPanel>
                         <ItemsPanelTemplate>
                             <VirtualizingStackPanel />
@@ -48,7 +49,7 @@
                         <ColumnDefinition Width="50*"/>
                         <ColumnDefinition Width="50*"/>
                     </Grid.ColumnDefinitions>
-                    <TextBox x:Name="txtSoLuong" Grid.Column="0" materialDesign:HintAssist.Hint="Số lượng" Margin="0,68,10,328" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                    <TextBox x:Name="txtSoLuong" Grid.Column="0" materialDesign:HintAssist.Hint="Số lượng" Margin="0,68,10,328" Style="{StaticResource MaterialDesignFloatingHintTextBox}" TextChanged="TxtSoLuong_TextChanged" />
                     <TextBox x:Name="txtGiaNhap" Grid.Column="1" materialDesign:HintAssist.Hint="Giá Nhập" Margin="10,68,0,328" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
                 </Grid>
                 <TextBox x:Name="txtThanhTien" Grid.Column="0" materialDesign:HintAssist.Hint="Thành Tiền" Margin="0,113,193,283" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />

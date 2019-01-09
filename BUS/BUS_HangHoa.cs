@@ -43,5 +43,20 @@ namespace BUS
         {
             return HangHoa.Instance.InsertHH(obj);
         }
+
+        public bool Update(DTO_HangHoa obj)
+        {
+            return HangHoa.Instance.update(obj);
+        }
+
+        public List<DTO_HangHoa> searchData(bool trangthai ,String str)
+        {
+            return HangHoa.Instance.search(trangthai ,str);
+        }
+
+        public decimal getGiaBan(string maHangHoa)
+        {
+            return HangHoa.Instance.getGiaBan(maHangHoa);
+        }
     }
 }

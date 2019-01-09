@@ -11,9 +11,48 @@ namespace DAL
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Linq;
+    using DTO;
+
     public partial class ChiTietPhieuBanHang
     {
+        private static ChiTietPhieuBanHang instance;
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public ChiTietPhieuBanHang()
+        {
+        }
+
+        public static ChiTietPhieuBanHang Instance
+        {
+            get
+            {
+                if (instance == null)
+                    instance = new ChiTietPhieuBanHang();
+                return instance;
+            }
+        }
+
+        public bool InsertCTPBH(DTO_ChiTietPhieuBanHang obj)
+        {
+            using (CellphoneComponentEntities db = new CellphoneComponentEntities())
+            {
+                ChiTietPhieuBanHang chiTietPhieuBanHang = new ChiTietPhieuBanHang();
+                chiTietPhieuBanHang.MaChiTietPhieuBan = obj.MaChiTietPhieuBan;
+                chiTietPhieuBanHang.MaPhieuBanHang = obj.MaPhieuBanHang;
+                chiTietPhieuBanHang.MaHangHoa = obj.MaHangHoa;
+                chiTietPhieuBanHang.SoLuong = obj.SoLuong;
+                chiTietPhieuBanHang.Gia = obj.Gia;
+                chiTietPhieuBanHang.ThanhTien = obj.ThanhTien;
+
+                db.ChiTietPhieuBanHangs.Add(chiTietPhieuBanHang);
+                if (db.SaveChanges() > 0)
+                {
+                    return true;
+                }
+                return false;
+            }
+        }
+
         public string MaPhieuBanHang { get; set; }
         public string MaHangHoa { get; set; }
         public Nullable<int> SoLuong { get; set; }

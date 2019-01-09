@@ -25,12 +25,15 @@ namespace SmilePhone.UI
         private String strMaHangHoa;
         private bool isNew = false;
         private DTO_HangHoa item = new DTO_HangHoa();
+        private int iSoLuongTon;
+        private bool bTrangThai;
 
         public UI_ThemHangHoa()
         {
             InitializeComponent();
-            generatePhieuBanHangID();
+            generateHangHoaID();
             isNew = true;
+            loadCombobox();
         }
 
         public UI_ThemHangHoa(DTO_HangHoa obj)
@@ -46,17 +49,53 @@ namespace SmilePhone.UI
             txtXuatXu.Text = obj.XuatXu;
             txtThoiGianBaoHanh.Text = obj.ThoiGianBaoHang.ToString();
             txtThongSoKiThuat.Text = obj.ThongSoKyThuat;
+            iSoLuongTon = (int) obj.SoLuongTon;
+            bTrangThai = (bool) obj.TrangThai;
             isNew = false;
+            loadCombobox();
+            foreach (DTO_LoaiHangHoa item in BUS_LoaiHangHoa.showData())
+            {
+                if (item.TenLoaiHangHoa.Equals(obj.TenLoaiHangHoa))
+                {
+                    cbLoaiHangHoa.SelectedValue = item.MaLoaiHangHoa;
+                    break;
+                }                   
+            }
         }
 
-        private void generatePhieuBanHangID()
+        private void loadCombobox()
+        {
+            cbLoaiHangHoa.ItemsSource = BUS_LoaiHangHoa.showData();
+            cbLoaiHangHoa.DisplayMemberPath = "TenLoaiHangHoa";
+            cbLoaiHangHoa.SelectedValuePath = "MaLoaiHangHoa";
+
+            cbLoaiHangHoa.SelectedIndex = 0;
+        }
+
+        private void generateHangHoaID()
         {
             strMaHangHoa = BUS_HangHoa.Instance.generateAutoID();
         }
 
         private void BtnRefresh_Click(object sender, RoutedEventArgs e)
         {
+            refresh();
+        }
 
+        private void refresh()
+        {
+            txtTenHangHoa.Text = "";
+            txtTenModel.Text = "";
+            txtGiaBan.Text = "";
+            txtGiamGia.Text = "";
+            txtDonViTinh.Text = "";
+            txtMoTa.Text = "";
+            txtXuatXu.Text = "";
+            txtThoiGianBaoHanh.Text = "";
+            txtThongSoKiThuat.Text = "";
+            loadCombobox();
+            generateHangHoaID();
+            isNew = true;
         }
 
         private void BtnSave_Click(object sender, RoutedEventArgs e)
@@ -76,6 +115,7 @@ namespace SmilePhone.UI
                     if (BUS_HangHoa.Instance.Insert(item))
                     {
                         MessageBox.Show("Thêm mới thành công!");
+                        refresh();
                     }
                     else MessageBox.Show("Thêm mới thất bại!");
                 }
@@ -86,7 +126,25 @@ namespace SmilePhone.UI
             }
             else
             {
+                if (txtTenHangHoa.Text != "" && txtTenModel.Text != ""
+                    && txtGiaBan.Text != "" && txtGiamGia.Text != ""
+                    && txtDonViTinh.Text != "" && txtMoTa.Text != ""
+                    && txtXuatXu.Text != "" && txtThoiGianBaoHanh.Text != ""
+                    && txtThongSoKiThuat.Text != "")
+                {
+                    getDataFromUI();
 
+                    if (BUS_HangHoa.Instance.Update(item))
+                    {
+                        MessageBox.Show("Lưu thành công!");
+                        refresh();
+                    }
+                    else MessageBox.Show("Lưu thất bại!");
+                }
+                else
+                {
+                    MessageBox.Show("Hãy điền tất cả các ô còn trống!!!");
+                }
             }
         }
 
@@ -102,8 +160,10 @@ namespace SmilePhone.UI
             item.ThongSoKyThuat = txtThongSoKiThuat.Text.Trim();
             item.ThoiGianBaoHang = int.Parse(txtThoiGianBaoHanh.Text.Trim());
             //item.HinhAnh = txtXuatXu.Text.Trim();
-            //item.TenLoaiHangHoa = txtXuatXu.Text.Trim();
+            item.TenLoaiHangHoa = cbLoaiHangHoa.Text;
             item.TenModel = txtTenModel.Text.Trim();
+            item.SoLuongTon = iSoLuongTon;
+            item.TrangThai = bTrangThai;
         }
 
         private void BtnBack_Click(object sender, RoutedEventArgs e)
