@@ -44,9 +44,9 @@
                 Làm mới
             </Button>
         </Grid>
-        <TextBox x:Name="txtReceiptID" Grid.Row="1" materialDesign:HintAssist.Hint="Mã phiếu chi" Margin="10" Style="{StaticResource MaterialDesignFloatingHintTextBox}" IsReadOnly="True" />
+        <TextBox x:Name="txtReceiptID" Grid.Row="1" materialDesign:HintAssist.Hint="Mã phiếu chi" MaxLength="10" Margin="10" Style="{StaticResource MaterialDesignFloatingHintTextBox}" IsReadOnly="True" />
         <DatePicker x:Name="dpReceiptDate" Grid.Row="2" Margin="10" materialDesign:HintAssist.Hint="Ngày chi" Style="{StaticResource MaterialDesignFloatingHintDatePicker}"/>
-        <TextBox x:Name="txtEmployeeName" Grid.Row="3" materialDesign:HintAssist.Hint="Tên nhân viên" IsReadOnly="True" Margin="10" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+        <TextBox x:Name="txtEmployeeName" Grid.Row="3" materialDesign:HintAssist.Hint="Tên nhân viên" MaxLength="50" IsReadOnly="True" Margin="10" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
         <ComboBox x:Name="cbbImportID" Grid.Row="4" materialDesign:HintAssist.Hint="Mã phiếu nhập" SelectionChanged="onChangeMoney" IsEditable="True" Margin="10" Style="{StaticResource MaterialDesignFloatingHintComboBox}" SelectedValuePath="MaPhieuNhap" DisplayMemberPath="MaPhieuNhap"/>
         <TextBox x:Name="txtReceiptNote" Grid.Row="5" materialDesign:HintAssist.Hint="Ghi chú" Height="100" MaxLength="200" VerticalAlignment="Top" AcceptsReturn="True" TextWrapping="Wrap" Margin="10" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalScrollBarVisibility="Auto"/>
         <DatePicker x:Name="dpReceiptEditDate" Grid.Row="6" Margin="10" materialDesign:HintAssist.Hint="Ngày chỉnh sửa" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
