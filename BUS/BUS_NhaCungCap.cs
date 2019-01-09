@@ -49,6 +49,16 @@ namespace BUS
             return Helper.generateAutoID("NhaCungCap", "MaNhaCungCap", "NCC");
         }
 
+        public bool isValidEmail(String email)
+        {
+            return Helper.IsValidEmail(email);
+        }
+
+        public bool isValidPhoneNumber(String phone)
+        {
+            return Helper.IsPhoneNumber(phone);
+        }
+
         public List<DTO_NhaCungCap> searchData(String str)
         {
             return NhaCungCap.Instance.searchNCC(str);

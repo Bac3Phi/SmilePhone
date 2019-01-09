@@ -83,7 +83,7 @@ namespace DAL
                 this.SoDienThoai = obj.SoDienThoai;
 
                 db.NhaCungCaps.Attach(this);
-                db.Entry(obj).State = System.Data.Entity.EntityState.Modified;
+                db.Entry(this).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
             }
         }
