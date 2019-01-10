@@ -49,6 +49,11 @@ namespace BUS
             return Helper.generateAutoID("NhaCungCap", "MaNhaCungCap", "NCC");
         }
 
+        public bool isAbleToDelete(String id)
+        {
+            return NhaCungCap.Instance.isAbleToDelete(id);
+        }
+
         public bool isValidEmail(String email)
         {
             return Helper.IsValidEmail(email);
