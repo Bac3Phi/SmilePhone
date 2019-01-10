@@ -65,59 +65,69 @@ namespace SmilePhone.UI
         private void btnLuu_Click(object sender, RoutedEventArgs e)
         {
             if (isNew == true)
-            {                
-                if (txtSumMoney.Text != "" && dpReceiptDate.SelectedDate != null
-                    && txtReceiptID.Text != "" && cbbImportID.Text != "" && txtEmployeeName.Text != "")
-                {
-                    item.MaPhieuChi = txtReceiptID.Text.Trim();
-                    item.NgayChi = dpReceiptDate.SelectedDate.Value;
-                    item.NgayChinhSua = dpReceiptEditDate.SelectedDate.Value;
-                    item.TongTienChi = decimal.Parse(txtSumMoney.Text);
-                    item.MaPhieuNhap = cbbImportID.Text;
-                    item.TenNhanVien = txtEmployeeName.Text;
-                    item.GhiChu = txtReceiptNote.Text.Trim();
-
-                    BUS_PhieuChi.Instance.InsertPC(item);
-                    AutoGenerateID();
-                    txtEmployeeName.Text = "";
-                    cbbImportID.Text = "";
-                    txtReceiptNote.Clear();
-                    txtSumMoney.Clear();
-                    dpReceiptDate.SelectedDate = null;
-                    dpReceiptEditDate.SelectedDate = null;
-                    MessageBox.Show("Thêm mới thành công!");
-                }
+            {
+                if (dpReceiptDate.SelectedDate.Value > dpReceiptEditDate.SelectedDate.Value)
+                    MessageBox.Show("Hãy kiểm tra lại ngày chỉnh sửa và ngày chi !");
                 else
                 {
-                    MessageBox.Show("Hãy điền tất cả các ô còn trống!!!");
+                    if (txtSumMoney.Text != "" && dpReceiptDate.SelectedDate != null
+                    && txtReceiptID.Text != "" && cbbImportID.Text != "" && txtEmployeeName.Text != "")
+                    {
+                        item.MaPhieuChi = txtReceiptID.Text.Trim();
+                        item.NgayChi = dpReceiptDate.SelectedDate.Value;
+                        item.NgayChinhSua = dpReceiptEditDate.SelectedDate.Value;
+                        item.TongTienChi = decimal.Parse(txtSumMoney.Text);
+                        item.MaPhieuNhap = cbbImportID.Text;
+                        item.TenNhanVien = txtEmployeeName.Text;
+                        item.GhiChu = txtReceiptNote.Text.Trim();
+
+                        BUS_PhieuChi.Instance.InsertPC(item);
+                        AutoGenerateID();
+                        txtEmployeeName.Text = "";
+                        cbbImportID.Text = "";
+                        txtReceiptNote.Clear();
+                        txtSumMoney.Clear();
+                        dpReceiptDate.SelectedDate = null;
+                        dpReceiptEditDate.SelectedDate = null;
+                        MessageBox.Show("Thêm mới thành công!");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Hãy điền tất cả các ô còn trống!!!");
+                    }
                 }
             }
             else
-            {                
-                if (txtSumMoney.Text != "" && dpReceiptDate.SelectedDate.Value != null
-                    && txtReceiptID.Text != "" && cbbImportID.Text != "" && txtEmployeeName.Text != "")
-                {
-                    item.MaPhieuChi = txtReceiptID.Text.Trim();
-                    item.NgayChi = dpReceiptDate.SelectedDate.Value;
-                    item.NgayChinhSua = dpReceiptEditDate.SelectedDate.Value;
-                    item.TongTienChi = decimal.Parse(txtSumMoney.Text);
-                    item.MaPhieuNhap = cbbImportID.Text;
-                    item.TenNhanVien = txtEmployeeName.Text;
-                    item.GhiChu = txtReceiptNote.Text.Trim();
-
-                    BUS_PhieuChi.Instance.UpdatePC(item);
-                    AutoGenerateID();
-                    txtEmployeeName.Text = "";
-                    cbbImportID.Text = "";
-                    txtReceiptNote.Clear();
-                    txtSumMoney.Clear();
-                    dpReceiptDate.SelectedDate = null;
-                    dpReceiptEditDate.SelectedDate = null;
-                    MessageBox.Show("Cập nhật nhân viên thành công!");
-                }
+            {
+                if (dpReceiptDate.SelectedDate.Value > dpReceiptEditDate.SelectedDate.Value)
+                    MessageBox.Show("Hãy kiểm tra lại ngày chỉnh sửa và ngày chi !");
                 else
                 {
-                    MessageBox.Show("Hãy điền tất cả các ô còn trống!!!");
+                    if (txtSumMoney.Text != "" && dpReceiptDate.SelectedDate.Value != null
+                    && txtReceiptID.Text != "" && cbbImportID.Text != "" && txtEmployeeName.Text != "")
+                    {
+                        item.MaPhieuChi = txtReceiptID.Text.Trim();
+                        item.NgayChi = dpReceiptDate.SelectedDate.Value;
+                        item.NgayChinhSua = dpReceiptEditDate.SelectedDate.Value;
+                        item.TongTienChi = decimal.Parse(txtSumMoney.Text);
+                        item.MaPhieuNhap = cbbImportID.Text;
+                        item.TenNhanVien = txtEmployeeName.Text;
+                        item.GhiChu = txtReceiptNote.Text.Trim();
+
+                        BUS_PhieuChi.Instance.UpdatePC(item);
+                        AutoGenerateID();
+                        txtEmployeeName.Text = "";
+                        cbbImportID.Text = "";
+                        txtReceiptNote.Clear();
+                        txtSumMoney.Clear();
+                        dpReceiptDate.SelectedDate = null;
+                        dpReceiptEditDate.SelectedDate = null;
+                        MessageBox.Show("Cập nhật nhân viên thành công!");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Hãy điền tất cả các ô còn trống!!!");
+                    }
                 }
             }
         }
