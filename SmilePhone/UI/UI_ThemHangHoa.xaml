@@ -96,6 +96,7 @@
                     IsEnabled="{Binding IsChecked, ElementName=MaterialDesignOutlinedTextFieldTextBoxEnabledComboBox}" Width="365" />
                 <ComboBox
                     x:Name="cbLoaiHangHoa"
+                    materialDesign:HintAssist.Hint="Tên Loại hàng hóa"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
                     Width="366" Height="28">
