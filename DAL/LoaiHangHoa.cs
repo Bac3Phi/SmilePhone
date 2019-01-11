@@ -11,15 +11,109 @@ namespace DAL
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
+    using DTO;
     
     public partial class LoaiHangHoa
     {
+        private static LoaiHangHoa instance;
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public LoaiHangHoa()
         {
             this.HangHoas = new HashSet<HangHoa>();
         }
-    
+
+        public static LoaiHangHoa Instance
+        {
+            get
+            {
+                if (instance == null)
+                    instance = new LoaiHangHoa();
+                return instance;
+            }
+        }
+
+        public List<DTO_LoaiHangHoa> show()
+        {
+            using (CellphoneComponentEntities db = new CellphoneComponentEntities())
+            {
+                var result = (from lhh in db.LoaiHangHoas
+                              select new DTO_LoaiHangHoa
+                              {
+                                  MaLoaiHangHoa = lhh.MaLoaiHangHoa,
+                                  TenLoaiHangHoa = lhh.TenLoaiHangHoa,
+                                  PhanTramLoiNhuan = lhh.PhanTramLoiNhuan
+                              }).ToList<DTO_LoaiHangHoa>();
+                return result;
+            }
+        }
+
+        public bool insert(DTO_LoaiHangHoa obj)
+        {
+            using (CellphoneComponentEntities db = new CellphoneComponentEntities())
+            {
+                LoaiHangHoa loaiHangHoa = new LoaiHangHoa();
+                loaiHangHoa.MaLoaiHangHoa = obj.MaLoaiHangHoa;
+                loaiHangHoa.TenLoaiHangHoa = obj.TenLoaiHangHoa;
+                loaiHangHoa.PhanTramLoiNhuan = obj.PhanTramLoiNhuan;
+
+                db.LoaiHangHoas.Add(loaiHangHoa);
+                if (db.SaveChanges() > 0)
+                    return true;
+                return false;
+
+            }
+        }
+
+        public bool delete(String id)
+        {
+            using (CellphoneComponentEntities db = new CellphoneComponentEntities())
+            {
+                LoaiHangHoa loaiHangHoa = (from item in db.LoaiHangHoas
+                                       where item.MaLoaiHangHoa == id
+                                       select item).SingleOrDefault();
+                db.LoaiHangHoas.Remove(loaiHangHoa);
+                if (db.SaveChanges() > 0)
+                    return true;
+                return false;
+            }
+        }
+
+        public List<DTO_LoaiHangHoa> search(string str)
+        {
+            using (CellphoneComponentEntities db = new CellphoneComponentEntities())
+            {
+                var result = (from item in db.LoaiHangHoas
+                              where item.MaLoaiHangHoa.Contains(str.ToUpper())
+                              || item.PhanTramLoiNhuan.ToString().Contains(str)
+                              || item.TenLoaiHangHoa.Contains(str)
+                              select new DTO_LoaiHangHoa
+                              {
+                                  MaLoaiHangHoa = item.MaLoaiHangHoa,
+                                  TenLoaiHangHoa = item.TenLoaiHangHoa,
+                                  PhanTramLoiNhuan = item.PhanTramLoiNhuan
+                              }).ToList<DTO_LoaiHangHoa>();
+                return result;
+            }
+        }
+
+        public bool update(DTO_LoaiHangHoa obj)
+        {
+            using (CellphoneComponentEntities db = new CellphoneComponentEntities())
+            {
+                LoaiHangHoa loaiHangHoa = new LoaiHangHoa();
+                loaiHangHoa.MaLoaiHangHoa = obj.MaLoaiHangHoa;
+                loaiHangHoa.TenLoaiHangHoa = obj.TenLoaiHangHoa;
+                loaiHangHoa.PhanTramLoiNhuan = obj.PhanTramLoiNhuan;
+
+                db.LoaiHangHoas.Attach(loaiHangHoa);
+                db.Entry(loaiHangHoa).State = System.Data.Entity.EntityState.Modified;
+                if (db.SaveChanges() > 0)
+                    return true;
+                return false;
+            }
+        }
+
         public string MaLoaiHangHoa { get; set; }
         public string TenLoaiHangHoa { get; set; }
         public Nullable<int> PhanTramLoiNhuan { get; set; }

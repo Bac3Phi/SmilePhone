@@ -11,9 +11,113 @@ namespace DAL
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Linq;
+    using DTO;
+
     public partial class ChiTietPhieuBanHang
     {
+        private static ChiTietPhieuBanHang instance;
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public ChiTietPhieuBanHang()
+        {
+        }
+
+        public static ChiTietPhieuBanHang Instance
+        {
+            get
+            {
+                if (instance == null)
+                    instance = new ChiTietPhieuBanHang();
+                return instance;
+            }
+        }
+
+        public List<DTO_ChiTietPhieuBanHang> showCTPBH(string maPhieuBan)
+        {
+            using (CellphoneComponentEntities db = new CellphoneComponentEntities())
+            {
+                var result = (from item in db.ChiTietPhieuBanHangs
+                              join hh in db.HangHoas on item.MaHangHoa equals hh.MaHangHoa
+                              where item.MaPhieuBanHang.Equals(maPhieuBan)
+                              select new DTO_ChiTietPhieuBanHang
+                              {
+                                  MaPhieuBanHang = item.MaPhieuBanHang,
+                                  MaHangHoa = item.MaHangHoa,
+                                  TenHangHoa = hh.TenHangHoa,
+                                  SoLuong = item.SoLuong,
+                                  Gia = item.Gia,
+                                  ThanhTien = item.ThanhTien,
+                                  MaChiTietPhieuBan = item.MaChiTietPhieuBan
+                              }).ToList();
+                return result;
+            }
+        }
+
+        public bool InsertCTPBH(DTO_ChiTietPhieuBanHang obj)
+        {
+            using (CellphoneComponentEntities db = new CellphoneComponentEntities())
+            {
+                ChiTietPhieuBanHang chiTietPhieuBanHang = new ChiTietPhieuBanHang();
+                chiTietPhieuBanHang.MaChiTietPhieuBan = obj.MaChiTietPhieuBan;
+                chiTietPhieuBanHang.MaPhieuBanHang = obj.MaPhieuBanHang;
+                chiTietPhieuBanHang.MaHangHoa = obj.MaHangHoa;
+                chiTietPhieuBanHang.SoLuong = obj.SoLuong;
+                chiTietPhieuBanHang.Gia = obj.Gia;
+                chiTietPhieuBanHang.ThanhTien = obj.ThanhTien;
+
+                db.ChiTietPhieuBanHangs.Add(chiTietPhieuBanHang);
+                if (db.SaveChanges() > 0)
+                {
+                    return true;
+                }
+                return false;
+            }
+        }
+
+        public bool SaveOrUpdate(DTO_ChiTietPhieuBanHang obj)
+        {
+            using (CellphoneComponentEntities db = new CellphoneComponentEntities())
+            {
+                ChiTietPhieuBanHang chiTietPhieuBanHang = new ChiTietPhieuBanHang();
+                chiTietPhieuBanHang.MaChiTietPhieuBan = obj.MaChiTietPhieuBan;
+                chiTietPhieuBanHang.MaPhieuBanHang = obj.MaPhieuBanHang;
+                chiTietPhieuBanHang.MaHangHoa = obj.MaHangHoa;
+                chiTietPhieuBanHang.SoLuong = obj.SoLuong;
+                chiTietPhieuBanHang.Gia = obj.Gia;
+                chiTietPhieuBanHang.ThanhTien = obj.ThanhTien;
+
+                if (db.ChiTietPhieuBanHangs.Any(e => e.MaChiTietPhieuBan == chiTietPhieuBanHang.MaChiTietPhieuBan))
+                {
+                    db.ChiTietPhieuBanHangs.Attach(chiTietPhieuBanHang);
+                    db.Entry(chiTietPhieuBanHang).State = System.Data.Entity.EntityState.Modified;
+                    if (db.SaveChanges() > 0)
+                        return true;
+                    return false;
+                }
+
+                db.ChiTietPhieuBanHangs.Add(chiTietPhieuBanHang);
+                if (db.SaveChanges() > 0)
+                {
+                    return true;
+                }
+                return false;
+            }
+        }
+
+        public bool DeleteCTPBH(String id)
+        {
+            using (CellphoneComponentEntities db = new CellphoneComponentEntities())
+            {
+                ChiTietPhieuBanHang chiTietPhieuBanHang = (from item in db.ChiTietPhieuBanHangs
+                                             where item.MaChiTietPhieuBan == id
+                                             select item).SingleOrDefault();
+                db.ChiTietPhieuBanHangs.Remove(chiTietPhieuBanHang);
+                if (db.SaveChanges() > 0)
+                    return true;
+                return false;
+            }
+        }
+
         public string MaPhieuBanHang { get; set; }
         public string MaHangHoa { get; set; }
         public Nullable<int> SoLuong { get; set; }

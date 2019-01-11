@@ -8,25 +8,27 @@
              mc:Ignorable="d" 
              d:DesignHeight="550" d:DesignWidth="800">
     <Grid Background="WhiteSmoke">
-        <WrapPanel Margin="0,20,29,0" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" Width="371">
+        <WrapPanel Margin="0,20,10,0" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" Width="248">
             <Button
+                x:Name="btnRefresh"
                 Margin="0,0,10,0"
                 Style="{StaticResource MaterialDesignRaisedButton}"
-                Width="100"
-                ToolTip="Resource name: MaterialDesignRaisedButton" Content="Lưu"/>
+                ToolTip="Resource name: MaterialDesignRaisedButton" Content="Làm mới" Click="BtnRefresh_Click"/>
             <Button
+                x:Name="btnSave"
                 Margin="0,0,10,0"
                 Style="{StaticResource MaterialDesignRaisedButton}"
-                Width="100"
-                ToolTip="Resource name: MaterialDesignRaisedButton" Content="Quay lại"/>
+                ToolTip="Resource name: MaterialDesignRaisedButton" Content="Lưu" Click="BtnSave_Click"/>
             <Button
+                x:Name="btnBack"
+                Margin="0,0,0,0"
                 Style="{StaticResource MaterialDesignRaisedButton}"
-                Width="150"
-                ToolTip="Resource name: MaterialDesignRaisedButton" Content="DS Nhà cung cấp"/>
+                ToolTip="Resource name: MaterialDesignRaisedButton" Content="Quay lại" Click="BtnBack_Click"/>
         </WrapPanel>
         <WrapPanel Margin="84,59,134,16" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
             <WrapPanel Orientation="Vertical" Height="202" Width="150" VerticalAlignment="Top" Margin="0,0,50,0">
                 <Image
+                    x:Name="imageHangHoa"
                     Margin="0,0,0,20"
                     Width="150"
                     Height="150"
@@ -34,26 +36,34 @@
                     HorizontalAlignment="Center"/>
                 <Button x:Name="btnChonHinhAnh"
                     Style="{StaticResource MaterialDesignRaisedLightButton}"
-                    ToolTip="Resource name: MaterialDesignRaisedLightButton" Content="Chọn hình ảnh" Width="150"/>
+                    ToolTip="Resource name: MaterialDesignRaisedLightButton" Content="Chọn hình ảnh" Width="150" Click="BtnChonHinhAnh_Click"/>
             </WrapPanel>
             <WrapPanel Orientation="Vertical" Height="475" Width="366">
                 <TextBox
+                    x:Name="txtTenHangHoa"
                     Margin="0,0,0,5"
                     materialDesign:HintAssist.Hint="Tên hàng hóa"
                     Style="{StaticResource MaterialDesignFloatingHintTextBox}" Height="39" Width="365" />
                 <TextBox
+                    x:Name="txtTenModel"
                     Margin="0,0,0,5"
                     materialDesign:HintAssist.Hint="Tên model"
                     Style="{StaticResource MaterialDesignFloatingHintTextBox}" Height="39" Width="365" />
+                <Grid Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50*"/>
+                        <ColumnDefinition Width="50*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBox x:Name="txtGiaBan" Grid.Column="0" materialDesign:HintAssist.Hint="Giá bán" Margin="0,0,10,0" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                    <TextBox x:Name="txtGiamGia" Grid.Column="1" materialDesign:HintAssist.Hint="Giảm giá" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                </Grid>
                 <TextBox
-                    Margin="0,0,0,5"
-                    materialDesign:HintAssist.Hint="Giá bán"
-                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" Height="39" Width="365" />
-                <TextBox
+                    x:Name="txtDonViTinh"
                     Margin="0,0,0,5"
                     materialDesign:HintAssist.Hint="Đơn vị tính"
                     Style="{StaticResource MaterialDesignFloatingHintTextBox}" Height="39" Width="365" />
                 <TextBox
+                    x:Name="txtMoTa"
                     Margin="0,0,0,5"
                     Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}"
                     VerticalAlignment="Top"
@@ -64,14 +74,17 @@
                     materialDesign:HintAssist.Hint="Mô tả"
                     IsEnabled="{Binding IsChecked, ElementName=MaterialDesignOutlinedTextFieldTextBoxEnabledComboBox}" Width="365" />
                 <TextBox
+                    x:Name="txtXuatXu"
                     Margin="0,0,0,5"
                     materialDesign:HintAssist.Hint="Xuất xứ"
                     Style="{StaticResource MaterialDesignFloatingHintTextBox}" Height="39" Width="365" />
                 <TextBox
+                    x:Name="txtThoiGianBaoHanh"
                     Margin="0,0,0,5"
                     materialDesign:HintAssist.Hint="Thời gian bảo hành"
                     Style="{StaticResource MaterialDesignFloatingHintTextBox}" Height="39" Width="365" />
                 <TextBox
+                    x:Name="txtThongSoKiThuat"
                     Margin="0,0,0,5"
                     Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}"
                     VerticalAlignment="Top"
@@ -82,9 +95,10 @@
                     materialDesign:HintAssist.Hint="Thông số kĩ thuật"
                     IsEnabled="{Binding IsChecked, ElementName=MaterialDesignOutlinedTextFieldTextBoxEnabledComboBox}" Width="365" />
                 <ComboBox
+                    x:Name="cbLoaiHangHoa"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
-                    x:Name="LocaleCombo" Width="366" Height="28">
+                    Width="366" Height="28">
                     <ComboBox.ItemsPanel>
                         <ItemsPanelTemplate>
                             <VirtualizingStackPanel />

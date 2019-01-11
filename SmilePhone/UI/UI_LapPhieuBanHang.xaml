@@ -6,14 +6,21 @@
              xmlns:local="clr-namespace:SmilePhone.UI"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d"
-             d:DesignHeight="550" d:DesignWidth="800">
-    <Grid Background="WhiteSmoke">
+             d:DesignHeight="550" d:DesignWidth="1000"
+             Loaded="Window_Loaded">
+    <Grid Background="WhiteSmoke" Margin="0,0,0,-112">
         <StackPanel Margin="419,20,29,392" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top">
             <Button
+                x:Name="btnRefresh"
+                Margin="0,0,10,0"
+                Style="{StaticResource MaterialDesignRaisedButton}"
+                ToolTip="Resource name: MaterialDesignRaisedButton" Content="Làm mới" Click="BtnRefresh_Click" Height="Auto"/>
+            <Button
+                x:Name="btnSave"
                 Margin="0,0,10,0"
                 Style="{StaticResource MaterialDesignRaisedButton}"
                 Width="100"
-                ToolTip="Resource name: MaterialDesignRaisedButton" Content="Lưu"/>
+                ToolTip="Resource name: MaterialDesignRaisedButton" Content="Lưu" Click="BtnSave_Click"/>
             <Button
                 Margin="0,0,10,0"
                 Style="{StaticResource MaterialDesignRaisedButton}"
@@ -24,55 +31,106 @@
                 Width="100"
                 ToolTip="Resource name: MaterialDesignRaisedButton" Content="Quay lại" Click="btnQuayLai_Click"/>
         </StackPanel>
-        <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10,72,10,48" Width="780">
+        <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10,72,10,10" Width="780">
             <Grid HorizontalAlignment="Left" Width="365" Height="432" Margin="0,0,50,0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition Width="0*"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="215*"/>
-                    <RowDefinition Height="218*"/>
-                </Grid.RowDefinitions>
                 <Label Content="Sản phẩm" FontSize="17" VerticalAlignment="Top" Height="33"/>
                 <ComboBox
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
-                    x:Name="LocaleCombo" Margin="0,33,0,0" Width="365" Height="28">
+                    x:Name="cbSanPham" Margin="0,33,0,0" Width="365" Height="28" SelectionChanged="CbSanPham_SelectionChanged">
                     <ComboBox.ItemsPanel>
                         <ItemsPanelTemplate>
                             <VirtualizingStackPanel />
                         </ItemsPanelTemplate>
                     </ComboBox.ItemsPanel>
                 </ComboBox>
-                <DataGrid
-                    Margin="0,79,0,0"
-                    ItemsSource="{Binding Items3}"
-                    CanUserSortColumns="True"
-                    CanUserAddRows="False" Grid.RowSpan="2"/>
+                <Grid Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50*"/>
+                        <ColumnDefinition Width="50*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBox x:Name="txtSoLuong" Grid.Column="0" materialDesign:HintAssist.Hint="Số lượng" Margin="0,68,10,328" Style="{StaticResource MaterialDesignFloatingHintTextBox}" TextChanged="TxtSoLuong_TextChanged" />
+                    <TextBox x:Name="txtGiaNhap" Grid.Column="1" materialDesign:HintAssist.Hint="Giá Nhập" Margin="10,68,0,328" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                </Grid>
+                <TextBox x:Name="txtThanhTien" Grid.Column="0" materialDesign:HintAssist.Hint="Thành Tiền" Margin="0,113,193,283" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                <Button
+                x:Name="btnAdd"
+                Margin="196,126,88,270"
+                Style="{StaticResource MaterialDesignRaisedButton}"
+                ToolTip="Resource name: MaterialDesignRaisedButton" Content="Thêm" Click="BtnAdd_Click" Height="Auto"/>
+                <Button
+                x:Name="btnUpdate"
+                Margin="282,126,0,270"
+                IsEnabled="False"
+                Style="{StaticResource MaterialDesignRaisedButton}"
+                ToolTip="Resource name: MaterialDesignRaisedButton" Content="Sửa" Height="Auto" Click="BtnUpdate_Click"/>
+
+                <DataGrid 
+                    x:Name="dgvChiTietPhieuBanHang" 
+                    SelectionUnit="FullRow" 
+                    SelectionMode="Extended" 
+                    CanUserSortColumns="True" 
+                    AutoGenerateColumns="False" 
+                    CanUserAddRows="false" 
+                    IsEnabled="True"
+                    IsReadOnly="True"
+                    EnableRowVirtualization="True" 
+                    Width="auto"
+                    Margin="0,180,0,0" 
+                    RowDetailsVisibilityMode="VisibleWhenSelected" SelectionChanged="DgvChiTietPhieuBanHang_SelectionChanged">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn x:Name="MaSanPhamCol" Binding="{Binding MaHangHoa}" Header="Mã sản phẩm" Width="Auto"/>
+                        <DataGridTextColumn x:Name="TenSanPhamCol" Binding="{Binding TenHangHoa}" Header="Tên sản phẩm" Width="Auto"/>
+                        <DataGridTextColumn x:Name="DonGiaCol" Binding="{Binding Gia}" Header="Đơn giá" Width="Auto"/>
+                        <DataGridTextColumn x:Name="SoLuongCol" Binding="{Binding SoLuong}" Header="Số lượng" Width="Auto"/>
+                        <DataGridTextColumn x:Name="ThanhTienCol" Binding="{Binding ThanhTien}" Header="Thành tiền" Width="Auto"/>
+                        <DataGridTemplateColumn>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <ToggleButton Grid.Column="0" Height="15"
+                                                Style="{StaticResource MaterialDesignFlatToggleButton}"
+                                                ToolTip="MaterialDesignFlatToggleButton" 
+                                                Click="btnDelete_Click" >
+                                            <materialDesign:PackIcon
+                                                Kind="Delete"/>
+                                        </ToggleButton>
+                                    </Grid>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
             </Grid>
-            <WrapPanel Orientation="Vertical" Height="426" Width="365" HorizontalAlignment="Right">
-                <TextBox
+            <WrapPanel Orientation="Vertical" Height="473" Width="365" HorizontalAlignment="Right">
+                <TextBox x:Name="txtMaPhieuBanHang"
                     Margin="0,20,0,10"
                     materialDesign:HintAssist.Hint="Số phiếu"
                     Style="{StaticResource MaterialDesignFloatingHintTextBox}" Height="39" Width="365" />
-                <DatePicker
+                <DatePicker x:Name="dpNgayLap"
                     Margin="0,0,0,10"
                     materialDesign:HintAssist.Hint="Ngày lập"
                     Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Height="42" Width="365" />
-                <TextBox
+                <DatePicker x:Name="dpNgayChinhSua"
+                    Margin="0,0,0,10"
+                    materialDesign:HintAssist.Hint="Ngày chỉnh sửa"
+                    Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Height="42" Width="365" />
+                <TextBox x:Name="txtTenNhanVien"
                     Margin="0,0,0,10"
                     materialDesign:HintAssist.Hint="Nhân viên"
                     Style="{StaticResource MaterialDesignFloatingHintTextBox}" Height="38" Width="364" />
-                <TextBox
+                <TextBox x:Name="txtTenKhachHang"
                     Margin="0,0,0,10"
                     materialDesign:HintAssist.Hint="Khách hàng"
                     Style="{StaticResource MaterialDesignFloatingHintTextBox}" Height="38" Width="365" />
-                <TextBox
+                <TextBox x:Name="txtSoDienThoai"
                     Margin="0,0,0,20"
                     materialDesign:HintAssist.Hint="Số điện thoại"
                     Style="{StaticResource MaterialDesignFloatingHintTextBox}" RenderTransformOrigin="0.5,0.5" Height="39" Width="363" />
-                <TextBox
+                <TextBox x:Name="txtGhiChu"
                     Margin="0,0,0,10"
                     Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}"
                     VerticalAlignment="Top"
@@ -82,7 +140,7 @@
                     VerticalScrollBarVisibility="Auto"
                     materialDesign:HintAssist.Hint="Ghi chú"
                     IsEnabled="{Binding IsChecked, ElementName=MaterialDesignOutlinedTextFieldTextBoxEnabledComboBox}" Width="365" />
-                <TextBox
+                <TextBox x:Name="txtTongTien"
                     VerticalAlignment="Bottom"
                     Margin="0,0,0,10"
                     materialDesign:HintAssist.Hint="Tổng tiền"
@@ -91,6 +149,5 @@
             </WrapPanel>
 
         </WrapPanel>
-
     </Grid>
 </UserControl>
