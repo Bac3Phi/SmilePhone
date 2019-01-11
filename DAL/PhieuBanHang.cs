@@ -96,6 +96,31 @@ namespace DAL
             }
         }
 
+        public bool update(DTO_PhieuBanHang obj)
+        {
+            using (CellphoneComponentEntities db = new CellphoneComponentEntities())
+            {
+                var result = db.Database
+                    .SqlQuery<String>("select MaNhanVien from dbo.NhanVien where TenNhanVien = N'" + obj.TenNhanVien + "'")
+                    .FirstOrDefault();
+                PhieuBanHang phieuBanHang = new PhieuBanHang();
+                phieuBanHang.MaPhieuBanHang = obj.MaPhieuBanHang;
+                phieuBanHang.NgayBan = obj.NgayBan;
+                phieuBanHang.MaNhanVien = result;
+                phieuBanHang.TenKhachHang = obj.TenKhachHang;
+                phieuBanHang.SoDienThoai = obj.SoDienThoai;
+                phieuBanHang.TongTien = obj.TongTien;
+                phieuBanHang.GhiChu = obj.GhiChu;
+                phieuBanHang.NgayChinhSua = obj.NgayChinhSua;
+
+                db.PhieuBanHangs.Attach(phieuBanHang);
+                db.Entry(phieuBanHang).State = System.Data.Entity.EntityState.Modified;
+                if (db.SaveChanges() > 0)
+                    return true;
+                return false;
+            }
+        }
+
         public bool DeletePBH(String id)
         {
             using (CellphoneComponentEntities db = new CellphoneComponentEntities())

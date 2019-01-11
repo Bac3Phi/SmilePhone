@@ -26,6 +26,7 @@ namespace SmilePhone.UI
         private bool isNew = false;
         private DTO_PhieuBanHang item = new DTO_PhieuBanHang();
         private List<DTO_ChiTietPhieuBanHang> listHangHoa = new List<DTO_ChiTietPhieuBanHang>();
+        private List<DTO_ChiTietPhieuBanHang> deleteList = new List<DTO_ChiTietPhieuBanHang>();
 
         public UI_LapPhieuBanHang()
         {
@@ -52,6 +53,7 @@ namespace SmilePhone.UI
             txtTongTien.Text = obj.TongTien.ToString();
             isNew = false;
             loadCombobox();
+            loadChiTiet(obj.MaPhieuBanHang);
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -83,6 +85,12 @@ namespace SmilePhone.UI
             cbSanPham.ItemsSource = BUS_HangHoa.showData();
             cbSanPham.DisplayMemberPath = "TenHangHoa";
             cbSanPham.SelectedValuePath = "MaHangHoa";
+        }
+
+        private void loadChiTiet(string maPhieuBan)
+        {
+            listHangHoa = BUS_ChiTietPhieuBanHang.showData(maPhieuBan);
+            dgvChiTietPhieuBanHang.ItemsSource = listHangHoa;
         }
 
         private void generatePhieuBanHangID()
@@ -123,8 +131,45 @@ namespace SmilePhone.UI
                             }
                         }
                         MessageBox.Show("Thêm mới thành công!");
+                        Refresh();
                     }
                     else MessageBox.Show("Thêm mới thất bại!");
+                }
+                else
+                {
+                    MessageBox.Show("Hãy điền tất cả các ô còn trống!!!");
+                }
+            }
+            else
+            {
+                if (dpNgayLap.SelectedDate != null && txtTenKhachHang.Text != ""
+                    && txtSoDienThoai.Text != "")
+                {
+                    getDataFromUI();
+
+                    if (BUS_PhieuBanHang.Instance.Update(item))
+                    {
+                        foreach (DTO_ChiTietPhieuBanHang item in listHangHoa)
+                        {
+                            if (item.MaChiTietPhieuBan == "")
+                                item.MaChiTietPhieuBan = generateChiTietPhieuBanHangID();
+                            if (!BUS_ChiTietPhieuBanHang.Instance.SaveOrUpdateCTPBH(item))
+                            {
+                                MessageBox.Show("Sửa thất bại!");
+                                return;
+                            }
+                        }
+                        foreach (DTO_ChiTietPhieuBanHang item in deleteList)
+                        {
+                            if (!BUS_ChiTietPhieuBanHang.Instance.Delete(item.MaChiTietPhieuBan))
+                            {
+                                MessageBox.Show("Sửa thất bại!");
+                                return;
+                            }
+                        }
+                        MessageBox.Show("Sửa thành công!");
+                    }
+                    else MessageBox.Show("Sửa thất bại!");
                 }
                 else
                 {
@@ -147,6 +192,11 @@ namespace SmilePhone.UI
 
         private void BtnRefresh_Click(object sender, RoutedEventArgs e)
         {
+            Refresh();
+        }
+
+        private void Refresh()
+        {
             generatePhieuBanHangID();
             dpNgayLap.SelectedDate = DateTime.Today;
             dpNgayChinhSua.SelectedDate = DateTime.Today;
@@ -162,6 +212,15 @@ namespace SmilePhone.UI
             txtThanhTien.Text = "";
             listHangHoa.Clear();
             dgvChiTietPhieuBanHang.ItemsSource = null;
+            btnUpdate.IsEnabled = false;
+        }
+
+        private void RefreshChiTiet()
+        {
+            cbSanPham.SelectedIndex = -1;
+            txtSoLuong.Text = "";
+            txtGiaNhap.Text = "";
+            txtThanhTien.Text = "";
         }
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
@@ -173,6 +232,7 @@ namespace SmilePhone.UI
                 {
                     DTO_ChiTietPhieuBanHang obj = dgvChiTietPhieuBanHang.SelectedItem as DTO_ChiTietPhieuBanHang;
                     listHangHoa.Remove(obj);
+                    deleteList.Add(obj);
                     dgvChiTietPhieuBanHang.ItemsSource = null;
                     dgvChiTietPhieuBanHang.ItemsSource = listHangHoa;
                 }
@@ -200,6 +260,7 @@ namespace SmilePhone.UI
             }           
             dgvChiTietPhieuBanHang.ItemsSource = null;
             dgvChiTietPhieuBanHang.ItemsSource = listHangHoa;
+            RefreshChiTiet();
         }
 
         private bool checkContain(string maHangHoa)
@@ -214,6 +275,7 @@ namespace SmilePhone.UI
 
         private void CbSanPham_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            btnUpdate.IsEnabled = false;
             if (cbSanPham.SelectedValue != null)
             {
                 txtGiaNhap.Text = BUS_HangHoa.Instance.getGiaBan(cbSanPham.SelectedValue.ToString()).ToString();
@@ -233,6 +295,34 @@ namespace SmilePhone.UI
         private void TxtSoLuong_TextChanged(object sender, TextChangedEventArgs e)
         {
             TinhTongTien();
+        }
+
+        private void DgvChiTietPhieuBanHang_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            DTO_ChiTietPhieuBanHang chiTietPhieuBanHang = dgvChiTietPhieuBanHang.SelectedItem as DTO_ChiTietPhieuBanHang;
+            if (chiTietPhieuBanHang != null)
+            {
+                cbSanPham.SelectedValue = chiTietPhieuBanHang.MaHangHoa;
+
+                txtSoLuong.Text = chiTietPhieuBanHang.SoLuong.ToString();
+                txtGiaNhap.Text = chiTietPhieuBanHang.Gia.ToString();
+                txtThanhTien.Text = chiTietPhieuBanHang.ThanhTien.ToString();
+
+                btnUpdate.IsEnabled = true;
+            }
+        }
+
+        private void BtnUpdate_Click(object sender, RoutedEventArgs e)
+        {
+            DTO_ChiTietPhieuBanHang obj = listHangHoa.FirstOrDefault(x => x.MaHangHoa == cbSanPham.SelectedValue.ToString());
+            if (obj != null)
+            {
+                obj.SoLuong = int.Parse(txtSoLuong.Text);
+                obj.ThanhTien = decimal.Parse(txtThanhTien.Text);
+            }
+            dgvChiTietPhieuBanHang.ItemsSource = null;
+            dgvChiTietPhieuBanHang.ItemsSource = listHangHoa;
+            RefreshChiTiet();
         }
     }
 }

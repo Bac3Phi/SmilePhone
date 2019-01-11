@@ -55,9 +55,15 @@
                 <TextBox x:Name="txtThanhTien" Grid.Column="0" materialDesign:HintAssist.Hint="Thành Tiền" Margin="0,113,193,283" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
                 <Button
                 x:Name="btnAdd"
-                Margin="196,126,0,270"
+                Margin="196,126,88,270"
                 Style="{StaticResource MaterialDesignRaisedButton}"
                 ToolTip="Resource name: MaterialDesignRaisedButton" Content="Thêm" Click="BtnAdd_Click" Height="Auto"/>
+                <Button
+                x:Name="btnUpdate"
+                Margin="282,126,0,270"
+                IsEnabled="False"
+                Style="{StaticResource MaterialDesignRaisedButton}"
+                ToolTip="Resource name: MaterialDesignRaisedButton" Content="Sửa" Height="Auto" Click="BtnUpdate_Click"/>
 
                 <DataGrid 
                     x:Name="dgvChiTietPhieuBanHang" 
@@ -70,8 +76,8 @@
                     IsReadOnly="True"
                     EnableRowVirtualization="True" 
                     Width="auto"
-                    Margin="0,185,0,0" 
-                    RowDetailsVisibilityMode="VisibleWhenSelected">
+                    Margin="0,180,0,0" 
+                    RowDetailsVisibilityMode="VisibleWhenSelected" SelectionChanged="DgvChiTietPhieuBanHang_SelectionChanged">
                     <DataGrid.Columns>
                         <DataGridTextColumn x:Name="MaSanPhamCol" Binding="{Binding MaHangHoa}" Header="Mã sản phẩm" Width="Auto"/>
                         <DataGridTextColumn x:Name="TenSanPhamCol" Binding="{Binding TenHangHoa}" Header="Tên sản phẩm" Width="Auto"/>

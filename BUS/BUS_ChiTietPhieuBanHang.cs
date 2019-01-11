@@ -24,9 +24,24 @@ namespace BUS
             }
         }
 
+        public static List<DTO_ChiTietPhieuBanHang> showData(string maPhieuBan)
+        {
+            return ChiTietPhieuBanHang.Instance.showCTPBH(maPhieuBan);
+        }
+
         public bool InsertCTPBH(DTO_ChiTietPhieuBanHang obj)
         {
             return ChiTietPhieuBanHang.Instance.InsertCTPBH(obj);
+        }
+
+        public bool SaveOrUpdateCTPBH(DTO_ChiTietPhieuBanHang obj)
+        {
+            return ChiTietPhieuBanHang.Instance.SaveOrUpdate(obj);
+        }
+
+        public bool Delete(String id)
+        {
+            return ChiTietPhieuBanHang.Instance.DeleteCTPBH(id);
         }
 
         public String generateAutoID()

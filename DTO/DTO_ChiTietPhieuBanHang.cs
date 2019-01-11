@@ -20,7 +20,6 @@ namespace DTO
         }
         public DTO_ChiTietPhieuBanHang()
         {
-
         }
 
         public DTO_ChiTietPhieuBanHang(string maPhieuBanHang, string maHangHoa, string tenHangHoa ,int? soLuong, decimal? gia, decimal? thanhTien, string maChiTietPhieuBan)

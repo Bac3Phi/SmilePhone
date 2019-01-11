@@ -44,6 +44,11 @@ namespace BUS
             return PhieuBanHang.Instance.DeletePBH(id);
         }
 
+        public bool Update(DTO_PhieuBanHang obj)
+        {
+            return PhieuBanHang.Instance.update(obj);
+        }
+
         public List<DTO_PhieuBanHang> SearchData(String str)
         {
             return PhieuBanHang.Instance.SearchPBH(str);
