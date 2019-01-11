@@ -57,6 +57,29 @@ namespace DAL
             }
         }
 
+        public bool isAbleToDelete(String id)
+        {
+            bool result;
+            using (CellphoneComponentEntities db = new CellphoneComponentEntities())
+            {
+                String queryImport = "select MaPhieuNhap from dbo.PhieuNhap where MaNhaCungcap = '" + id + "'";
+                String queryOrder = "select MaPhieuDatHang from dbo.PhieuDatHang where MaNhaCungcap = '" + id + "'";
+                var resImport = db.Database
+                    .SqlQuery<String>(queryImport)
+                    .FirstOrDefault();
+                var resOrder = db.Database
+                    .SqlQuery<String>(queryOrder)
+                    .FirstOrDefault();
+
+                if (resOrder == null && resImport == null)
+                    result = true;
+                else 
+                    result = false;
+               
+                return result;
+            }
+        }
+
         public void InsertNCC(DTO_NhaCungCap obj)
         {
             using (CellphoneComponentEntities db = new CellphoneComponentEntities())
@@ -83,7 +106,7 @@ namespace DAL
                 this.SoDienThoai = obj.SoDienThoai;
 
                 db.NhaCungCaps.Attach(this);
-                db.Entry(obj).State = System.Data.Entity.EntityState.Modified;
+                db.Entry(this).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
             }
         }

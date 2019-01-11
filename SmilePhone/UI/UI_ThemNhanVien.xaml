@@ -41,12 +41,12 @@
                 <ColumnDefinition Width="5*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <TextBox x:Name="txtEmployeesID" Grid.Column="0" materialDesign:HintAssist.Hint="Mã nhân viên" Margin="10" Style="{StaticResource MaterialDesignFloatingHintTextBox}" IsReadOnly="True" />
+            <TextBox x:Name="txtEmployeesID" Grid.Column="0" materialDesign:HintAssist.Hint="Mã nhân viên" MaxLength="10" Margin="10" Style="{StaticResource MaterialDesignFloatingHintTextBox}" IsReadOnly="True" />
             <ToggleButton x:Name="btnVisible" Grid.Column="1" Style="{StaticResource MaterialDesignSwitchToggleButton}" ToolTip="MaterialDesignSwitchToggleButton"/>
-        </Grid>        
-        <TextBox x:Name="txtEmployeesName" Grid.Row="2" materialDesign:HintAssist.Hint="Tên nhân viên" Margin="10" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
-        <TextBox x:Name="txtEmployeesUserName" Grid.Row="3" materialDesign:HintAssist.Hint="Username" Margin="10" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
-        <PasswordBox x:Name="txtEmployeesPass" Grid.Row="4" materialDesign:HintAssist.Hint="Password" Margin="10" />
+        </Grid>
+        <TextBox x:Name="txtEmployeesName" Grid.Row="2" materialDesign:HintAssist.Hint="Tên nhân viên" MaxLength="50" Margin="10" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+        <TextBox x:Name="txtEmployeesUserName" Grid.Row="3" materialDesign:HintAssist.Hint="Username" MaxLength="50" Margin="10" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+        <PasswordBox x:Name="txtEmployeesPass" Grid.Row="4" materialDesign:HintAssist.Hint="Password" MaxLength="50" Margin="10" />
         <ComboBox x:Name="cbbPermissionName" Grid.Row="5" SelectedValuePath="TenPhanQuyen" DisplayMemberPath="TenPhanQuyen" Margin="10" materialDesign:HintAssist.Hint="Tên phân quyền" IsEditable="True" Style="{StaticResource MaterialDesignFloatingHintComboBox}" />
     </Grid>
 </UserControl>

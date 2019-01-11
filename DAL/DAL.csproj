@@ -105,7 +105,7 @@
     <Compile Include="PhieuBanHang.cs">
       <DependentUpon>CellphoneComponentEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="PhieuBaoHang.cs">
+    <Compile Include="PhieuBaoHanh.cs">
       <DependentUpon>CellphoneComponentEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="PhieuChi.cs">

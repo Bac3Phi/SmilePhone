@@ -12,7 +12,7 @@ namespace DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class PhieuBaoHang
+    public partial class PhieuBaoHanh
     {
         public string MaPhieuBaoHanh { get; set; }
         public Nullable<System.DateTime> NgayLap { get; set; }
@@ -24,8 +24,9 @@ namespace DAL
         public string GhiChu { get; set; }
         public Nullable<bool> DaGiao { get; set; }
         public Nullable<System.DateTime> NgayChinhSua { get; set; }
-        public string TenModel { get; set; }
+        public string MaHangHoa { get; set; }
     
+        public virtual HangHoa HangHoa { get; set; }
         public virtual NhanVien NhanVien { get; set; }
     }
 }
