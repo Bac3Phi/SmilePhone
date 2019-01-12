@@ -1,0 +1,124 @@
+﻿<UserControl x:Class="SmilePhone.UI.UI_PhieuBaoHanh"
+
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:local="clr-namespace:SmilePhone.UI"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid Background="WhiteSmoke">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.58*" />
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0" Content="Danh sách Phiếu Bảo Hành" FontFamily="Segoe UI Semibold" FontSize="18" Padding="10" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+            <Button Grid.Column="1" Style="{StaticResource MaterialDesignRaisedButton}" Margin="10,5,10,5" Width="100" ToolTip="Resource name: MaterialDesignRaisedButton"
+                    Click="btnLapPhieu_Click">
+                Lập Phiếu
+            </Button>
+            <Button Grid.Column="2" Style="{StaticResource MaterialDesignRaisedButton}" Margin="10,5,10,5" Width="100" ToolTip="Resource name: MaterialDesignRaisedButton"
+                    Click="btnRefresh_Click">
+                Làm mới
+            </Button>
+        </Grid>
+        <Grid Grid.Row="1" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <DatePicker x:Name="dpFromPC" Grid.Column="0" Width="250" SelectedDateChanged="onFromDateChanged" materialDesign:HintAssist.Hint="Từ ngày" Margin="30,5,10,5" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+            <DatePicker x:Name="dpToPC" Grid.Column="1" Width="250" SelectedDateChanged="onToDateChanged" materialDesign:HintAssist.Hint="Đến ngày" Margin="10,5,10,5" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+            <Button Grid.Column="2" Style="{StaticResource MaterialDesignRaisedButton}" Margin="10,5,10,5" Width="100" ToolTip="Resource name: MaterialDesignRaisedButton"
+                    Click="btnSearchDate_Click">
+                Tìm
+            </Button>
+        </Grid>
+        <Grid Grid.Row="2" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <ComboBox Grid.Column="0" x:Name="cbbTrangThai" SelectedValuePath="Tag" Height="45" Width="150" Margin="30,5,10,5" materialDesign:HintAssist.Hint="Trạng Thái" Style="{StaticResource MaterialDesignFloatingHintComboBox}" DropDownClosed="cbbTrangThai_DropDownClosed">
+                <ComboBoxItem Tag="2">Tất Cả</ComboBoxItem>
+                <ComboBoxItem Tag="1">Đã Giao</ComboBoxItem>
+                <ComboBoxItem Tag="0">Chưa Giao</ComboBoxItem>
+            </ComboBox>
+            <TextBox x:Name="txtSearch" Grid.Column="1" TextChanged="TxtSearchText_TextChanged" materialDesign:HintAssist.Hint="Tìm kiếm" Height="45" Width="330" Margin="30,5,10,5" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+            <RepeatButton Grid.Column="2" Width="100" ToolTip="Resource name: MaterialDesignRaisedButton" Margin="10,5,10,5"
+                          Click="btnSearchStr_Click">
+                Tìm
+            </RepeatButton>
+        </Grid>
+        <DataGrid 
+            x:Name="dgvPhieuBaoHanh" 
+            Grid.Row="3" 
+            SelectionUnit="FullRow" 
+            SelectionMode="Extended" 
+            CanUserSortColumns="True" 
+            AutoGenerateColumns="False" 
+            CanUserAddRows="false" 
+            IsEnabled="True"
+            IsReadOnly="True"
+            EnableRowVirtualization="True" 
+            Width="auto"
+            Margin="10,10,10,10" 
+            ScrollViewer.CanContentScroll="True" 
+            ScrollViewer.VerticalScrollBarVisibility="Auto"
+            ScrollViewer.HorizontalScrollBarVisibility="Auto"
+            materialDesign:DataGridAssist.ColumnHeaderPadding="8"
+            RowDetailsVisibilityMode="VisibleWhenSelected">
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="MaPhieuNhapCol" Binding="{Binding MaPhieuBaoHanh}" Header="Mã Phiếu Bảo Hành" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="NgayLapCol" Binding="{Binding NgayLap, StringFormat=\{0:dd.MM.yy\}}" Header="Ngày Lập" Width="Auto"/>
+                <DataGridTextColumn x:Name="NgayGiaoCol" Binding="{Binding NgayGiao, StringFormat=\{0:dd.MM.yy\}}" Header="Ngày Giao" Width="Auto"/>
+                <DataGridTextColumn x:Name="HangHoaCol" Binding="{Binding TenHangHoa}" Header="Hàng Hóa" Width="Auto"/>
+                <DataGridTextColumn x:Name="MaNhanVienCol" Binding="{Binding TenNhanVien}" Header="Nhân Viên" Width="Auto"/>
+                <DataGridTextColumn x:Name="TenKhachHangCol" Binding="{Binding TenKhachHang}" Header="Tên Khách Hàng" Width="Auto"/>
+                <DataGridTextColumn x:Name="SoDienThoaiCol" Binding="{Binding SoDienThoai}" Header="Số Điện Thoại" Width="Auto"/>
+                <DataGridTextColumn x:Name="TongTienCol" Binding="{Binding TongTien}" Header="Tổng Tiền" Width="Auto"/>
+                <DataGridCheckBoxColumn x:Name="DaGiaoCol" Header="Đã Giao" Width="Auto" Binding="{Binding DaGiao}" ElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnStyle}" EditingElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnEditingStyle}">
+                </DataGridCheckBoxColumn>
+                    <DataGridTextColumn x:Name="GhiChuCol" Binding="{Binding GhiChu}" Header="Ghi Chú" Width="Auto"/>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <ToggleButton Grid.Column="1" Height="15"
+                                Style="{StaticResource MaterialDesignFlatToggleButton}"
+                                ToolTip="MaterialDesignFlatToggleButton" 
+                                Click="btnEdit_Click" >
+                                    <materialDesign:PackIcon
+                                    Kind="Edit"/>
+                                </ToggleButton>
+                                <ToggleButton Grid.Column="2" Height="15"
+                                Style="{StaticResource MaterialDesignFlatToggleButton}"
+                                ToolTip="MaterialDesignFlatToggleButton" 
+                                Click="btnDelete_Click" >
+                                    <materialDesign:PackIcon
+                                    Kind="DeleteForever"/>
+                                </ToggleButton>
+                            </Grid>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>

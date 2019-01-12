@@ -116,6 +116,9 @@
     <Compile Include="UI\UI_NhanVien.xaml.cs">
       <DependentUpon>UI_NhanVien.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\UI_PhieuBaoHanh.xaml.cs">
+      <DependentUpon>UI_PhieuBaoHanh.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\UI_PhieuNhap.xaml.cs">
       <DependentUpon>UI_PhieuNhap.xaml</DependentUpon>
     </Compile>
@@ -130,6 +133,9 @@
     </Compile>
     <Compile Include="UI\UI_PhieuChi.xaml.cs">
       <DependentUpon>UI_PhieuChi.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\UI_ThemPhieuBaoHanh.xaml.cs">
+      <DependentUpon>UI_ThemPhieuBaoHanh.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\UI_ThemPhieuChi.xaml.cs">
       <DependentUpon>UI_ThemPhieuChi.xaml</DependentUpon>
@@ -192,6 +198,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UI\UI_PhieuBaoHanh.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UI\UI_PhieuNhap.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -209,6 +219,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\UI_PhieuChi.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\UI_ThemPhieuBaoHanh.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
