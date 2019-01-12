@@ -54,26 +54,43 @@ namespace SmilePhone.UI
 
         private void btnEdit_Click(object sender, RoutedEventArgs e)
         {
-            UserControl usc = new UI_ThemHangHoa(dgvHangHoa.SelectedItem as DTO_HangHoa);
-            UI_ManHinhChinh.gridMain.Children.Clear();
-            UI_ManHinhChinh.gridMain.Children.Add(usc);
+            if (dgvHangHoa.SelectedItem != null)
+            {
+                DTO_HangHoa obj = new DTO_HangHoa();
+                obj = dgvHangHoa.SelectedItem as DTO_HangHoa;
+                if (obj.TrangThai == true)
+                {
+                    UserControl usc = new UI_ThemHangHoa(dgvHangHoa.SelectedItem as DTO_HangHoa);
+                    UI_ManHinhChinh.gridMain.Children.Clear();
+                    UI_ManHinhChinh.gridMain.Children.Add(usc);
+                }
+                else
+                {
+                    MessageBox.Show("Mặt hàng đã ngừng kinh doanh!");
+                }
+            }
         }
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult result = MessageBox.Show("Bạn có muốn xóa dòng này?", "Confirmation", MessageBoxButton.YesNo);
-            if (result == MessageBoxResult.Yes)
+            if (dgvHangHoa.SelectedItem != null)
             {
-                if (dgvHangHoa.SelectedItem != null)
+                DTO_HangHoa obj = new DTO_HangHoa();
+                obj = dgvHangHoa.SelectedItem as DTO_HangHoa;
+                if (obj.TrangThai == true)
                 {
-                    DTO_HangHoa obj = new DTO_HangHoa();
-                    obj = dgvHangHoa.SelectedItem as DTO_HangHoa;
-                    String id = obj.MaHangHoa;
-
-                    BUS_HangHoa.Delete(id);
-                    dgvHangHoa.ItemsSource = BUS_HangHoa.showData();
-
+                    MessageBoxResult result = MessageBox.Show("Bạn muốn ngừng kinh doanh mặt hàng này?", "Confirmation", MessageBoxButton.YesNo);
+                    if (result == MessageBoxResult.Yes)
+                    {
+                           BUS_HangHoa.Delete(obj);
+                           dgvHangHoa.ItemsSource = BUS_HangHoa.showData();
+                    }
                 }
+                else
+                {
+                    BUS_HangHoa.Delete(obj);
+                    dgvHangHoa.ItemsSource = BUS_HangHoa.showData();
+                }              
             }
         }
 

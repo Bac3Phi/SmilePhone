@@ -37,6 +37,7 @@ namespace DTO
         public string HinhAnh { get; set; }
         public string TenLoaiHangHoa { get; set; }
         public Nullable<bool> TrangThai { get; set; }
+        public string strTrangThai { get; set; }
         public string TenModel { get; set; }
     }
 }

@@ -74,7 +74,7 @@
                 <DataGridTextColumn x:Name="SoLuongTonCol" Binding="{Binding SoLuongTon}" Header="Số lượng tồn" Width="Auto"/>
                 <DataGridTextColumn x:Name="DonViTinhCol" Binding="{Binding DonViTinh}" Header="Đơn vị tính" Width="Auto"/>
                 <DataGridTextColumn x:Name="LoaiHangHoaCol" Binding="{Binding TenLoaiHangHoa}" Header="Loại hàng hóa" Width="Auto"/>
-                <DataGridTextColumn x:Name="TrangThaiCol" Binding="{Binding TrangThai}" Header="Trạng thái" Width="Auto"/>
+                <DataGridTextColumn x:Name="TrangThaiCol" Binding="{Binding strTrangThai}" Header="Trạng thái" Width="Auto"/>
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
@@ -84,14 +84,18 @@
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
-                                <ToggleButton Grid.Column="1" Height="15"
+                                <ToggleButton 
+                                    x:Name="btnEdit"
+                                    Grid.Column="1" Height="15"
                                 Style="{StaticResource MaterialDesignFlatToggleButton}"
                                 ToolTip="MaterialDesignFlatToggleButton" 
                                 Click="btnEdit_Click" >
                                     <materialDesign:PackIcon
                                     Kind="Edit"/>
                                 </ToggleButton>
-                                <ToggleButton Grid.Column="2" Height="15"
+                                <ToggleButton 
+                                    x:Name="btnDelete"
+                                    Grid.Column="2" Height="15"
                                 Style="{StaticResource MaterialDesignFlatToggleButton}"
                                 ToolTip="MaterialDesignFlatToggleButton" 
                                 Click="btnDelete_Click" >

@@ -34,9 +34,9 @@ namespace BUS
             return HangHoa.Instance.showHH();
         }
 
-        public static bool Delete(String id)
+        public static bool Delete(DTO_HangHoa obj)
         {
-            return HangHoa.Instance.DeleteHH(id);
+            return HangHoa.Instance.DeleteHH(obj);
         }
 
         public bool Insert(DTO_HangHoa obj)
