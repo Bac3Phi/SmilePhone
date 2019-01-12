@@ -113,14 +113,8 @@ namespace SmilePhone.UI
                 if (dgvSuppliers.SelectedItem != null)
                 {
                     DTO_NhaCungCap obj = dgvSuppliers.SelectedItem as DTO_NhaCungCap;
-                    bool checkDel = BUS_NhaCungCap.Instance.isAbleToDelete(obj.MaNhaCungCap);
-                    if (checkDel == true)
-                    {
-                        BUS_NhaCungCap.DeleteNCC(obj);
-                        dgvSuppliers.ItemsSource = BUS_NhaCungCap.showData();
-                    }
-                    else
-                        MessageBox.Show("Nhà cung cấp này đang được sử dụng !");
+                    BUS_NhaCungCap.DeleteNCC(obj);
+                    dgvSuppliers.ItemsSource = BUS_NhaCungCap.showData();
                 }
             }
         }
