@@ -20,71 +20,70 @@ using DTO;
 namespace SmilePhone.UI
 {
     /// <summary>
-    /// Interaction logic for UI_PhieuNhap.xaml
+    /// Interaction logic for UI_PhieuBaoHanh.xaml
     /// </summary>
-    public partial class UI_PhieuNhap : UserControl
+    public partial class UI_PhieuBaoHanh : UserControl
     {
         private Grid gridMain;
         private bool isRefreshing = false;
-        public UI_PhieuNhap(Grid gridMain)
+        private bool isMergeCondition = false;
+        private bool daGiao;
+        public UI_PhieuBaoHanh(Grid gridMain)
         {
             InitializeComponent();
             this.gridMain = gridMain;
-            dgvStockImport.ItemsSource = BUS_PhieuNhap.showData();
+            dgvPhieuBaoHanh.ItemsSource = BUS_PhieuBaoHanh.showData();
             dpFromPC.SelectedDate = DateTime.Today.AddDays(0);
             dpToPC.SelectedDate = DateTime.Today.AddDays(0);
         }
 
+
         private void TxtSearchText_TextChanged(object sender, TextChangedEventArgs e)
         {
-            Helper.FindListViewItem(dgvStockImport,txtSearch.Text);
+            Helper.FindListViewItem(dgvPhieuBaoHanh, txtSearch.Text);
         }
-        
+
         private void btnSearchStr_Click(object sender, RoutedEventArgs e)
         {
-            string searchStr = txtSearch.Text;
-            dgvStockImport.ItemsSource = BUS_PhieuNhap.Instance.searchData(searchStr);
+            String searchStr = txtSearch.Text;
+            dgvPhieuBaoHanh.ItemsSource = BUS_PhieuBaoHanh.Instance.searchData(searchStr, isMergeCondition, daGiao);
         }
 
         private void btnSearchDate_Click(object sender, RoutedEventArgs e)
         {
             DateTime fromPC = dpFromPC.SelectedDate.Value;
             DateTime toPC = dpToPC.SelectedDate.Value;
-            dgvStockImport.ItemsSource = BUS_PhieuNhap.Instance.searchDate(fromPC, toPC);
+            dgvPhieuBaoHanh.ItemsSource = BUS_PhieuBaoHanh.Instance.searchDate(fromPC, toPC);
         }
 
         private void btnLapPhieu_Click(object sender, RoutedEventArgs e)
         {
-            UserControl usc = new UI_ThemPhieuNhap(gridMain, dgvStockImport.SelectedItem as DTO_PhieuNhap);
+            UserControl usc = new UI_ThemPhieuBaoHanh(gridMain, dgvPhieuBaoHanh.SelectedItem as DTO_PhieuBaoHanh);
             gridMain.Children.Clear();
             gridMain.Children.Add(usc);
         }
-        private void btnTim_Click(object sender, RoutedEventArgs e)
-        {
-            string searchStr = txtSearch.Text;
-            dgvStockImport.ItemsSource = BUS_PhieuNhap.Instance.searchData(searchStr);
-        }
+
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
             MessageBoxResult result = MessageBox.Show("Bạn có muốn xóa dòng này?", "Confirmation", MessageBoxButton.YesNo);
             if (result == MessageBoxResult.Yes)
             {
-                if (dgvStockImport.SelectedItem != null)
+                if (dgvPhieuBaoHanh.SelectedItem != null)
                 {
-                    DTO_PhieuNhap obj = new DTO_PhieuNhap();
-                    obj = dgvStockImport.SelectedItem as DTO_PhieuNhap;
-                    String id = obj.MaPhieuNhap;
+                    DTO_PhieuBaoHanh obj = new DTO_PhieuBaoHanh();
+                    obj = dgvPhieuBaoHanh.SelectedItem as DTO_PhieuBaoHanh;
+                    String id = obj.MaPhieuBaoHanh;
 
-                    BUS_PhieuNhap.Delete(id);
-                    dgvStockImport.ItemsSource = BUS_PhieuNhap.showData();
+                    BUS_PhieuBaoHanh.Delete(id);
+                    dgvPhieuBaoHanh.ItemsSource = BUS_PhieuBaoHanh.showData();
 
                 }
             }
         }
         private void btnEdit_Click(object sender, RoutedEventArgs e)
         {
-            UserControl usc = new UI_ThemPhieuNhap(gridMain, dgvStockImport.SelectedItem as DTO_PhieuNhap);
+            UserControl usc = new UI_ThemPhieuBaoHanh(gridMain, dgvPhieuBaoHanh.SelectedItem as DTO_PhieuBaoHanh);
             gridMain.Children.Clear();
             gridMain.Children.Add(usc);
         }
@@ -95,7 +94,7 @@ namespace SmilePhone.UI
             txtSearch.Clear();
             dpFromPC.SelectedDate = DateTime.Today.AddDays(0);
             dpToPC.SelectedDate = DateTime.Today.AddDays(0);
-            dgvStockImport.ItemsSource = BUS_PhieuNhap.showData();
+            dgvPhieuBaoHanh.ItemsSource = BUS_PhieuBaoHanh.showData();
             isRefreshing = false;
         }
 
@@ -142,6 +141,26 @@ namespace SmilePhone.UI
             {
                 dpToPC.SelectedDate = null;
                 dpFromPC.SelectedDate = null;
+            }
+        }
+
+        private void cbbTrangThai_DropDownClosed(object sender, EventArgs e)
+        {
+            var trangThai = Int32.Parse(cbbTrangThai.SelectedValue.ToString());
+            switch (trangThai)
+            {
+                case 0:
+                    isMergeCondition = true;
+                    daGiao = false;
+                    break;
+                case 1:
+                    isMergeCondition = true;
+                    daGiao = true;
+                    break;
+                default:
+                    isMergeCondition = false;
+                    break;
+
             }
         }
     }

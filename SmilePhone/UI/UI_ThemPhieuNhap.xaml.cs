@@ -128,7 +128,9 @@ namespace SmilePhone.UI
             }
             else
             {
-
+                getDataFromUI();
+                BUS_PhieuNhap.Instance.Update(item);
+                MessageBox.Show("Cập nhật thành công!");
             }
         }
 
