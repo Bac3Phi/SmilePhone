@@ -48,5 +48,10 @@ namespace BUS
         {
             return NhanVien.Instance.searchNV(str);
         }
+
+        public bool checkExist(String username, String password, String passwordNew)
+        {
+            return NhanVien.Instance.checkExist(username, password, passwordNew);
+        }
     }
 }

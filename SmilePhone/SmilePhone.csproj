@@ -125,6 +125,9 @@
     <Compile Include="UI\UI_QuanTri.xaml.cs">
       <DependentUpon>UI_QuanTri.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\UI_ThayDoiMatKhau.xaml.cs">
+      <DependentUpon>UI_ThayDoiMatKhau.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\UI_ThemNhaCungCap.xaml.cs">
       <DependentUpon>UI_ThemNhaCungCap.xaml</DependentUpon>
     </Compile>
@@ -207,6 +210,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\UI_QuanTri.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\UI_ThayDoiMatKhau.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

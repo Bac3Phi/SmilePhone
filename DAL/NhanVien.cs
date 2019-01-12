@@ -38,6 +38,8 @@ namespace DAL
             }
         }
 
+
+
         public string MaNhanVien { get; set; }
         public string TenNhanVien { get; set; }
         public string UserName { get; set; }
@@ -142,6 +144,28 @@ namespace DAL
                                   TrangThai = item.TrangThai
                               }).ToList<DTO_NhanVien>();
                 return result;
+            }
+        }
+
+        public bool checkExist(String username, String password, String passwordNew)
+        {
+            using (CellphoneComponentEntities db = new CellphoneComponentEntities())
+            {
+
+                var result = (from s in db.NhanViens
+                              where s.UserName == username && s.Password == password
+                              select s).Count();
+                if (result != 0)
+                {
+                    var item = db.NhanViens.SingleOrDefault(nv => nv.UserName == username);
+                    item.Password = passwordNew;
+                    db.SaveChanges();
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
         }
     }

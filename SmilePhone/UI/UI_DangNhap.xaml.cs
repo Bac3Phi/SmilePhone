@@ -50,5 +50,11 @@ namespace SmilePhone.UI
                                           MessageBoxButton.OK);
             }
         }
+
+        private void TextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            UI_ThayDoiMatKhau UI_ThayDoiMatKhau = new UI_ThayDoiMatKhau();
+            UI_ThayDoiMatKhau.Show();
+        }
     }
 }
