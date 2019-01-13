@@ -60,11 +60,18 @@ namespace SmilePhone.UI
             {
                 groupCTPN.IsEnabled = true;
                 generateChiTietPhieuNhapID();
-                cbbTenHangHoa.SelectedValue = "Tai nghe Apple EarPods Lightning";
-                cbbTenHangHoa.Text = "Tai nghe Apple EarPods Lightning";
+                loadCombobox();
                 dgvChiTietPhieuNhap.ItemsSource = BUS_ChiTietPhieuNhap.showDataByPhieuNhap(phieunhap.MaPhieuNhap);
             }
         }
+
+        private void loadCombobox()
+        {
+            cbbTenHangHoa.ItemsSource = BUS_HangHoa.showDataDKD();
+            cbbTenHangHoa.DisplayMemberPath = "TenHangHoa";
+            cbbTenHangHoa.SelectedValuePath = "MaHangHoa";
+        }
+
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             cbbNhaCungCap.ItemsSource = BUS_NhaCungCap.showData();

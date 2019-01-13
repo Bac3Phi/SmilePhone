@@ -40,6 +40,7 @@ namespace SmilePhone.UI
         public UI_LapPhieuDatHang(DTO_PhieuDatHang obj)
         {
             InitializeComponent();
+            cbbNhaCungCap.ItemsSource = BUS_NhaCungCap.showData();
             getDataFromEditUI(obj);
             checkGroupCTPN(isNew = false, obj);
         }
@@ -79,7 +80,7 @@ namespace SmilePhone.UI
             txtMaPhieuDatHang.Text = obj.MaPhieuDatHang;
             dpNgayLap.SelectedDate = obj.NgayDat;
             dpNgayChinhSua.SelectedDate = obj.NgayChinhSua;
-            cbbNhaCungCap.Text = obj.TenNhaCungCap;
+            cbbNhaCungCap.SelectedValue = obj.TenNhaCungCap;
             txtTenNhanVien.Text = obj.TenNhanVien;
             txtGhiChu.Text = obj.GhiChu;
 
