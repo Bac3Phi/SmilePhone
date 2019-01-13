@@ -67,6 +67,60 @@ namespace DAL
             }
         }
 
+        public bool insert(DTO_PhieuDatHang obj)
+        {
+            using (CellphoneComponentEntities db = new CellphoneComponentEntities())
+            {
+                var resultMaNhanVien = db.Database
+                    .SqlQuery<String>("select MaNhanVien from dbo.NhanVien where TenNhanVien = N'" + obj.TenNhanVien + "'")
+                    .FirstOrDefault();
+                var resultMaNhaCungCap = db.Database
+                    .SqlQuery<String>("select MaNhaCungCap from dbo.NhaCungCap where TenNhaCungCap = N'" + obj.TenNhaCungCap + "'")
+                    .FirstOrDefault();
+                PhieuDatHang phieuDatHang = new PhieuDatHang();
+                phieuDatHang.MaPhieuDatHang = obj.MaPhieuDatHang;
+                phieuDatHang.MaNhaCungCap = resultMaNhaCungCap;
+                phieuDatHang.MaNhanVien = resultMaNhanVien;
+                phieuDatHang.NgayChinhSua = obj.NgayChinhSua;
+                phieuDatHang.NgayDat = obj.NgayDat;
+                phieuDatHang.TongTien = obj.TongTien;
+                phieuDatHang.GhiChu = obj.GhiChu;
+
+                db.PhieuDatHangs.Add(phieuDatHang);
+
+                if (db.SaveChanges() > 0)
+                    return true;
+                return false;
+            }
+        }
+
+        public bool update(DTO_PhieuDatHang obj)
+        {
+            using (CellphoneComponentEntities db = new CellphoneComponentEntities())
+            {
+                var resultMaNhanVien = db.Database
+                    .SqlQuery<String>("select MaNhanVien from dbo.NhanVien where TenNhanVien = N'" + obj.TenNhanVien + "'")
+                    .FirstOrDefault();
+                var resultMaNhaCungCap = db.Database
+                    .SqlQuery<String>("select MaNhaCungCap from dbo.NhaCungCap where TenNhaCungCap = N'" + obj.TenNhaCungCap + "'")
+                    .FirstOrDefault();
+                PhieuDatHang phieuDatHang = new PhieuDatHang();
+                phieuDatHang.MaPhieuDatHang = obj.MaPhieuDatHang;
+                phieuDatHang.MaNhaCungCap = resultMaNhaCungCap;
+                phieuDatHang.MaNhanVien = resultMaNhanVien;
+                phieuDatHang.NgayChinhSua = obj.NgayChinhSua;
+                phieuDatHang.NgayDat = obj.NgayDat;
+                phieuDatHang.TongTien = obj.TongTien;
+                phieuDatHang.GhiChu = obj.GhiChu;
+
+                db.PhieuDatHangs.Attach(phieuDatHang);
+                db.Entry(phieuDatHang).State = System.Data.Entity.EntityState.Modified;
+                if (db.SaveChanges() > 0)
+                    return true;
+                return false;
+            }
+        }
+
         public bool delete(String id)
         {
             using (CellphoneComponentEntities db = new CellphoneComponentEntities())

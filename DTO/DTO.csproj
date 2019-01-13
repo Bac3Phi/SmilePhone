@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DTO_ChiTietPhieuBanHang.cs" />
+    <Compile Include="DTO_ChiTietPhieuDatHang.cs" />
     <Compile Include="DTO_ChiTietPhieuNhap.cs" />
     <Compile Include="DTO_HangHoa.cs" />
     <Compile Include="DTO_LoaiHangHoa.cs" />

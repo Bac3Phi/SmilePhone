@@ -24,12 +24,14 @@ namespace SmilePhone.UI
     {
         private bool isNew = false;
         private DTO_PhieuDatHang item = new DTO_PhieuDatHang();
-        private DTO_ChiTietPhieuNhap itemCTPN = new DTO_ChiTietPhieuNhap();
+        private DTO_ChiTietPhieuDatHang itemCTPDH = new DTO_ChiTietPhieuDatHang();
 
         public UI_LapPhieuDatHang()
         {
             InitializeComponent();
             generateID();
+            cbbNhaCungCap.ItemsSource = BUS_NhaCungCap.showData();
+            txtTenNhanVien.Text = Properties.Settings.Default.TenNhanVien;
             dpNgayLap.SelectedDate = DateTime.Today.AddDays(0);
             dpNgayChinhSua.SelectedDate = DateTime.Today.AddDays(0);
             checkGroupCTPN(isNew = true, item);
@@ -60,10 +62,16 @@ namespace SmilePhone.UI
             {
                 groupCTPN.IsEnabled = true;
                 generateChiTietID();
-                //cbbTenHangHoa.SelectedValue = "Tai nghe Apple EarPods Lightning";
-                //cbbTenHangHoa.Text = "Tai nghe Apple EarPods Lightning";
-                //dgvChiTietPhieuNhap.ItemsSource = BUS_ChiTietPhieuNhap.showDataByPhieuNhap(phieunhap.MaPhieuNhap);
+                loadCombobox();
+                dgvChiTietPhieuDat.ItemsSource = BUS_ChiTietPhieuDatHang.Instance.showByPhieuDatHang(item.MaPhieuDatHang);
             }
+        }
+
+        private void loadCombobox()
+        {
+            cbbTenHangHoa.ItemsSource = BUS_HangHoa.showDataDKD();
+            cbbTenHangHoa.DisplayMemberPath = "TenHangHoa";
+            cbbTenHangHoa.SelectedValuePath = "MaHangHoa";
         }
 
         private void getDataFromEditUI(DTO_PhieuDatHang obj)
@@ -82,17 +90,100 @@ namespace SmilePhone.UI
 
         private void btnThemChiTiet_Click(object sender, RoutedEventArgs e)
         {
+            if (txtSoLuong.Text != "" && txtGiaNhap.Text != "" && cbbTenHangHoa.SelectedValue != null)
+            {
+                getDataFromCTPDH();
 
+                if (BUS_ChiTietPhieuDatHang.Instance.Insert(itemCTPDH))
+                {
+                    MessageBox.Show("Thêm mới thành công!");
+                    calTongTien();
+                    clearCTPDH();
+                    dgvChiTietPhieuDat.ItemsSource = BUS_ChiTietPhieuDatHang.Instance.showByPhieuDatHang(item.MaPhieuDatHang);
+                }
+                else MessageBox.Show("Thêm mới thất bại!");
+            }
+            else
+            {
+                MessageBox.Show("Hãy điền tất cả các ô còn trống!!!");
+            }
+        }
+
+        private void getDataFromCTPDH()
+        {
+            itemCTPDH.MaChiTietPhieuDat = txtMaChiTietPhieuDatHang.Text;
+            itemCTPDH.TenHangHoa = cbbTenHangHoa.Text;
+            itemCTPDH.SoLuong = Int32.Parse(txtSoLuong.Text);
+            itemCTPDH.Gia = decimal.Parse(txtGiaNhap.Text);
+            itemCTPDH.MaPhieuDatHang = txtMaPhieuDatHang.Text;
+            itemCTPDH.ThanhTien = itemCTPDH.SoLuong * itemCTPDH.Gia;
+        }
+
+        private void calTongTien(bool isDelete = false, decimal? thanhTienDelete = 0)
+        {
+            var tongTien = txtTongTien.Text;
+            if (isDelete)
+            {
+                tongTien = (decimal.Parse(tongTien) - thanhTienDelete).ToString();
+            }
+            else if (tongTien != "")
+            {
+                tongTien = (decimal.Parse(tongTien) + itemCTPDH.ThanhTien).ToString();
+            }
+            else
+            {
+                tongTien = itemCTPDH.ThanhTien.ToString();
+            }
+            txtTongTien.Text = tongTien;
+            item.TongTien = decimal.Parse(tongTien);
+            BUS_PhieuDatHang.Instance.Update(item);
         }
 
         private void txtTongTien_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+            getDataFromUI();
         }
 
         private void btnLuu_Click(object sender, RoutedEventArgs e)
         {
+            if (isNew == true)
+            {
+                if (dpNgayLap.SelectedDate != null
+                     && cbbNhaCungCap.Text != "")
+                {
+                    getDataFromUI();
 
+                    if (BUS_PhieuDatHang.Instance.Insert(item))
+                    {
+                        MessageBox.Show("Thêm mới thành công!");
+                        checkGroupCTPN(isNew = false, item);
+                    }
+                    else MessageBox.Show("Thêm mới thất bại!");
+                }
+                else
+                {
+                    MessageBox.Show("Hãy điền tất cả các ô còn trống!!!");
+                }
+            }
+            else
+            {
+                getDataFromUI();
+                if (BUS_PhieuDatHang.Instance.Update(item))
+                {
+                    MessageBox.Show("Cập nhật thành công!");
+                }
+                else MessageBox.Show("Cập nhật thất bại!");
+            }
+        }
+
+        private void getDataFromUI()
+        {
+            item.MaPhieuDatHang = txtMaPhieuDatHang.Text.Trim();
+            item.NgayDat = dpNgayLap.SelectedDate.Value;
+            item.NgayChinhSua = dpNgayChinhSua.SelectedDate.Value;
+            item.TenNhaCungCap = cbbNhaCungCap.Text;
+            item.TenNhanVien = txtTenNhanVien.Text.Trim();
+            item.GhiChu = txtGhiChu.Text.Trim();
         }
 
         private void btnQuayLai_Click(object sender, RoutedEventArgs e)
@@ -102,6 +193,27 @@ namespace SmilePhone.UI
             UI_ManHinhChinh.gridMain.Children.Add(usc);
         }
 
+        private void clearPDH()
+        {
+            generateID();
+            cbbNhaCungCap.ItemsSource = BUS_NhaCungCap.showData();
+            txtTenNhanVien.Text = Properties.Settings.Default.TenNhanVien;
+            dpNgayLap.SelectedDate = DateTime.Today.AddDays(0);
+            dpNgayChinhSua.SelectedDate = DateTime.Today.AddDays(0);
+            cbbNhaCungCap.Text = "";
+            txtGhiChu.Clear();
+        }
+
+        private void clearCTPDH()
+        {
+            generateChiTietID();
+            cbbTenHangHoa.Text = "";
+            txtSoLuong.Clear();
+            txtGiaNhap.Clear();
+
+            dgvChiTietPhieuDat.ItemsSource = null;
+        }
+
         private void btnExportPDF_Click(object sender, RoutedEventArgs e)
         {
 
@@ -109,12 +221,28 @@ namespace SmilePhone.UI
 
         private void btnRefresh_Click(object sender, RoutedEventArgs e)
         {
-
+            clearPDH();
+            clearCTPDH();
+            checkGroupCTPN(isNew = true, item);
         }
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
+            MessageBoxResult result = MessageBox.Show("Bạn có muốn xóa dòng này?", "Confirmation", MessageBoxButton.YesNo);
+            if (result == MessageBoxResult.Yes)
+            {
+                if (dgvChiTietPhieuDat.SelectedItem != null)
+                {
+                    DTO_ChiTietPhieuDatHang obj = dgvChiTietPhieuDat.SelectedItem as DTO_ChiTietPhieuDatHang;
+                    String id = obj.MaChiTietPhieuDat;
 
+                    if (BUS_ChiTietPhieuDatHang.Instance.Delete(id))
+                    {
+                        dgvChiTietPhieuDat.ItemsSource = BUS_ChiTietPhieuDatHang.Instance.showByPhieuDatHang(item.MaPhieuDatHang);
+                        calTongTien(true, obj.ThanhTien);
+                    }              
+                }
+            }
         }
     }
 }

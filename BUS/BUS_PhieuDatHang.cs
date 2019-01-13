@@ -38,5 +38,15 @@ namespace BUS
         {
             return PhieuDatHang.Instance.delete(id);
         }
+
+        public bool Insert(DTO_PhieuDatHang obj)
+        {
+            return PhieuDatHang.Instance.insert(obj);
+        }
+
+        public bool Update(DTO_PhieuDatHang obj)
+        {
+            return PhieuDatHang.Instance.update(obj);
+        }
     }
 }
