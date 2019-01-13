@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DTO_ChiTietPhieuBanHang.cs" />
+    <Compile Include="DTO_ChiTietPhieuDatHang.cs" />
     <Compile Include="DTO_ChiTietPhieuNhap.cs" />
     <Compile Include="DTO_HangHoa.cs" />
     <Compile Include="DTO_LoaiHangHoa.cs" />
@@ -58,6 +59,7 @@
     <Compile Include="DTO_PhieuBanHang.cs" />
     <Compile Include="DTO_PhieuBaoHanh.cs" />
     <Compile Include="DTO_PhieuChi.cs" />
+    <Compile Include="DTO_PhieuDatHang.cs" />
     <Compile Include="DTO_PhieuNhap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
