@@ -4,6 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Documents;
+using System.Windows.Media;
 
 namespace DAL
 {
@@ -51,6 +55,62 @@ namespace DAL
         {
             bool result = Regex.Match(number, @"(\+84|0)\d{9,10}$").Success;
             return result;
+        }
+
+        private static Regex regex;
+        public static void FindListViewItem(DependencyObject obj, String searchText ="")
+        {
+            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(obj); i++)
+            {
+                DataGrid lv = obj as DataGrid;
+                if (lv != null)
+                {
+                    HighlightText(lv, searchText);
+                }
+                FindListViewItem(VisualTreeHelper.GetChild(obj as DependencyObject, i), searchText);
+            }
+        }
+
+        private static void HighlightText(Object itx, String searchText)
+        {
+            if (itx != null)
+            {
+                if (itx is TextBlock)
+                {
+                    regex = new Regex("(" + searchText + ")", RegexOptions.IgnoreCase);
+                    TextBlock tb = itx as TextBlock;
+                    if (searchText.Length == 0)
+                    {
+                        string str = tb.Text;
+                        tb.Inlines.Clear();
+                        tb.Inlines.Add(str);
+                        return;
+                    }
+                    string[] substrings = regex.Split(tb.Text);
+                    tb.Inlines.Clear();
+                    foreach (var item in substrings)
+                    {
+                        if (regex.Match(item).Success)
+                        {
+                            Run runx = new Run(item);
+                            runx.Background = Brushes.Yellow;
+                            tb.Inlines.Add(runx);
+                        }
+                        else
+                        {
+                            tb.Inlines.Add(item);
+                        }
+                    }
+                    return;
+                }
+                else
+                {
+                    for (int i = 0; i < VisualTreeHelper.GetChildrenCount(itx as DependencyObject); i++)
+                    {
+                        HighlightText(VisualTreeHelper.GetChild(itx as DependencyObject, i), searchText);
+                    }
+                }
+            }
         }
     }
 }

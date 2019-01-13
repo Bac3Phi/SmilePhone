@@ -73,6 +73,10 @@ namespace SmilePhone.UI
                     usc = new UI_HangHoa();
                     GridMain.Children.Add(usc);
                     break;
+                case "ItemBaoHanh":
+                    usc = new UI_PhieuBaoHanh(GridMain);
+                    GridMain.Children.Add(usc);
+                    break;
                 default:
                     break;
             }

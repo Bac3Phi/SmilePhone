@@ -15,7 +15,7 @@
             </Grid>
         </materialDesign:Card>
 
-        <StackPanel Margin="0,50,95,106" HorizontalAlignment="Right" Width="286">
+        <StackPanel Margin="0,50,95,70" HorizontalAlignment="Right" Height="300" Width="286">
             <Label Content="Đăng Nhập" FontFamily="Segoe UI Black" FontSize="24" Margin="0,10" VerticalAlignment="Top" HorizontalAlignment="Left"/>
             <StackPanel Orientation="Horizontal">
                 <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" TextWrapping="Wrap" Foreground="#707070"><Run Text="Bạn quên tài khoản? "/></TextBlock>
@@ -30,6 +30,7 @@
                 <materialDesign:PackIcon Kind="Key" VerticalAlignment="Center" Foreground="#707070"/>
                 <PasswordBox x:Name="tbPassword" materialDesign:HintAssist.Hint="Mật khẩu" Width="250" Margin="5" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"/>
             </StackPanel>
+            <TextBlock HorizontalAlignment="Center" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown" VerticalAlignment="Top" Margin="5" TextWrapping="Wrap" Foreground="Purple"><Run Text="Thay đổi mật khẩu"/></TextBlock>
             <Button x:Name="btnDangNhap"
             Style="{StaticResource MaterialDesignRaisedButton}"
             IsDefault="True"
