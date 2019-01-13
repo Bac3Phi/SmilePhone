@@ -34,6 +34,11 @@ namespace BUS
             return HangHoa.Instance.showHH();
         }
 
+        public static List<DTO_HangHoa> showDataDKD()
+        {
+            return HangHoa.Instance.showHHDKD();
+        }
+
         public static bool Delete(DTO_HangHoa obj)
         {
             return HangHoa.Instance.DeleteHH(obj);

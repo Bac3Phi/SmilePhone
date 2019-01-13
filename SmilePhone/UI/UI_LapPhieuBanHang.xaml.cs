@@ -82,7 +82,7 @@ namespace SmilePhone.UI
 
         private void loadCombobox()
         {
-            cbSanPham.ItemsSource = BUS_HangHoa.showData();
+            cbSanPham.ItemsSource = BUS_HangHoa.showDataDKD();
             cbSanPham.DisplayMemberPath = "TenHangHoa";
             cbSanPham.SelectedValuePath = "MaHangHoa";
         }

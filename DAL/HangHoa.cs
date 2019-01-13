@@ -92,6 +92,35 @@ namespace DAL
             }
         }
 
+        public List<DTO_HangHoa> showHHDKD()
+        {
+            using (CellphoneComponentEntities db = new CellphoneComponentEntities())
+            {
+                var result = (from item in db.HangHoas
+                              join lh in db.LoaiHangHoas on item.MaLoaiHangHoa equals lh.MaLoaiHangHoa
+                              where item.TrangThai == true
+                              select new DTO_HangHoa
+                              {
+                                  MaHangHoa = item.MaHangHoa,
+                                  TenHangHoa = item.TenHangHoa,
+                                  GiaBan = item.GiaBan,
+                                  GiamGia = item.GiamGia,
+                                  SoLuongTon = item.SoLuongTon,
+                                  DonViTinh = item.DonViTinh,
+                                  MoTa = item.MoTa,
+                                  ThongSoKyThuat = item.ThongSoKyThuat,
+                                  XuatXu = item.XuatXu,
+                                  ThoiGianBaoHang = item.ThoiGianBaoHang,
+                                  HinhAnh = item.HinhAnh,
+                                  TenLoaiHangHoa = lh.TenLoaiHangHoa,
+                                  TrangThai = item.TrangThai,
+                                  strTrangThai = item.TrangThai == true ? "Đang kinh doanh" : "Ngừng kinh doanh",
+                                  TenModel = item.TenModel
+                              }).ToList<DTO_HangHoa>();
+                return result;
+            }
+        }
+
         public decimal getGiaBan(string maHangHoa)
         {
             using (CellphoneComponentEntities db = new CellphoneComponentEntities())
