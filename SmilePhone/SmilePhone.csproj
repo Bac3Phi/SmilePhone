@@ -149,6 +149,13 @@
     <Compile Include="UI\UI_ThemPhieuNhap.xaml.cs">
       <DependentUpon>UI_ThemPhieuNhap.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Validations\EmailValidationRule.cs" />
+    <Compile Include="Validations\MaxLengthValidationRule.cs" />
+    <Compile Include="Validations\NotifyPropertyChangedExtension.cs" />
+    <Compile Include="Validations\NumberValidationRule.cs" />
+    <Compile Include="Validations\PhoneValidationRule.cs" />
+    <Compile Include="Validations\RequiredValidationRule.cs" />
+    <Compile Include="Validations\TextFieldsViewModel.cs" />
     <Page Include="Assets\assets.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

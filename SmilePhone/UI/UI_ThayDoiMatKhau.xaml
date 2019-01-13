@@ -5,9 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:SmilePhone.UI"
+        xmlns:local1="clr-namespace:SmilePhone.Validations"
+        
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         Title="UI_ThayDoiMatKhau" Height="400" Width="300">
+   
     <Grid Background="WhiteSmoke">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -19,7 +22,17 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <TextBox Grid.Row="0" x:Name="tbUserName" Focusable="True" materialDesign:HintAssist.Hint="Tên đăng nhập" Margin="10" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+        <TextBox Grid.Row="0" x:Name="tbUserName" Focusable="True" materialDesign:HintAssist.Hint="Tên đăng nhập" Margin="10" Style="{StaticResource MaterialDesignFloatingHintTextBox}">
+            <TextBox.Text>
+                <Binding Path="BindingValidate" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <local1:RequiredValidationRule ValidatesOnTargetUpdated="True" xmlns:local1="clr-namespace:SmilePhone.Validations" />
+                        <local1:MaxLengthValidationRule MinValue="0" MaxValue="15"/>
+                        <local1:NumberValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
         <PasswordBox Grid.Row="1" Margin="10px" x:Name="pwdCu" materialDesign:HintAssist.Hint="Mật khẩu củ" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" />
         <PasswordBox Grid.Row="2" Margin="10px" x:Name="pwdMoi" materialDesign:HintAssist.Hint="Mật khẩu mới" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" />
         <PasswordBox Grid.Row="3" Margin="10px" x:Name="pwdXacNhan" materialDesign:HintAssist.Hint="Nhập lại mật khẩu mới" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" />

@@ -1,5 +1,6 @@
 ﻿using BUS;
 using DTO;
+using SmilePhone.Validations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,6 +29,7 @@ namespace SmilePhone.UI
         public UI_ThemPhieuBaoHanh(Grid gridMain, DTO_PhieuBaoHanh obj)
         {
             InitializeComponent();
+
             this.gridMain = gridMain;
             if (obj == null)
             {
@@ -43,7 +45,7 @@ namespace SmilePhone.UI
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             cbbTenHangHoa.ItemsSource = BUS_HangHoa.showData();
-
+            DataContext = new TextFieldsViewModel();
         }
 
         private void generatePhieuBaoHanhID()
@@ -53,6 +55,11 @@ namespace SmilePhone.UI
 
         private void btnLuu_Click(object sender, RoutedEventArgs e)
         {
+            if (isHasError())
+            {
+                MessageBox.Show("Vui lòng điền đầy đủ chính xác thông tin!");
+                return;
+            }
             if (isNew == true)
             {
                 getData();
@@ -145,6 +152,16 @@ namespace SmilePhone.UI
             cbDaGiao.IsChecked = false;
             txtGhiChu.Clear();
             txtTongTien.Clear();
+        }
+
+        private Boolean isHasError()
+        {
+            if (Validation.GetHasError(txtTenKhachHang) == true
+                || Validation.GetHasError(txtSoDienThoai) == true 
+                || Validation.GetHasError(txtTongTien) == true)
+                return true;
+            else
+                return false;
         }
     }
 }
