@@ -1,5 +1,6 @@
 ﻿using BUS;
 using DTO;
+using SmilePhone.Validations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,6 +30,7 @@ namespace SmilePhone.UI
         public UI_ThemPhieuNhap(Grid gridMain, DTO_PhieuNhap obj)
         {
             InitializeComponent();
+            DataContext = new TextFieldsViewModel();
             this.gridMain = gridMain;
             if (obj == null)
             {
@@ -243,6 +245,13 @@ namespace SmilePhone.UI
         private void txtTongTien_TextChanged(object sender, TextChangedEventArgs e)
         {
             getDataFromUI();
+        }
+        private Boolean isHasError()
+        {
+            if (Validation.GetHasError(txtSoLuong) == true)
+                return true;
+            else
+                return false;
         }
     }
 }

@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using BUS;
+using SmilePhone.Validations;
 
 namespace SmilePhone.UI
 {
@@ -23,6 +24,7 @@ namespace SmilePhone.UI
         public UI_ThayDoiMatKhau()
         {
             InitializeComponent();
+            DataContext = new TextFieldsViewModel();
         }
 
         private void btnThayDoi_Click(object sender, RoutedEventArgs e)

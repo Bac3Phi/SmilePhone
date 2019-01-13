@@ -6,11 +6,14 @@
              xmlns:local="clr-namespace:SmilePhone.UI"
              
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:local1="clr-namespace:SmilePhone.Validations"
              mc:Ignorable="d" 
-             d:DesignHeight="650" d:DesignWidth="650"
+             d:DesignHeight="750" d:DesignWidth="650"
              Loaded="Window_Loaded">
+    
     <Grid Background="WhiteSmoke">
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
@@ -51,11 +54,41 @@
         <DatePicker x:Name="dpNgayLap" Grid.Row="2" Margin="10" materialDesign:HintAssist.Hint="Ngày Lập" Style="{StaticResource MaterialDesignFloatingHintDatePicker}"/>
         <TextBox x:Name="txtTenNhanVien" Grid.Row="3" materialDesign:HintAssist.Hint="Tên nhân viên" IsReadOnly="True" Margin="10" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
         <ComboBox x:Name="cbbTenHangHoa" Grid.Row="4" materialDesign:HintAssist.Hint="Tên Hàng Hóa"  IsEditable="True" Margin="10" Style="{StaticResource MaterialDesignFloatingHintComboBox}" SelectedValuePath="TenHangHoa" DisplayMemberPath="TenHangHoa"/>
-        <TextBox x:Name="txtTenKhachHang" Grid.Row="5" materialDesign:HintAssist.Hint="Tên khách hàng"  Margin="10" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
-        <TextBox x:Name="txtSoDienThoai" Grid.Row="6" materialDesign:HintAssist.Hint="Số điện thoại"  Margin="10" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+        <TextBox x:Name="txtTenKhachHang" Grid.Row="5" materialDesign:HintAssist.Hint="Tên khách hàng"  Margin="10" Style="{StaticResource MaterialDesignFloatingHintTextBox}">
+            <TextBox.Text>
+                <Binding Path="BindingValidate" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <local1:RequiredValidationRule ValidatesOnTargetUpdated="True" xmlns:local1="clr-namespace:SmilePhone.Validations" />
+                        <local1:MaxLengthValidationRule MinValue="0" MaxValue="50"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox x:Name="txtSoDienThoai" Grid.Row="6" materialDesign:HintAssist.Hint="Số điện thoại"  Margin="10" Style="{StaticResource MaterialDesignFloatingHintTextBox}">
+            <TextBox.Text>
+                <Binding      Mode="TwoWay"
+    ValidatesOnDataErrors="True" Path="BindingValidate" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <local1:RequiredValidationRule ValidatesOnTargetUpdated="True" xmlns:local1="clr-namespace:SmilePhone.Validations" />
+                        <local1:PhoneValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+
         <DatePicker x:Name="dpNgayGiao" Grid.Row="7" Margin="10" materialDesign:HintAssist.Hint="Ngày Giao" Style="{StaticResource MaterialDesignFloatingHintDatePicker}"/>
         <CheckBox x:Name="cbDaGiao" Grid.Row="8" Style="{StaticResource MaterialDesignCheckBox}" Margin="10" >Đã giao</CheckBox>
         <TextBox x:Name="txtGhiChu" Grid.Row="9" materialDesign:HintAssist.Hint="Ghi chú" Height="100" MaxLength="200" VerticalAlignment="Top" AcceptsReturn="True" TextWrapping="Wrap" Margin="10" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalScrollBarVisibility="Auto"/>
-        <TextBox x:Name="txtTongTien" Grid.Row="10" Style="{StaticResource MaterialDesignFilledTextFieldTextBox}" VerticalAlignment="Top" AcceptsReturn="True" TextWrapping="Wrap" Margin="10" materialDesign:HintAssist.Hint="Tổng tiền" IsEnabled="True" FontWeight="Bold" FontSize="18"/>
+        <TextBox x:Name="txtTongTien" Grid.Row="10" Style="{StaticResource MaterialDesignFilledTextFieldTextBox}" VerticalAlignment="Top" AcceptsReturn="True" TextWrapping="Wrap" Margin="10" materialDesign:HintAssist.Hint="Tổng tiền" IsEnabled="True" FontWeight="Bold" FontSize="18">
+            <TextBox.Text>
+                <Binding Path="BindingValidate" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <local1:RequiredValidationRule ValidatesOnTargetUpdated="True" xmlns:local1="clr-namespace:SmilePhone.Validations" />
+                        <local1:MaxLengthValidationRule MinValue="0" MaxValue="50"/>
+                        <local1:NumberValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
     </Grid>
 </UserControl>
