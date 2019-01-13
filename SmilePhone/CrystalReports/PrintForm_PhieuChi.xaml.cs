@@ -13,7 +13,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using CrystalDecisions.CrystalReports.Engine;
-using DAL;
 using DTO;
 using BUS;
 using SmilePhone.UI;

@@ -11,15 +11,28 @@ namespace DAL
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Linq;
+    using DTO;
+
     public partial class PhieuDatHang
     {
+        private static PhieuDatHang instance;
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public PhieuDatHang()
         {
             this.ChiTietPhieuDatHangs = new HashSet<ChiTietPhieuDatHang>();
         }
-    
+
+        public static PhieuDatHang Instance
+        {
+            get
+            {
+                if (instance == null)
+                    instance = new PhieuDatHang();
+                return instance;
+            }
+        }
+
         public string MaPhieuDatHang { get; set; }
         public Nullable<System.DateTime> NgayDat { get; set; }
         public string MaNhanVien { get; set; }
@@ -32,5 +45,41 @@ namespace DAL
         public virtual ICollection<ChiTietPhieuDatHang> ChiTietPhieuDatHangs { get; set; }
         public virtual NhanVien NhanVien { get; set; }
         public virtual NhaCungCap NhaCungCap { get; set; }
+
+        public List<DTO_PhieuDatHang> show()
+        {
+            using (CellphoneComponentEntities db = new CellphoneComponentEntities())
+            {
+                var result = (from pn in db.PhieuDatHangs
+                              join nv in db.NhanViens on pn.MaNhanVien equals nv.MaNhanVien
+                              join ncc in db.NhaCungCaps on pn.MaNhaCungCap equals ncc.MaNhaCungCap
+                              select new DTO_PhieuDatHang
+                              {
+                                  MaPhieuDatHang = pn.MaPhieuDatHang,
+                                  NgayDat = pn.NgayDat,
+                                  NgayChinhSua = pn.NgayChinhSua,
+                                  TenNhanVien = nv.TenNhanVien,
+                                  TenNhaCungCap = ncc.TenNhaCungCap,
+                                  TongTien = pn.TongTien,
+                                  GhiChu = pn.GhiChu
+                              }).ToList<DTO_PhieuDatHang>();
+                return result;
+            }
+        }
+
+        public bool delete(String id)
+        {
+            using (CellphoneComponentEntities db = new CellphoneComponentEntities())
+            {
+                PhieuDatHang phieuDatHang = (from item in db.PhieuDatHangs
+                                       where item.MaPhieuDatHang == id
+                                       select item).SingleOrDefault();
+                db.PhieuDatHangs.Remove(phieuDatHang);
+
+                if (db.SaveChanges() > 0)
+                    return true;
+                return false;
+            }
+        }
     }
 }
