@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BUS;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -95,6 +96,66 @@ namespace SmilePhone.UI
             UI_DangNhap UI_DangNhap = new UI_DangNhap();
             UI_DangNhap.Show();
             this.Close();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            var phanQuyen = BUS_PhanQuyen.Instance.getTenPhanQuyenByID(Properties.Settings.Default.MaNV.ToString());
+
+            switch (phanQuyen)
+            {
+                case "Bộ phận kĩ thuật":
+                    ItemHome.Visibility = Visibility.Collapsed;
+                    ItemCreate.Visibility = Visibility.Collapsed;
+                    ItemReport.Visibility = Visibility.Collapsed;
+                    ItemDatHang.Visibility = Visibility.Collapsed;
+                    ItemHangHoa.Visibility = Visibility.Collapsed;
+                    ItemSuppliers.Visibility = Visibility.Collapsed;
+                    ItemStockImport.Visibility = Visibility.Collapsed;
+                    ItemEmployees.Visibility = Visibility.Collapsed;
+                    ItemReceipt.Visibility = Visibility.Collapsed;
+
+                    ItemBaoHanh.Visibility = Visibility.Collapsed;
+                    break;
+                case "Kinh doanh":
+                    ItemHome.Visibility = Visibility.Collapsed;
+
+                    ItemReport.Visibility = Visibility.Collapsed;
+
+                    ItemHangHoa.Visibility = Visibility.Collapsed;
+                    ItemSuppliers.Visibility = Visibility.Collapsed;
+                    ItemStockImport.Visibility = Visibility.Collapsed;
+                    ItemEmployees.Visibility = Visibility.Collapsed;
+                    ItemReceipt.Visibility = Visibility.Collapsed;
+
+                    ItemBaoHanh.Visibility = Visibility.Collapsed;
+                    break;
+                case "Thủ kho":
+                    ItemHome.Visibility = Visibility.Collapsed;
+                    ItemCreate.Visibility = Visibility.Collapsed;
+
+
+                    ItemSuppliers.Visibility = Visibility.Collapsed;
+                    ItemStockImport.Visibility = Visibility.Collapsed;
+                    ItemEmployees.Visibility = Visibility.Collapsed;
+                    ItemReceipt.Visibility = Visibility.Collapsed;
+
+                    ItemBaoHanh.Visibility = Visibility.Collapsed;
+                    break;
+                case "Kế toán":
+                    ItemHome.Visibility = Visibility.Collapsed;
+                    ItemCreate.Visibility = Visibility.Collapsed;
+
+                    ItemDatHang.Visibility = Visibility.Collapsed;
+                    ItemHangHoa.Visibility = Visibility.Collapsed;
+                    ItemSuppliers.Visibility = Visibility.Collapsed;
+
+                    ItemEmployees.Visibility = Visibility.Collapsed;
+
+
+                    ItemBaoHanh.Visibility = Visibility.Collapsed;
+                    break;
+            }
         }
     }
 }

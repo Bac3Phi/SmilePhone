@@ -12,7 +12,7 @@ namespace DAL
     using System;
     using System.Collections.Generic;
     using System.Linq;
-
+    using DTO;
     public partial class PhanQuyen
     {
         private static PhanQuyen instance;
@@ -21,6 +21,25 @@ namespace DAL
         {
             this.NhanViens = new HashSet<NhanVien>();
         }
+
+        public string getTenPhanQuyenByID(string manv)
+        {
+            using (CellphoneComponentEntities db = new CellphoneComponentEntities())
+            {
+                var result = (from item in db.PhanQuyens
+                              join nv in db.NhanViens on item.MaPhanQuyen equals nv.MaPhanQuyen
+                              where nv.MaNhanVien.Equals(manv)
+                              select new DTO_PhanQuyen
+                              {
+                                  TenPhanQuyen = item.TenPhanQuyen
+                              }).ToList<DTO_PhanQuyen>();
+
+                if (result.Count > 0)
+                    return result.First().TenPhanQuyen;
+                else return "";
+            }
+        }
+
         public static PhanQuyen Instance
         {
             get
