@@ -27,5 +27,9 @@ namespace BUS
         {
             return PhanQuyen.Instance.showPQ();
         }
+        public string getTenPhanQuyenByID(string manv)
+        {
+            return PhanQuyen.Instance.getTenPhanQuyenByID(manv);
+        }
     }
 }
