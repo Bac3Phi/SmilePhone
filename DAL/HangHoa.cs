@@ -52,7 +52,7 @@ namespace DAL
                     .SqlQuery<String>("select MaHangHoa from dbo.HangHoa where TenHangHoa = N'" + obj.TenHangHoa + "'")
                     .FirstOrDefault();
                 HangHoa hanghoa = new HangHoa();
-                hanghoa.MaHangHoa = obj.MaHangHoa;
+                hanghoa.MaHangHoa = resultMaHangHoa;
                 hanghoa.TenHangHoa = obj.TenHangHoa;
                 hanghoa.SoLuongTon = obj.SoLuongTon;
 
@@ -177,7 +177,7 @@ namespace DAL
             using (CellphoneComponentEntities db = new CellphoneComponentEntities())
             {
                 var maHangHoa = db.Database
-                    .SqlQuery<String>("select MaLoaiHangHoa from dbo.LoaiHangHoa where TenLoaiHangHoa = N'" + tenHangHoa + "'")
+                    .SqlQuery<String>("select MaHangHoa from dbo.HangHoa where TenHangHoa = N'" + tenHangHoa + "'")
                     .FirstOrDefault();
                 var result = (from item in db.HangHoas
                               where item.MaHangHoa.Equals(maHangHoa)
