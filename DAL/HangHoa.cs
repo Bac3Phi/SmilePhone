@@ -51,10 +51,27 @@ namespace DAL
                 var resultMaHangHoa = db.Database
                     .SqlQuery<String>("select MaHangHoa from dbo.HangHoa where TenHangHoa = N'" + obj.TenHangHoa + "'")
                     .FirstOrDefault();
+                var resultMaLoaiHangHoa = db.Database
+                    .SqlQuery<String>("select MaLoaiHangHoa from dbo.LoaiHangHoa where TenLoaiHangHoa = N'" + obj.TenLoaiHangHoa + "'")
+                    .FirstOrDefault();
+                var item = getHangHoaById(resultMaHangHoa);
+
                 HangHoa hanghoa = new HangHoa();
+
                 hanghoa.MaHangHoa = resultMaHangHoa;
                 hanghoa.TenHangHoa = obj.TenHangHoa;
+                hanghoa.GiaBan = item.GiaBan;
+                hanghoa.GiamGia = item.GiamGia;
                 hanghoa.SoLuongTon = obj.SoLuongTon;
+                hanghoa.DonViTinh = item.DonViTinh;
+                hanghoa.MoTa = item.MoTa;
+                hanghoa.ThongSoKyThuat = item.ThongSoKyThuat;
+                hanghoa.XuatXu = item.XuatXu;
+                hanghoa.ThoiGianBaoHang = item.ThoiGianBaoHang;
+                hanghoa.HinhAnh = item.HinhAnh;
+                hanghoa.MaLoaiHangHoa = resultMaLoaiHangHoa;
+                hanghoa.TrangThai = item.TrangThai;
+                hanghoa.TenModel = item.TenModel;
 
                 db.HangHoas.Attach(hanghoa);
                 db.Entry(hanghoa).State = System.Data.Entity.EntityState.Modified;
@@ -64,6 +81,33 @@ namespace DAL
             }
         }
 
+        public DTO_HangHoa getHangHoaById(string id)
+        {
+            using (CellphoneComponentEntities db = new CellphoneComponentEntities())
+            {
+                var result = (from item in db.HangHoas
+                              where item.MaHangHoa.Equals(id)
+                              select new DTO_HangHoa
+                              {
+                                  MaHangHoa = item.MaHangHoa,
+                                  TenHangHoa = item.TenHangHoa,
+                                  GiaBan = item.GiaBan,
+                                  GiamGia = item.GiamGia,
+                                  SoLuongTon = item.SoLuongTon,
+                                  DonViTinh = item.DonViTinh,
+                                  MoTa = item.MoTa,
+                                  ThongSoKyThuat = item.ThongSoKyThuat,
+                                  XuatXu = item.XuatXu,
+                                  ThoiGianBaoHang = item.ThoiGianBaoHang,
+                                  HinhAnh = item.HinhAnh,
+                                  TrangThai = item.TrangThai,
+                                  TenModel = item.TenModel
+                              }).ToList<DTO_HangHoa>();
+                if (result.Count > 0)
+                    return result.First();
+                else return null;
+            }
+        }
         public string MoTa { get; set; }
         public string ThongSoKyThuat { get; set; }
         public string XuatXu { get; set; }
