@@ -11,9 +11,12 @@ namespace DAL
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
+    using DTO;
     
     public partial class BaoCaoTonKho
     {
+        private static BaoCaoTonKho instance;
         public string MaBaoCao { get; set; }
         public Nullable<int> Thang { get; set; }
         public Nullable<int> Nam { get; set; }
@@ -24,5 +27,68 @@ namespace DAL
         public Nullable<int> SoLuongTonCuoi { get; set; }
     
         public virtual HangHoa HangHoa { get; set; }
+
+        public static BaoCaoTonKho Instance
+        {
+            get
+            {
+                if (instance == null)
+                    instance = new BaoCaoTonKho();
+                return instance;
+            }
+        }
+
+
+        public List<DTO_BaoCaoTonKho> showBC()
+        {
+            using (CellphoneComponentEntities db = new CellphoneComponentEntities())
+            {
+                //var tondau = (from item in db.BaoCaoTonKhoes
+                //              join goods in db.HangHoas on item.MaHangHoa equals goods.MaHangHoa
+                //              select goods.SoLuongTon).ToList();
+
+                //var nhap = (from id in db.PhieuNhaps
+                //            join details in db.ChiTietPhieuNhaps on id.MaPhieuNhap equals details.MaPhieuNhap
+                //            where details.MaHangHoa == this.MaHangHoa
+                //            select )
+
+                var result = (from item in db.BaoCaoTonKhoes
+                              join goods in db.HangHoas on item.MaHangHoa equals goods.MaHangHoa
+                              select new DTO_BaoCaoTonKho
+                              {
+                                  MaBaoCao = item.MaBaoCao,
+                                  Thang = item.Thang,
+                                  Nam = item.Nam,
+                                  TenHangHoa = goods.TenHangHoa,
+                                  SoLuongTonDau = item.SoLuongTonDau,
+                                  SoLuongNhap = item.SoLuongNhap,
+                                  SoLuongXuat = item.SoLuongXuat,
+                                  SoLuongTonCuoi = item.SoLuongTonCuoi
+                              }).ToList();
+                return result;
+            }
+        }
+
+        public List<DTO_BaoCaoTonKho> showChart(String name)
+        {
+            using (CellphoneComponentEntities db = new CellphoneComponentEntities())
+            {
+                var result = (from item in db.BaoCaoTonKhoes
+                              join goods in db.HangHoas on item.MaHangHoa equals goods.MaHangHoa
+                              where goods.TenHangHoa == name
+                              select new DTO_BaoCaoTonKho
+                              {
+                                  MaBaoCao = item.MaBaoCao,
+                                  Thang = item.Thang,
+                                  Nam = item.Nam,
+                                  TenHangHoa = goods.TenHangHoa,
+                                  SoLuongTonDau = item.SoLuongTonDau,
+                                  SoLuongNhap = item.SoLuongNhap,
+                                  SoLuongXuat = item.SoLuongXuat,
+                                  SoLuongTonCuoi = item.SoLuongTonCuoi
+                              }).ToList();
+                return result;
+            }
+        }
     }
 }
