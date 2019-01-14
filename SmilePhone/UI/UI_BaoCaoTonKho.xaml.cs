@@ -64,9 +64,16 @@ namespace SmilePhone.UI
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
-            //UserControl usc = new UI_ThemNhanVien(gridMain, dgvEmployees.SelectedItem as DTO_NhanVien);
-            //gridMain.Children.Clear();
-            //gridMain.Children.Add(usc);
+            MessageBoxResult result = MessageBox.Show("Bạn có muốn xóa dòng này?", "Confirmation", MessageBoxButton.YesNo);
+            if (result == MessageBoxResult.Yes)
+            {
+                if (dgvStockReport.SelectedItem != null)
+                {
+                    DTO_BaoCaoTonKho obj = dgvStockReport.SelectedItem as DTO_BaoCaoTonKho;
+                    BUS_BaoCaoTonKho.Instance.Delete(obj);
+                    dgvStockReport.ItemsSource = BUS_BaoCaoTonKho.showData();
+                }
+            }
         }
 
         private void TxtSearchText_TextChanged(object sender, TextChangedEventArgs e)

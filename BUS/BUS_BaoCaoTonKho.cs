@@ -64,6 +64,11 @@ namespace BUS
             BaoCaoTonKho.Instance.InsertBC(obj);
         }
 
+        public void Delete(DTO_BaoCaoTonKho obj)
+        {
+            BaoCaoTonKho.Instance.DeleteBC(obj);
+        }
+
         public String generateAutoID()
         {
             return Helper.generateAutoID("BaoCaoTonKho", "MaBaoCao", "BCTK");

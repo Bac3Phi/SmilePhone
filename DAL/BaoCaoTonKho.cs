@@ -185,5 +185,17 @@ namespace DAL
                 db.SaveChanges();
             }
         }
+
+        public void DeleteBC(DTO_BaoCaoTonKho obj)
+        {
+            using (CellphoneComponentEntities db = new CellphoneComponentEntities())
+            {
+                BaoCaoTonKho bc = (from item in db.BaoCaoTonKhoes
+                                  where item.MaBaoCao == obj.MaBaoCao
+                                  select item).SingleOrDefault();
+                db.BaoCaoTonKhoes.Remove(bc);
+                db.SaveChanges();
+            }
+        }
     }
 }
