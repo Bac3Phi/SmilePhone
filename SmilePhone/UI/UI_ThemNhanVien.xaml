@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SmilePhone.UI"
-             
+             xmlns:local1="clr-namespace:SmilePhone.Validations"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              d:DesignHeight="350" d:DesignWidth="650">
@@ -44,8 +44,25 @@
             <TextBox x:Name="txtEmployeesID" Grid.Column="0" materialDesign:HintAssist.Hint="Mã nhân viên" MaxLength="10" Margin="10" Style="{StaticResource MaterialDesignFloatingHintTextBox}" IsReadOnly="True" />
             <ToggleButton x:Name="btnVisible" Grid.Column="1" Style="{StaticResource MaterialDesignSwitchToggleButton}" ToolTip="MaterialDesignSwitchToggleButton"/>
         </Grid>
-        <TextBox x:Name="txtEmployeesName" Grid.Row="2" materialDesign:HintAssist.Hint="Tên nhân viên" MaxLength="50" Margin="10" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
-        <TextBox x:Name="txtEmployeesUserName" Grid.Row="3" materialDesign:HintAssist.Hint="Username" MaxLength="50" Margin="10" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+        <TextBox x:Name="txtEmployeesName" Grid.Row="2" materialDesign:HintAssist.Hint="Tên nhân viên" MaxLength="50" Margin="10" Style="{StaticResource MaterialDesignFloatingHintTextBox}">
+            <TextBox.Text>
+                <Binding Mode="OneWayToSource" ValidatesOnDataErrors="True" Path="BindingValidate" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <local1:RequiredValidationRule ValidatesOnTargetUpdated="True" xmlns:local1="clr-namespace:SmilePhone.Validations" />
+                        <local1:MaxLengthValidationRule MinValue="3" MaxValue="50"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+
+        <TextBox x:Name="txtEmployeesUserName" Grid.Row="3" materialDesign:HintAssist.Hint="Username" MaxLength="50" Margin="10" Style="{StaticResource MaterialDesignFloatingHintTextBox}">
+        <TextBox.Text>
+            <Binding Mode="OneWayToSource" ValidatesOnDataErrors="True" Path="BindingValidate" UpdateSourceTrigger="PropertyChanged">
+                <Binding.ValidationRules>
+                        <local1:RequiredValidationRule ValidatesOnTargetUpdated="True" xmlns:local1="clr-namespace:SmilePhone.Validations" />
+                    </Binding.ValidationRules>
+            </Binding>
+        </TextBox.Text></TextBox>
         <PasswordBox x:Name="txtEmployeesPass" Grid.Row="4" materialDesign:HintAssist.Hint="Password" MaxLength="50" Margin="10" />
         <ComboBox x:Name="cbbPermissionName" Grid.Row="5" SelectedValuePath="TenPhanQuyen" DisplayMemberPath="TenPhanQuyen" Margin="10" materialDesign:HintAssist.Hint="Tên phân quyền" IsEditable="True" Style="{StaticResource MaterialDesignFloatingHintComboBox}" />
     </Grid>

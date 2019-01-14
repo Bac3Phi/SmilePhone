@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using DAL;
 using BUS;
 using DTO;
+using SmilePhone.Validations;
 
 namespace SmilePhone.UI
 {
@@ -31,6 +32,7 @@ namespace SmilePhone.UI
         public UI_ThemNhanVien(Grid gridMain, DTO_NhanVien obj)
         {
             InitializeComponent();
+            DataContext = new TextFieldsViewModel();
             this.gridMain = gridMain;
             isChangingVisible = false;
             cbbPermissionName.ItemsSource = BUS_PhanQuyen.showData();
@@ -69,6 +71,12 @@ namespace SmilePhone.UI
 
         private void btnLuu_Click(object sender, RoutedEventArgs e)
         {
+            if (isHasError())
+            {
+                MessageBox.Show("Vui lòng điền đầy đủ chính xác thông tin!");
+                return;
+            }
+
             if (isNew == true)
             {
                 item.MaNhanVien = txtEmployeesID.Text.Trim();
@@ -77,21 +85,15 @@ namespace SmilePhone.UI
                 item.Password = txtEmployeesPass.Password.Trim();
                 item.TenPhanQuyen = cbbPermissionName.Text;
                 item.TrangThai = btnVisible.IsChecked;
-                if (txtEmployeesName.Text != "" && txtEmployeesPass.Password != ""
-                    && txtEmployeesUserName.Text != "" && cbbPermissionName.Text != "")
-                {
-                    BUS_NhanVien.Instance.InsertNV(item);
-                    AutoGenerateID();
-                    txtEmployeesName.Clear();
-                    txtEmployeesPass.Clear();
-                    txtEmployeesUserName.Clear();
-                    cbbPermissionName.SelectedIndex = 0;
-                    MessageBox.Show("Thêm mới thành công!");
-                }
-                else
-                {
-                    MessageBox.Show("Hãy điền tất cả các ô còn trống!!!");
-                }
+                
+                BUS_NhanVien.Instance.InsertNV(item);
+                AutoGenerateID();
+                txtEmployeesName.Clear();
+                txtEmployeesPass.Clear();
+                txtEmployeesUserName.Clear();
+                cbbPermissionName.SelectedIndex = 0;
+                MessageBox.Show("Thêm mới thành công!");
+                
             }
             else
             {
@@ -104,28 +106,23 @@ namespace SmilePhone.UI
                     item.TrangThai = true;
                 else
                     item.TrangThai = isChangingVisible;
-                if (txtEmployeesName.Text != "" && txtEmployeesPass.Password != ""
-                    && txtEmployeesUserName.Text != "" && cbbPermissionName.Text != "")
-                {
-                    BUS_NhanVien.Instance.UpdateNV(item);
-                    AutoGenerateID();
-                    txtEmployeesName.Clear();
-                    txtEmployeesPass.Clear();
-                    txtEmployeesUserName.Clear();
-                    btnVisible.IsChecked = true;
+                
+                BUS_NhanVien.Instance.UpdateNV(item);
+                AutoGenerateID();
+                txtEmployeesName.Clear();
+                txtEmployeesPass.Clear();
+                txtEmployeesUserName.Clear();
+                btnVisible.IsChecked = true;
 
-                    txtEmployeesID.FontStyle = FontStyles.Normal;
-                    txtEmployeesName.FontStyle = FontStyles.Normal;
-                    txtEmployeesPass.FontStyle = FontStyles.Normal;
-                    txtEmployeesUserName.FontStyle = FontStyles.Normal;
-                    cbbPermissionName.FontStyle = FontStyles.Normal;
-                    cbbPermissionName.SelectedIndex = 0;
-                    MessageBox.Show("Cập nhật nhân viên thành công!");
-                }
-                else
-                {
-                    MessageBox.Show("Hãy điền tất cả các ô còn trống!!!");
-                }
+                txtEmployeesID.FontStyle = FontStyles.Normal;
+                txtEmployeesName.FontStyle = FontStyles.Normal;
+                txtEmployeesPass.FontStyle = FontStyles.Normal;
+                txtEmployeesUserName.FontStyle = FontStyles.Normal;
+                cbbPermissionName.FontStyle = FontStyles.Normal;
+                cbbPermissionName.SelectedIndex = 0;
+                MessageBox.Show("Cập nhật nhân viên thành công!");
+
+
             }
         }
 
@@ -152,6 +149,14 @@ namespace SmilePhone.UI
             cbbPermissionName.FontStyle = FontStyles.Normal;
             isNew = true;
             AutoGenerateID();
+        }
+        private Boolean isHasError()
+        {
+            if (Validation.GetHasError(txtEmployeesName) == true
+                || Validation.GetHasError(txtEmployeesUserName) == true)
+                return true;
+            else
+                return false;
         }
     }
 }

@@ -119,21 +119,18 @@ namespace SmilePhone.UI
         }
         private void btnLuu_Click(object sender, RoutedEventArgs e)
         {
+            if (isHasError())
+            {
+                MessageBox.Show("Vui lòng điền đầy đủ chính xác thông tin!");
+                return;
+            }
             if (isNew == true)
             {
-                if (dpNgayLap.SelectedDate != null
-                     && cbbNhaCungCap.Text != "")
-                {
-                    getDataFromUI();
+                getDataFromUI();
 
-                    BUS_PhieuNhap.Instance.Insert(item);
-                    MessageBox.Show("Thêm mới thành công!");
-                    checkGroupCTPN(isNew = false, item);
-                }
-                else
-                {
-                    MessageBox.Show("Hãy điền tất cả các ô còn trống!!!");
-                }
+                BUS_PhieuNhap.Instance.Insert(item);
+                MessageBox.Show("Thêm mới thành công!");
+                checkGroupCTPN(isNew = false, item);
             }
             else
             {
@@ -196,6 +193,25 @@ namespace SmilePhone.UI
             item.TongTien = decimal.Parse(tongTien);
             BUS_PhieuNhap.Instance.Update(item);
         }
+
+        private void calSoLuongNhap(bool isDelete = false)
+        {
+            var soLuong = BUS_HangHoa.Instance.getSoLuong(itemCTPN.TenHangHoa);
+            if (isDelete)
+            {
+                soLuong = soLuong - (int)itemCTPN.SoLuong;
+            }
+            else
+            {
+                soLuong = soLuong + (int)itemCTPN.SoLuong;
+            }
+
+            var hangHoa = new DTO_HangHoa();
+            hangHoa.TenHangHoa = itemCTPN.TenHangHoa;
+            hangHoa.SoLuongTon = soLuong;
+            BUS_HangHoa.Instance.UpdateSoLuong(hangHoa);
+
+        }
         private void clearPN()
         {
             generatePhieuNhapID();
@@ -229,18 +245,20 @@ namespace SmilePhone.UI
                     BUS_ChiTietPhieuNhap.Delete(id);
                     dgvChiTietPhieuNhap.ItemsSource = BUS_ChiTietPhieuNhap.showDataByPhieuNhap(item.MaPhieuNhap);
                     calTongTien(true, obj.ThanhTien);
+                    calSoLuongNhap(true);
                 }
             }
         }
         private void btnThemChiTiet_Click(object sender, RoutedEventArgs e)
         {
-            if(txtSoLuong.Text != "" && txtGiaNhap.Text != "" && cbbTenHangHoa.SelectedValue != null)
+            if(cbbTenHangHoa.SelectedValue != null)
             {
                 getDataFromCTPN();
 
                 BUS_ChiTietPhieuNhap.Instance.Insert(itemCTPN);
                 MessageBox.Show("Thêm mới thành công!");
                 calTongTien();
+                calSoLuongNhap();
                 clearCTPN();
             }
             else
@@ -255,7 +273,8 @@ namespace SmilePhone.UI
         }
         private Boolean isHasError()
         {
-            if (Validation.GetHasError(txtSoLuong) == true)
+            if (Validation.GetHasError(txtSoLuong) == true
+                || Validation.GetHasError(txtGiaNhap) == true)
                 return true;
             else
                 return false;

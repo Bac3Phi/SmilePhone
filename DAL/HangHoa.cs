@@ -43,6 +43,27 @@ namespace DAL
         public Nullable<decimal> GiamGia { get; set; }
         public Nullable<int> SoLuongTon { get; set; }
         public string DonViTinh { get; set; }
+
+        public bool updateSoLuong(DTO_HangHoa obj)
+        {
+            using (CellphoneComponentEntities db = new CellphoneComponentEntities())
+            {
+                var resultMaHangHoa = db.Database
+                    .SqlQuery<String>("select MaHangHoa from dbo.HangHoa where TenHangHoa = N'" + obj.TenHangHoa + "'")
+                    .FirstOrDefault();
+                HangHoa hanghoa = new HangHoa();
+                hanghoa.MaHangHoa = obj.MaHangHoa;
+                hanghoa.TenHangHoa = obj.TenHangHoa;
+                hanghoa.SoLuongTon = obj.SoLuongTon;
+
+                db.HangHoas.Attach(hanghoa);
+                db.Entry(hanghoa).State = System.Data.Entity.EntityState.Modified;
+                if (db.SaveChanges() > 0)
+                    return true;
+                return false;
+            }
+        }
+
         public string MoTa { get; set; }
         public string ThongSoKyThuat { get; set; }
         public string XuatXu { get; set; }
@@ -151,6 +172,36 @@ namespace DAL
             }
         }
 
+        public int getSoLuong(string tenHangHoa)
+        {
+            using (CellphoneComponentEntities db = new CellphoneComponentEntities())
+            {
+                var maHangHoa = db.Database
+                    .SqlQuery<String>("select MaLoaiHangHoa from dbo.LoaiHangHoa where TenLoaiHangHoa = N'" + tenHangHoa + "'")
+                    .FirstOrDefault();
+                var result = (from item in db.HangHoas
+                              where item.MaHangHoa.Equals(maHangHoa)
+                              select new DTO_HangHoa
+                              {
+                                  MaHangHoa = item.MaHangHoa,
+                                  TenHangHoa = item.TenHangHoa,
+                                  GiaBan = item.GiaBan,
+                                  GiamGia = item.GiamGia,
+                                  SoLuongTon = item.SoLuongTon,
+                                  DonViTinh = item.DonViTinh,
+                                  MoTa = item.MoTa,
+                                  ThongSoKyThuat = item.ThongSoKyThuat,
+                                  XuatXu = item.XuatXu,
+                                  ThoiGianBaoHang = item.ThoiGianBaoHang,
+                                  HinhAnh = item.HinhAnh,
+                                  TrangThai = item.TrangThai,
+                                  TenModel = item.TenModel
+                              }).ToList<DTO_HangHoa>();
+                if (result.Count > 0)
+                    return (int)result.First().SoLuongTon;
+                else return 0;
+            }
+        }
         public bool DeleteHH(DTO_HangHoa obj)
         {
             using (CellphoneComponentEntities db = new CellphoneComponentEntities())

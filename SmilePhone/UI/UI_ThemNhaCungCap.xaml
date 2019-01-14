@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SmilePhone.UI"
-             
+             xmlns:local1="clr-namespace:SmilePhone.Validations"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              d:DesignHeight="350" d:DesignWidth="650">
@@ -37,9 +37,45 @@
             </Button>
         </Grid>
         <TextBox x:Name="txtSupplierID" Grid.Row="1" materialDesign:HintAssist.Hint="Mã nhà cung cấp" MaxLength="10" Margin="10" Style="{StaticResource MaterialDesignFloatingHintTextBox}" IsReadOnly="True" />
-        <TextBox x:Name="txtSupplierName" Grid.Row="2" materialDesign:HintAssist.Hint="Tên nhà cung cấp" MaxLength="50" Margin="10" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
-        <TextBox x:Name="txtSupplierAddress" Grid.Row="3" materialDesign:HintAssist.Hint="Địa chỉ" MaxLength="100" Margin="10" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
-        <TextBox x:Name="txtSupplierPhone" Grid.Row="4" materialDesign:HintAssist.Hint="Số điện thoại" MaxLength="50" Margin="10" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
-        <TextBox x:Name="txtSupplierEmail" Grid.Row="5" materialDesign:HintAssist.Hint="Email" MaxLength="30" Margin="10" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+        <TextBox x:Name="txtSupplierName" Grid.Row="2" materialDesign:HintAssist.Hint="Tên nhà cung cấp" MaxLength="50" Margin="10" Style="{StaticResource MaterialDesignFloatingHintTextBox}" >
+            <TextBox.Text>
+                <Binding Mode="OneWayToSource" ValidatesOnDataErrors="True" Path="BindingValidate" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <local1:RequiredValidationRule ValidatesOnTargetUpdated="True" />
+                        <local1:MaxLengthValidationRule MinValue="0" MaxValue="50"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox x:Name="txtSupplierAddress" Grid.Row="3" materialDesign:HintAssist.Hint="Địa chỉ" MaxLength="100" Margin="10" Style="{StaticResource MaterialDesignFloatingHintTextBox}" >
+            <TextBox.Text>
+                <Binding Mode="OneWayToSource" ValidatesOnDataErrors="True" Path="BindingValidate" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <local1:RequiredValidationRule ValidatesOnTargetUpdated="True" />
+                        <local1:MaxLengthValidationRule MinValue="0" MaxValue="200"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox x:Name="txtSupplierPhone" Grid.Row="4" materialDesign:HintAssist.Hint="Số điện thoại" MaxLength="50" Margin="10" Style="{StaticResource MaterialDesignFloatingHintTextBox}" >
+            <TextBox.Text>
+                <Binding Mode="OneWayToSource" ValidatesOnDataErrors="True" Path="BindingValidate" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <local1:RequiredValidationRule ValidatesOnTargetUpdated="True" />
+                        <local1:PhoneValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox x:Name="txtSupplierEmail" Grid.Row="5" materialDesign:HintAssist.Hint="Email" MaxLength="30" Margin="10" Style="{StaticResource MaterialDesignFloatingHintTextBox}" >
+            <TextBox.Text>
+                <Binding Mode="OneWayToSource" ValidatesOnDataErrors="True" Path="BindingValidate" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <local1:RequiredValidationRule ValidatesOnTargetUpdated="True" />
+                        <local1:EmailValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
     </Grid>
 </UserControl>

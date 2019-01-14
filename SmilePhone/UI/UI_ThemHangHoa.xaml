@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SmilePhone.UI"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:local1="clr-namespace:SmilePhone.Validations"
              mc:Ignorable="d" 
              d:DesignHeight="550" d:DesignWidth="800">
     <Grid Background="WhiteSmoke">
@@ -25,7 +26,7 @@
                 Style="{StaticResource MaterialDesignRaisedButton}"
                 ToolTip="Resource name: MaterialDesignRaisedButton" Content="Quay lại" Click="BtnBack_Click"/>
         </WrapPanel>
-        <WrapPanel Margin="84,59,134,16" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <WrapPanel Margin="92,59,142,-15" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Height="506">
             <WrapPanel Orientation="Vertical" Height="202" Width="150" VerticalAlignment="Top" Margin="0,0,50,0">
                 <Image
                     x:Name="imageHangHoa"
@@ -38,30 +39,75 @@
                     Style="{StaticResource MaterialDesignRaisedLightButton}"
                     ToolTip="Resource name: MaterialDesignRaisedLightButton" Content="Chọn hình ảnh" Width="150" Click="BtnChonHinhAnh_Click"/>
             </WrapPanel>
-            <WrapPanel Orientation="Vertical" Height="475" Width="366">
+            <WrapPanel Orientation="Vertical" Height="503" Width="366">
                 <TextBox
                     x:Name="txtTenHangHoa"
                     Margin="0,0,0,5"
                     materialDesign:HintAssist.Hint="Tên hàng hóa"
-                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" Height="39" Width="365" />
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" Height="39" Width="365" >
+                    <TextBox.Text>
+                        <Binding Mode="OneWayToSource" ValidatesOnDataErrors="True" Path="BindingValidate" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <local1:RequiredValidationRule ValidatesOnTargetUpdated="True" />
+                                <local1:MaxLengthValidationRule MinValue="0" MaxValue="50"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
                 <TextBox
                     x:Name="txtTenModel"
                     Margin="0,0,0,5"
                     materialDesign:HintAssist.Hint="Tên model"
-                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" Height="39" Width="365" />
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" Height="39" Width="365" >
+                    <TextBox.Text>
+                        <Binding Mode="OneWayToSource" ValidatesOnDataErrors="True" Path="BindingValidate" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <local1:RequiredValidationRule ValidatesOnTargetUpdated="True" />
+                                <local1:MaxLengthValidationRule MinValue="0" MaxValue="50"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
                 <Grid Grid.Row="2">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="50*"/>
                         <ColumnDefinition Width="50*"/>
                     </Grid.ColumnDefinitions>
-                    <TextBox x:Name="txtGiaBan" Grid.Column="0" materialDesign:HintAssist.Hint="Giá bán" Margin="0,0,10,0" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
-                    <TextBox x:Name="txtGiamGia" Grid.Column="1" materialDesign:HintAssist.Hint="Giảm giá" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                    <TextBox x:Name="txtGiaBan" Grid.Column="0" materialDesign:HintAssist.Hint="Giá bán" Margin="0,0,10,0" Style="{StaticResource MaterialDesignFloatingHintTextBox}" >
+                        <TextBox.Text>
+                            <Binding Mode="OneWayToSource" ValidatesOnDataErrors="True" Path="BindingValidate" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <local1:RequiredValidationRule ValidatesOnTargetUpdated="True" />
+                                    <local1:NumberValidationRule/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                    <TextBox x:Name="txtGiamGia" Grid.Column="1" materialDesign:HintAssist.Hint="Giảm giá" Style="{StaticResource MaterialDesignFloatingHintTextBox}" >
+                        <TextBox.Text>
+                            <Binding Mode="OneWayToSource" ValidatesOnDataErrors="True" Path="BindingValidate" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <local1:RequiredValidationRule ValidatesOnTargetUpdated="True" />
+                                    <local1:NumberValidationRule/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
                 </Grid>
                 <TextBox
                     x:Name="txtDonViTinh"
                     Margin="0,0,0,5"
                     materialDesign:HintAssist.Hint="Đơn vị tính"
-                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" Height="39" Width="365" />
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" Height="39" Width="365" >
+                    <TextBox.Text>
+                        <Binding Mode="OneWayToSource" ValidatesOnDataErrors="True" Path="BindingValidate" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <local1:RequiredValidationRule ValidatesOnTargetUpdated="True" />
+                                <local1:MaxLengthValidationRule MinValue="0" MaxValue="50"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
                 <TextBox
                     x:Name="txtMoTa"
                     Margin="0,0,0,5"
@@ -77,23 +123,41 @@
                     x:Name="txtXuatXu"
                     Margin="0,0,0,5"
                     materialDesign:HintAssist.Hint="Xuất xứ"
-                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" Height="39" Width="365" />
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" Height="39" Width="365" >
+                    <TextBox.Text>
+                        <Binding Mode="OneWayToSource" ValidatesOnDataErrors="True" Path="BindingValidate" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <local1:RequiredValidationRule ValidatesOnTargetUpdated="True" />
+                                <local1:MaxLengthValidationRule MinValue="0" MaxValue="50"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
                 <TextBox
                     x:Name="txtThoiGianBaoHanh"
                     Margin="0,0,0,5"
                     materialDesign:HintAssist.Hint="Thời gian bảo hành"
-                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" Height="39" Width="365" />
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" Height="39" Width="365" >
+                    <TextBox.Text>
+                        <Binding Mode="OneWayToSource" ValidatesOnDataErrors="True" Path="BindingValidate" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <local1:RequiredValidationRule ValidatesOnTargetUpdated="True" />
+                                <local1:MaxLengthValidationRule MinValue="0" MaxValue="50"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
                 <TextBox
                     x:Name="txtThongSoKiThuat"
                     Margin="0,0,0,5"
                     Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}"
                     VerticalAlignment="Top"
-                    Height="82"
+                    Height="90"
                     AcceptsReturn="True"
                     TextWrapping="Wrap"
                     VerticalScrollBarVisibility="Auto"
                     materialDesign:HintAssist.Hint="Thông số kĩ thuật"
-                    IsEnabled="{Binding IsChecked, ElementName=MaterialDesignOutlinedTextFieldTextBoxEnabledComboBox}" Width="365" />
+                    IsEnabled="{Binding IsChecked, ElementName=MaterialDesignOutlinedTextFieldTextBoxEnabledComboBox}" Width="366" />
                 <ComboBox
                     x:Name="cbLoaiHangHoa"
                     materialDesign:HintAssist.Hint="Tên Loại hàng hóa"

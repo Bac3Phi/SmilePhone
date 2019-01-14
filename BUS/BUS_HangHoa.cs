@@ -63,5 +63,14 @@ namespace BUS
         {
             return HangHoa.Instance.getGiaBan(maHangHoa);
         }
+        public bool UpdateSoLuong(DTO_HangHoa obj)
+        {
+            return HangHoa.Instance.updateSoLuong(obj);
+        }
+
+        public int getSoLuong(string tenHangHoa)
+        {
+            return HangHoa.Instance.getSoLuong(tenHangHoa);
+        }
     }
 }

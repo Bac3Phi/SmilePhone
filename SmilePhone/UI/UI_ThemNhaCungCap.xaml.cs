@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using DTO;
 using BUS;
+using SmilePhone.Validations;
 
 namespace SmilePhone.UI
 {
@@ -29,6 +30,7 @@ namespace SmilePhone.UI
         public UI_ThemNhaCungCap(Grid gridMain, DTO_NhaCungCap obj)
         {
             InitializeComponent();
+            DataContext = new TextFieldsViewModel();
             this.gridMain = gridMain;
             if (obj == null)
             {
@@ -53,113 +55,31 @@ namespace SmilePhone.UI
 
         private void btnLuu_Click(object sender, RoutedEventArgs e)
         {
-            bool isEmailCorrect = false;
-            bool isPhoneCorrect = false;
-
-            item.MaNhaCungCap = txtSupplierID.Text.Trim();
-            item.TenNhaCungCap = txtSupplierName.Text.Trim();
-            item.DiaChi = txtSupplierAddress.Text.Trim();
-
-            if (txtSupplierPhone.Text != "")
+            if (isHasError())
             {
-                if (txtSupplierPhone.Text != "" && BUS_NhaCungCap.Instance.isValidPhoneNumber(txtSupplierPhone.Text.Trim()) == true)
-                {
-                    item.SoDienThoai = txtSupplierPhone.Text.Trim();
-                    isPhoneCorrect = true;
-                }
-                else
-                    MessageBox.Show("Mời bạn kiểm tra lại số điện thoại !!! Nếu là số bàn, hãy thêm mã vùng.");
-            }
-
-            if (txtSupplierEmail.Text != "")
-            {
-                if (BUS_NhaCungCap.Instance.isValidEmail(txtSupplierEmail.Text.Trim()) == true)
-                {
-                    item.Email = txtSupplierEmail.Text.Trim();
-                    isEmailCorrect = true;
-                }
-                else
-                    MessageBox.Show("Mời bạn kiểm tra lại email !!!");
+                MessageBox.Show("Vui lòng điền đầy đủ chính xác thông tin!");
+                return;
             }
 
             if (isNew == true)
             {
-                if (((txtSupplierEmail.Text != "" && isEmailCorrect == true) && (txtSupplierPhone.Text != "" && isPhoneCorrect == true))
-                    || ((txtSupplierPhone.Text == "" && isPhoneCorrect == false) && (txtSupplierEmail.Text == "" && isEmailCorrect == false)))
-                {
-                    BUS_NhaCungCap.Instance.InsertNCC(item);
-                    MessageBox.Show("Thêm mới thành công!");
-                    AutoGenerateID();
-                    txtSupplierName.Clear();
-                    txtSupplierPhone.Clear();
-                    txtSupplierAddress.Clear();
-                    txtSupplierEmail.Clear();
-                }
-                else if (((txtSupplierEmail.Text != "" && isEmailCorrect == true) && (txtSupplierPhone.Text == "" && isPhoneCorrect == false)) 
-                    || ((txtSupplierPhone.Text != "" && isPhoneCorrect == true) && (txtSupplierEmail.Text == "" && isEmailCorrect == false)))
-                {
-                    BUS_NhaCungCap.Instance.InsertNCC(item);
-                    MessageBox.Show("Thêm mới thành công!");
-                    AutoGenerateID();
-                    txtSupplierName.Clear();
-                    txtSupplierPhone.Clear();
-                    txtSupplierAddress.Clear();
-                    txtSupplierEmail.Clear();
-                }
-                else
-                {
-                    MessageBox.Show("Mời bạn kiểm tra lại thông tin !!");
-                }
+                BUS_NhaCungCap.Instance.InsertNCC(item);
+                MessageBox.Show("Thêm mới thành công!");
+                AutoGenerateID();
+                txtSupplierName.Clear();
+                txtSupplierPhone.Clear();
+                txtSupplierAddress.Clear();
+                txtSupplierEmail.Clear();
             }
             else
             {
-                if (txtSupplierEmail.Text != "" && txtSupplierPhone.Text != ""
-                    && txtSupplierAddress.Text != "" && txtSupplierName.Text != "")
-                {
-                    if (isEmailCorrect == true && isPhoneCorrect == true)
-                    {
-                        BUS_NhaCungCap.Instance.UpdateNCC(item);
-                        MessageBox.Show("Cập nhật thành công!");
-                        AutoGenerateID();
-                        txtSupplierName.Clear();
-                        txtSupplierPhone.Clear();
-                        txtSupplierAddress.Clear();
-                        txtSupplierEmail.Clear();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Mời bạn kiểm tra lại thông tin !!");
-                    }
-                }
-                else
-                {
-                    if (((txtSupplierEmail.Text != "" && isEmailCorrect == true) && (txtSupplierPhone.Text != "" && isPhoneCorrect == true))
-                    || ((txtSupplierPhone.Text == "" && isPhoneCorrect == false) && (txtSupplierEmail.Text == "" && isEmailCorrect == false)))
-                    {
-                        BUS_NhaCungCap.Instance.UpdateNCC(item);
-                        MessageBox.Show("Cập nhật thành công!");
-                        AutoGenerateID();
-                        txtSupplierName.Clear();
-                        txtSupplierPhone.Clear();
-                        txtSupplierAddress.Clear();
-                        txtSupplierEmail.Clear();
-                    }
-                    else if (((txtSupplierEmail.Text != "" && isEmailCorrect == true) && (txtSupplierPhone.Text == "" && isPhoneCorrect == false))
-                        || ((txtSupplierPhone.Text != "" && isPhoneCorrect == true) && (txtSupplierEmail.Text == "" && isEmailCorrect == false)))
-                    {
-                        BUS_NhaCungCap.Instance.UpdateNCC(item);
-                        MessageBox.Show("Cập nhật thành công!");
-                        AutoGenerateID();
-                        txtSupplierName.Clear();
-                        txtSupplierPhone.Clear();
-                        txtSupplierAddress.Clear();
-                        txtSupplierEmail.Clear();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Mời bạn kiểm tra lại thông tin !!");
-                    }
-                }
+                BUS_NhaCungCap.Instance.UpdateNCC(item);
+                MessageBox.Show("Cập nhật thành công!");
+                AutoGenerateID();
+                txtSupplierName.Clear();
+                txtSupplierPhone.Clear();
+                txtSupplierAddress.Clear();
+                txtSupplierEmail.Clear();
             }
         }
 
@@ -179,6 +99,16 @@ namespace SmilePhone.UI
             txtSupplierEmail.Clear();
             isNew = true;
             AutoGenerateID();
+        }
+        private Boolean isHasError()
+        {
+            if (Validation.GetHasError(txtSupplierName) == true
+                || Validation.GetHasError(txtSupplierAddress) == true
+                || Validation.GetHasError(txtSupplierPhone) == true
+                || Validation.GetHasError(txtSupplierEmail) == true)
+                return true;
+            else
+                return false;
         }
     }
 }
