@@ -122,6 +122,9 @@
     <Compile Include="UI\UI_LapPhieuBanHang.xaml.cs">
       <DependentUpon>UI_LapPhieuBanHang.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\UI_LapPhieuDatHang.xaml.cs">
+      <DependentUpon>UI_LapPhieuDatHang.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\UI_LoaiHangHoa.xaml.cs">
       <DependentUpon>UI_LoaiHangHoa.xaml</DependentUpon>
     </Compile>
@@ -136,6 +139,9 @@
     </Compile>
     <Compile Include="UI\UI_PhieuBaoHanh.xaml.cs">
       <DependentUpon>UI_PhieuBaoHanh.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\UI_PhieuDatHang.xaml.cs">
+      <DependentUpon>UI_PhieuDatHang.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\UI_PhieuNhap.xaml.cs">
       <DependentUpon>UI_PhieuNhap.xaml</DependentUpon>
@@ -170,6 +176,13 @@
     <Compile Include="UI\UI_ThemPhieuNhap.xaml.cs">
       <DependentUpon>UI_ThemPhieuNhap.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Validations\EmailValidationRule.cs" />
+    <Compile Include="Validations\MaxLengthValidationRule.cs" />
+    <Compile Include="Validations\NotifyPropertyChangedExtension.cs" />
+    <Compile Include="Validations\NumberValidationRule.cs" />
+    <Compile Include="Validations\PhoneValidationRule.cs" />
+    <Compile Include="Validations\RequiredValidationRule.cs" />
+    <Compile Include="Validations\TextFieldsViewModel.cs" />
     <Page Include="Assets\assets.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -222,6 +235,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UI\UI_LapPhieuDatHang.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UI\UI_LoaiHangHoa.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -239,6 +256,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\UI_PhieuBaoHanh.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\UI_PhieuDatHang.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -332,7 +353,7 @@
       <Name>BUS</Name>
     </ProjectReference>
     <ProjectReference Include="..\DAL\DAL.csproj">
-      <Project>{77FF60C0-4736-427B-8712-7BFE1F78C07E}</Project>
+      <Project>{77ff60c0-4736-427b-8712-7bfe1f78c07e}</Project>
       <Name>DAL</Name>
     </ProjectReference>
     <ProjectReference Include="..\DTO\DTO.csproj">

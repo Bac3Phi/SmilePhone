@@ -101,7 +101,7 @@
                             <TextBlock Text="Bảo Hành" VerticalAlignment="Center"  FontWeight="Bold"  Margin="20 10"/>
                         </StackPanel>
                     </ListViewItem>
-                    <ListViewItem Height="60">
+                    <ListViewItem x:Name="ItemDatHang" Height="60">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="PackageDown" Height="25" Width="25" Margin="10"/>
                             <TextBlock Text="Đặt Hàng" VerticalAlignment="Center"  FontWeight="Bold"  Margin="20 10"/>
