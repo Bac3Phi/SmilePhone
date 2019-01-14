@@ -129,6 +129,7 @@ namespace SmilePhone.UI
                                 MessageBox.Show("Thêm mới thất bại!");
                                 return;
                             }
+                            calSoLuongNhap(item);
                         }
                         MessageBox.Show("Thêm mới thành công!");
                         Refresh();
@@ -166,6 +167,7 @@ namespace SmilePhone.UI
                                 MessageBox.Show("Sửa thất bại!");
                                 return;
                             }
+                            calSoLuongNhap(item, true);
                         }
                         MessageBox.Show("Sửa thành công!");
                     }
@@ -176,6 +178,25 @@ namespace SmilePhone.UI
                     MessageBox.Show("Hãy điền tất cả các ô còn trống!!!");
                 }
             }
+        }
+
+        private void calSoLuongNhap(DTO_ChiTietPhieuBanHang item, bool isDelete = false)
+        {
+            var soLuong = BUS_HangHoa.Instance.getSoLuong(item.TenHangHoa);
+            if (isDelete)
+            {
+                soLuong = soLuong + (int)item.SoLuong;
+            }
+            else
+            {
+                soLuong = soLuong - (int)item.SoLuong;
+            }
+
+            var hangHoa = new DTO_HangHoa();
+            hangHoa.TenHangHoa = item.TenHangHoa;
+            hangHoa.SoLuongTon = soLuong;
+            BUS_HangHoa.Instance.UpdateSoLuong(hangHoa);
+
         }
 
         private void getDataFromUI()

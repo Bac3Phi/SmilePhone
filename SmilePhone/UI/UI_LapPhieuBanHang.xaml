@@ -50,9 +50,9 @@
                         <ColumnDefinition Width="50*"/>
                     </Grid.ColumnDefinitions>
                     <TextBox x:Name="txtSoLuong" Grid.Column="0" materialDesign:HintAssist.Hint="Số lượng" Margin="0,68,10,328" Style="{StaticResource MaterialDesignFloatingHintTextBox}" TextChanged="TxtSoLuong_TextChanged" />
-                    <TextBox x:Name="txtGiaNhap" Grid.Column="1" materialDesign:HintAssist.Hint="Giá Nhập" Margin="10,68,0,328" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                    <TextBox x:Name="txtGiaNhap" IsReadOnly="True" Grid.Column="1" materialDesign:HintAssist.Hint="Giá Nhập" Margin="10,68,0,328" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
                 </Grid>
-                <TextBox x:Name="txtThanhTien" Grid.Column="0" materialDesign:HintAssist.Hint="Thành Tiền" Margin="0,113,193,283" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                <TextBox x:Name="txtThanhTien" IsReadOnly="True" Grid.Column="0" materialDesign:HintAssist.Hint="Thành Tiền" Margin="0,113,193,283" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
                 <Button
                 x:Name="btnAdd"
                 Margin="196,126,88,270"
@@ -109,7 +109,7 @@
                 <TextBox x:Name="txtMaPhieuBanHang"
                     Margin="0,20,0,10"
                     materialDesign:HintAssist.Hint="Số phiếu"
-                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" Height="39" Width="365" />
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" Height="39" Width="365" IsReadOnly="True" />
                 <DatePicker x:Name="dpNgayLap"
                     Margin="0,0,0,10"
                     materialDesign:HintAssist.Hint="Ngày lập"
@@ -121,7 +121,7 @@
                 <TextBox x:Name="txtTenNhanVien"
                     Margin="0,0,0,10"
                     materialDesign:HintAssist.Hint="Nhân viên"
-                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" Height="38" Width="364" />
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" Height="38" Width="364" IsReadOnly="True" />
                 <TextBox x:Name="txtTenKhachHang"
                     Margin="0,0,0,10"
                     materialDesign:HintAssist.Hint="Khách hàng"
@@ -144,7 +144,7 @@
                     VerticalAlignment="Bottom"
                     Margin="0,0,0,10"
                     materialDesign:HintAssist.Hint="Tổng tiền"
-                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" Height="39" Width="364" />
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" Height="39" Width="364" IsReadOnly="True" />
 
             </WrapPanel>
 

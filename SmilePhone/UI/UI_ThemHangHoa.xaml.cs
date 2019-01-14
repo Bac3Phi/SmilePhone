@@ -53,6 +53,10 @@ namespace SmilePhone.UI
             txtThongSoKiThuat.Text = obj.ThongSoKyThuat;
             iSoLuongTon = (int) obj.SoLuongTon;
             bTrangThai = (bool) obj.TrangThai;
+            if (obj.HinhAnh != null)
+            {
+                imageHangHoa.Source = new BitmapImage(new Uri(obj.HinhAnh));
+            }           
             isNew = false;
             loadCombobox();
             foreach (DTO_LoaiHangHoa item in BUS_LoaiHangHoa.showData())
@@ -182,7 +186,28 @@ namespace SmilePhone.UI
 
         private void BtnChonHinhAnh_Click(object sender, RoutedEventArgs e)
         {
+            // Create OpenFileDialog 
+            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
 
+
+
+            // Set filter for file extension and default file extension 
+            dlg.DefaultExt = ".png";
+            dlg.Filter = "JPEG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png|JPG Files (*.jpg)|*.jpg";
+
+
+            // Display OpenFileDialog by calling ShowDialog method 
+            Nullable<bool> result = dlg.ShowDialog();
+
+
+            // Get the selected file name and display in a TextBox 
+            if (result == true)
+            {
+                // Open document 
+                imageHangHoa.Source = new BitmapImage(new Uri(dlg.FileName));
+                item.HinhAnh = dlg.FileName;
+                //textBox1.Text = filename;
+            }
         }
         private Boolean isHasError()
         {

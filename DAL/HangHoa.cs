@@ -50,11 +50,11 @@ namespace DAL
             {
                 var resultMaHangHoa = db.Database
                     .SqlQuery<String>("select MaHangHoa from dbo.HangHoa where TenHangHoa = N'" + obj.TenHangHoa + "'")
-                    .FirstOrDefault();
-                var resultMaLoaiHangHoa = db.Database
-                    .SqlQuery<String>("select MaLoaiHangHoa from dbo.LoaiHangHoa where TenLoaiHangHoa = N'" + obj.TenLoaiHangHoa + "'")
-                    .FirstOrDefault();
+                    .FirstOrDefault();                
                 var item = getHangHoaById(resultMaHangHoa);
+                var resultMaLoaiHangHoa = db.Database
+                    .SqlQuery<String>("select MaLoaiHangHoa from dbo.LoaiHangHoa where TenLoaiHangHoa = N'" + item.TenLoaiHangHoa + "'")
+                    .FirstOrDefault();
 
                 HangHoa hanghoa = new HangHoa();
 
@@ -86,6 +86,7 @@ namespace DAL
             using (CellphoneComponentEntities db = new CellphoneComponentEntities())
             {
                 var result = (from item in db.HangHoas
+                              join lh in db.LoaiHangHoas on item.MaLoaiHangHoa equals lh.MaLoaiHangHoa
                               where item.MaHangHoa.Equals(id)
                               select new DTO_HangHoa
                               {
@@ -101,6 +102,7 @@ namespace DAL
                                   ThoiGianBaoHang = item.ThoiGianBaoHang,
                                   HinhAnh = item.HinhAnh,
                                   TrangThai = item.TrangThai,
+                                  TenLoaiHangHoa = lh.TenLoaiHangHoa,
                                   TenModel = item.TenModel
                               }).ToList<DTO_HangHoa>();
                 if (result.Count > 0)
