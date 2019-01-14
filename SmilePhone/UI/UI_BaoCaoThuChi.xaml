@@ -1,0 +1,101 @@
+﻿<UserControl x:Class="SmilePhone.UI.UI_BaoCaoThuChi"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:local="clr-namespace:SmilePhone.UI"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             Loaded="Window_Loaded">
+    <Grid Background="WhiteSmoke">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.58*" />
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0" Content="Danh sách Báo cáo thu chi" FontFamily="Segoe UI Semibold" FontSize="18" Padding="10" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+            <Button Grid.Column="1" Style="{StaticResource MaterialDesignRaisedButton}" Margin="10,5,10,5" Width="110" ToolTip="Resource name: MaterialDesignRaisedButton"
+                    Click="btnThem_Click">
+                Lập báo cáo
+            </Button>
+            <Button Grid.Column="3" Style="{StaticResource MaterialDesignRaisedButton}" Margin="10,5,10,5" Width="110" ToolTip="Resource name: MaterialDesignRaisedButton"
+                    Click="btnRefresh_Click">
+                Làm mới
+            </Button>
+            <Button Grid.Column="2" Style="{StaticResource MaterialDesignRaisedButton}" Margin="10,5,10,5" Width="110" ToolTip="Resource name: MaterialDesignRaisedButton"
+                    Click="btnChart_Click">
+                Biểu đồ
+            </Button>
+        </Grid>
+        <Grid Grid.Row="1" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBox x:Name="txtSearch" Grid.Column="0" TextChanged="TxtSearchText_TextChanged" materialDesign:HintAssist.Hint="Tìm kiếm" Height="45" Width="500" Margin="100,5,5,5" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+            <RepeatButton Grid.Column="1" Width="110" ToolTip="Resource name: MaterialDesignRaisedButton"
+                          Click="btnTim_Click">
+                Tìm
+            </RepeatButton>
+        </Grid>
+        <DataGrid 
+            x:Name="dgvStockReport" 
+            Grid.Row="2" 
+            SelectionUnit="FullRow" 
+            SelectionMode="Extended" 
+            CanUserSortColumns="True" 
+            AutoGenerateColumns="False" 
+            CanUserAddRows="false" 
+            IsEnabled="True" 
+            IsReadOnly="true"
+            EnableRowVirtualization="True" 
+            Width="auto"
+            Margin="10,10,10,10" 
+            RowDetailsVisibilityMode="VisibleWhenSelected">
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="ReportIDCol" Binding="{Binding MaBaoCao}" Header="Mã báo cáo" Width="SizeToHeader" IsReadOnly="true"/>
+                <DataGridTextColumn x:Name="ReportMonthCol" Binding="{Binding Thang}" Header="Tháng" Width="Auto" IsReadOnly="true"/>
+                <DataGridTextColumn x:Name="ReportYearCol" Binding="{Binding Nam}" Header="Năm" Width="Auto" IsReadOnly="true"/>
+                <DataGridTextColumn x:Name="GoodsNameCol" Binding="{Binding TenHangHoa}" Header="Tên hàng" Width="Auto" IsReadOnly="true"/>
+                <DataGridTextColumn x:Name="FirstMountCol" Binding="{Binding SoLuongTonDau}" Header="Tồn đầu" Width="Auto" IsReadOnly="true"/>
+                <DataGridTextColumn x:Name="InputMountCol" Binding="{Binding SoLuongNhap}" Header="Lượng nhập" Width="Auto" IsReadOnly="true"/>
+                <DataGridTextColumn x:Name="OutputMountCol" Binding="{Binding SoLuongXuat}" Header="Lượng xuất" Width="Auto" IsReadOnly="true"/>
+                <DataGridTextColumn x:Name="LastMountCol" Binding="{Binding SoLuongTonCuoi}" Header="Tồn cuối" Width="Auto" IsReadOnly="true"/>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <ToggleButton Grid.Column="0" Height="15"
+                                Style="{StaticResource MaterialDesignFlatToggleButton}"
+                                ToolTip="MaterialDesignFlatToggleButton" 
+                                Click="btnEdit_Click" >
+                                    <materialDesign:PackIcon
+                                    Kind="MoreCircleOutline"/>
+                                </ToggleButton>
+                                <ToggleButton Grid.Column="1" Height="15"
+                                Style="{StaticResource MaterialDesignFlatToggleButton}"
+                                ToolTip="MaterialDesignFlatToggleButton" 
+                                Click="btnDelete_Click" >
+                                    <materialDesign:PackIcon
+                                    Kind="DeleteForever"/>
+                                </ToggleButton>
+                            </Grid>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>

@@ -53,3 +53,21 @@ INSERT INTO dbo.ChiTietPhieuNhap VALUES('PN2', 'HH1', '20', '1142857', '228570',
 select * from dbo.PhieuChi
 INSERT INTO dbo.PhieuChi VALUES('PC1', '2018-05-15', 'NV1', 'PN1', '79345', N'Đã hoàn tất việc thu chi.', '2018-05-15')
 INSERT INTO dbo.PhieuChi VALUES('PC2', '2018-12-29', 'NV1', 'PN2', '228570', N'Đã hoàn tất việc thu chi cho 50% số lượng đặt.', '2019-01-02')
+
+select * from dbo.phieubanhang
+INSERT INTO dbo.phieubanhang VALUES('PBH1', '2018-12-23', 'NV1', N'Trần Thị Bích', '0991479345', '233644', N'Đã giao dịch xong', '2018-12-23')
+INSERT INTO dbo.phieubanhang VALUES('PBH2', '2018-12-25', 'NV1', N'Phạm Thị Đẹp', '0991485345', '2285714', N'Đã giao dịch xong', '2018-12-26')
+
+
+select * from dbo.chitietphieubanhang
+INSERT INTO dbo.chitietphieubanhang VALUES('PBH1', 'HH1', '1', '233644', '233644', 'CTPBH1')
+INSERT INTO dbo.chitietphieubanhang VALUES('PBH2', 'HH2', '2', '1142857', '2285714', 'CTPBH2')
+
+select * from dbo.Baocaotonkho
+INSERT INTO dbo.Baocaotonkho VALUES('BCTK1', '12', '2018', 'HH1', '20', '20', '1','19')
+INSERT INTO dbo.Baocaotonkho VALUES('BCTK2', '5', '2018', 'HH2', '30', '30', '2','28')
+
+select HH.TenHangHoa, HH.soluongton from dbo.HangHoa HH join dbo.BaoCaoTonKho BCTK on HH.MaHangHoa = BCTK.MaHangHoa
+select CTPN.MaHangHoa, CTPN.soluong from dbo.PhieuNhap PN join dbo.ChiTietPhieuNhap CTPN on PN.MaPhieuNhap = CTPN.MaPhieuNhap
+
+select sum(CTPN.soluong) as soluongxuat from dbo.Phieubanhang PN join dbo.ChiTietPhieubanhang CTPN on PN.MaPhieuBanHang = CTPN.MaPhieuBanHang where CTPN.MaHangHoa = 'HH1' AND month(PN.Ngayban) = 12 AND year(PN.Ngayban) = 2018
