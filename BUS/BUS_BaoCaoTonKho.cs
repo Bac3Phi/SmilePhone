@@ -33,5 +33,40 @@ namespace BUS
         {
             return BaoCaoTonKho.Instance.showChart(name);
         }
+
+        public static List<DTO_HangHoa> showGoods()
+        {
+            return BaoCaoTonKho.Instance.showGoods();
+        }
+
+        public static int getImport(String id, int month, int year)
+        {
+            return BaoCaoTonKho.Instance.getImport(id, month, year);
+        }
+
+        public static int getExport(String id, int month, int year)
+        {
+            return BaoCaoTonKho.Instance.getExport(id, month, year);
+        }
+
+        public static int getLastMount(String id, int month, int year)
+        {
+            return BaoCaoTonKho.Instance.getLastMount(id, month, year);
+        }
+
+        public static int getFirstMount(String id)
+        {
+            return BaoCaoTonKho.Instance.getFirstMount(id);
+        }
+
+        public void Insert(DTO_BaoCaoTonKho obj)
+        {
+            BaoCaoTonKho.Instance.InsertBC(obj);
+        }
+
+        public String generateAutoID()
+        {
+            return Helper.generateAutoID("BaoCaoTonKho", "MaBaoCao", "BCTK");
+        }
     }
 }

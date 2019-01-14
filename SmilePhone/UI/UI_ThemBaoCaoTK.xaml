@@ -40,10 +40,10 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <ComboBox x:Name="cbbReportMonth" Grid.Column="0" SelectedValuePath="Thang" DisplayMemberPath="Thang" Margin="10" materialDesign:HintAssist.Hint="Tháng" IsEditable="True" Style="{StaticResource MaterialDesignFloatingHintComboBox}" />
-            <ComboBox x:Name="cbbReportYear" Grid.Column="1" SelectedValuePath="Nam" DisplayMemberPath="Nam" Margin="10" materialDesign:HintAssist.Hint="Năm" IsEditable="True" Style="{StaticResource MaterialDesignFloatingHintComboBox}" />
+            <ComboBox x:Name="cbbReportMonth" Grid.Column="0" Margin="10" materialDesign:HintAssist.Hint="Tháng" IsEditable="True" Style="{StaticResource MaterialDesignFloatingHintComboBox}" />
+            <ComboBox x:Name="cbbReportYear" Grid.Column="1" Margin="10" materialDesign:HintAssist.Hint="Năm" IsEditable="True" Style="{StaticResource MaterialDesignFloatingHintComboBox}" />
         </Grid>
-        <ComboBox x:Name="cbbGoodsName" Grid.Row="3" SelectedValuePath="TenHangHoa" DisplayMemberPath="TenHangHoa" Margin="10" materialDesign:HintAssist.Hint="Tên hàng hóa" IsEditable="True" Style="{StaticResource MaterialDesignFloatingHintComboBox}" />
+        <ComboBox x:Name="cbbGoodsName" Grid.Row="3" SelectedValuePath="TenHangHoa" DisplayMemberPath="TenHangHoa" SelectionChanged="onChangeMount" Margin="10" materialDesign:HintAssist.Hint="Tên hàng hóa" IsEditable="True" Style="{StaticResource MaterialDesignFloatingHintComboBox}" />
         <Grid Grid.Row="4">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
