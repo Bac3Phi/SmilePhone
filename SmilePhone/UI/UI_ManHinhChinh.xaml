@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         SizeToContent="Height"
 
-        Title="UI_ManHinhChinh"  Height="auto" Width="auto" MinWidth="1000">
+        Title="Smile Mobile" Icon="/Assets/appIcon.ico"  Height="auto" Width="auto" MinWidth="1000">
     <Window.Resources>
         <Storyboard x:Key="OpenMenu">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="GridMenu">
