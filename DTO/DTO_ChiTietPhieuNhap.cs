@@ -10,6 +10,8 @@ namespace DTO
     {
         public string MaPhieuNhap { get; set; }
         public string TenHangHoa { get; set; }
+    
+        public string MaHangHoa { get; set; }
         public Nullable<int> SoLuong { get; set; }
         public Nullable<decimal> GiaNhap { get; set; }
         public Nullable<decimal> ThanhTien { get; set; }

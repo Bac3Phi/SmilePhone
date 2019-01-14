@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:SmilePhone.UI"
              
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:local1="clr-namespace:SmilePhone.Validations"
              mc:Ignorable="d" 
              d:DesignHeight="700" d:DesignWidth="650"
              Loaded="Window_Loaded">
@@ -80,8 +81,27 @@
                             <ColumnDefinition Width="50*"/>
                             <ColumnDefinition Width="50*"/>
                         </Grid.ColumnDefinitions>
-                        <TextBox x:Name="txtSoLuong" Grid.Column="0" materialDesign:HintAssist.Hint="Số lượng" Margin="10" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
-                        <TextBox x:Name="txtGiaNhap" Grid.Column="1" materialDesign:HintAssist.Hint="Giá Nhập" Margin="10" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                        <TextBox x:Name="txtSoLuong" Grid.Column="0" materialDesign:HintAssist.Hint="Số lượng" Margin="10" Style="{StaticResource MaterialDesignFloatingHintTextBox}" >
+                            <TextBox.Text>
+                                <Binding Mode="OneWayToSource" ValidatesOnDataErrors="True" Path="BindingValidate" UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules>
+                                        <local1:RequiredValidationRule ValidatesOnTargetUpdated="True" />
+                                        <local1:MaxLengthValidationRule MinValue="0" MaxValue="5"/>
+                                        <local1:NumberValidationRule/>
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+                        <TextBox x:Name="txtGiaNhap" Grid.Column="1" materialDesign:HintAssist.Hint="Giá Nhập" Margin="10" Style="{StaticResource MaterialDesignFloatingHintTextBox}" >
+                            <TextBox.Text>
+                                <Binding Mode="OneWayToSource" ValidatesOnDataErrors="True" Path="BindingValidate" UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules>
+                                        <local1:RequiredValidationRule ValidatesOnTargetUpdated="True" />
+                                        <local1:NumberValidationRule/>
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
                     </Grid>
                     <Button Grid.Row="3" Style="{StaticResource MaterialDesignRaisedButton}" Width="100" ToolTip="Resource name: MaterialDesignRaisedButton"
                             Click="btnThemChiTiet_Click">
